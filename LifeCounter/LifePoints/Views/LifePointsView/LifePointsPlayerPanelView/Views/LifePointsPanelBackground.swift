@@ -35,7 +35,14 @@ extension LifePointsPlayerPanelView {
                         VisualEffectView(effect: UIBlurEffect(style: blurEffect))
                     } else {
                         //players[playerId].backgroundColor
-                        player.backgroundColor
+                        ZStack {
+                            GeometryReader { geo in
+                                Image("BackgroundTest")
+                                    .resizable()
+                                    .scaledToFill()
+                            }
+                            LinearGradient(gradient: getGradient(player.backgroundColor), startPoint: .leading, endPoint: .trailing)
+                        }
                     }
                 }
                 
@@ -45,6 +52,10 @@ extension LifePointsPlayerPanelView {
                 
                 Color.black.opacity(0.1)
             }
+        }
+        
+        func getGradient(_ color: Color) -> Gradient {
+            return Gradient(colors: [color.opacity(0.8), color.opacity(0.3), color.opacity(0.3), color.opacity(0.3), color.opacity(0.8)])
         }
     }
 }

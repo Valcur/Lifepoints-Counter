@@ -163,7 +163,7 @@ extension LifePointsPlayerPanelView {
             @Binding var lifePoints: Int
             
             var body: some View {
-                HStack {
+                HStack(spacing: 2) {
                     ForEach(0..<damageTaken.count, id: \.self) { i in
                         ZStack {
                             VisualEffectView(effect: UIBlurEffect(style: blurEffect))
