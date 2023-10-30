@@ -70,14 +70,8 @@ extension LifePointsPlayerPanelView {
             
             var body: some View {
                 Button(action: {
-                    let isPartnerEnabled = isEnabled
-                    for i in 0..<lifePointsViewModel.players.count {
-                        if isPartnerEnabled {
-                            lifePointsViewModel.players[i].counters.commanderDamages[playerId].remove(at: 1)
-                        } else {
-                            lifePointsViewModel.players[i].counters.commanderDamages[playerId].append(0)
-                        }
-                    }
+                    lifePointsViewModel.togglePartnerForPlayer(playerId)
+                    lifePointsViewModel.savePartnerForPlayer(playerId)
                 }, label: {
                     Text("\(isEnabled ? "Disable" : "Enable") partner")
                         .headline()

@@ -124,7 +124,6 @@
 			children = (
 				DBA758172AEE9B6C00DE2D16 /* Treachery */,
 				DBA758162AEE9B6500DE2D16 /* Views */,
-				DBA758182AEE9B7E00DE2D16 /* LifePointsViewModel.swift */,
 				DBA758202AEE9BC300DE2D16 /* Blueprints.swift */,
 			);
 			path = LifePoints;
@@ -133,6 +132,7 @@
 		DBA758162AEE9B6500DE2D16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DBA758182AEE9B7E00DE2D16 /* LifePointsViewModel.swift */,
 				DBA758462AEFE92A00DE2D16 /* LifePointsView */,
 				DBA758282AEE9BF500DE2D16 /* MonarchTokenView.swift */,
 				DBA7582A2AEE9BFE00DE2D16 /* CircularButtonView.swift */,

@@ -205,12 +205,22 @@ extension OptionsMenuView {
 struct PlayerCustomProfile: Codable, Identifiable {
     var id = UUID()
     var name: String
-    var lastUsedSlot: Int
     var customImageData: Data?
     
-    init(name: String = "", lastUsedSlot: Int = -1, customImageData: Data? = nil) {
+    init(name: String = "", customImageData: Data? = nil) {
         self.name = name
-        self.lastUsedSlot = lastUsedSlot
         self.customImageData = customImageData
+    }
+}
+
+struct LastUsedSetup: Codable {
+    var playersProfiles: [PlayerCustomProfile?]
+    var partnerEnabled: [Bool]
+    var alternativeCountersEnabled: [[String]]
+    
+    static func getDefaultSetup() -> LastUsedSetup {
+        return LastUsedSetup(playersProfiles: Array.init(repeating: nil, count: 8),
+                             partnerEnabled: Array.init(repeating: false, count: 8),
+                             alternativeCountersEnabled: Array.init(repeating: ["Poison", "Exp"], count: 8))
     }
 }

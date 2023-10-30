@@ -66,6 +66,21 @@ extension SaveManager {
         return []
     }
     
+    static func saveLastUsedSetup(_ setup: LastUsedSetup) {
+        if let encoded = try? JSONEncoder().encode(setup) {
+            UserDefaults.standard.set(encoded, forKey: "LastUsedSetup")
+            print("yes")
+        }
+    }
+    
+    static func getLastUsedSetup() -> LastUsedSetup {
+        if let data = UserDefaults.standard.object(forKey: "LastUsedSetup") as? Data,
+           let setup = try? JSONDecoder().decode(LastUsedSetup.self, from: data) {
+            return setup
+        }
+        return LastUsedSetup.getDefaultSetup()
+    }
+    
     static func saveOptions_GradientId(_ gradientId: Int) {
         UserDefaults.standard.set(gradientId, forKey: "GradientId")
     }
