@@ -7,20 +7,55 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LifeCounterAppView: View {
+    let lifePointsViewModel: LifePointsViewModel
+    let planeChaseVM: PlanechaseViewModel
+    
+    init(lifeCounterOptions: LifeOptions, profiles: [PlayerCustomProfile], playWithTreachery: Bool) {
+        lifePointsViewModel = LifePointsViewModel(numberOfPlayer: lifeCounterOptions.nbrOfPlayers,
+                                                  startingLife: lifeCounterOptions.startingLife, colorPalette: lifeCounterOptions.colorPaletteId, customProfiles: profiles, playWithTreachery: playWithTreachery)
+        planeChaseVM = PlanechaseViewModel()
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            // Options
+            ZStack(alignment: .bottomLeading) {
+                OptionsMenuView()
+                    .environmentObject(planeChaseVM)
+                
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        planeChaseVM.gameVM.showLifePointsView.toggle()
+                    }
+                }, label: {
+                    Image(systemName: "xmark")
+                        .imageButtonLabel(style: .noBackground)
+                })
+            }
+            
+            // LifeApp
+            LifePointsView()
+                .environmentObject(lifePointsViewModel)
+                .environmentObject(planeChaseVM)
+                .environmentObject(planeChaseVM.gameVM)
         }
-        .padding()
+        .background(Color.black)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+class GameViewModel: ObservableObject {
+    @Published var showLifePointsView = true
+}
+
+struct LifeOptions: Codable {
+    var useLifeCounter: Bool
+    var useCommanderDamages: Bool
+    var colorPaletteId: Int
+    var nbrOfPlayers: Int
+    var startingLife: Int
+    var backgroundStyleId: Int
+    var autoHideLifepointsCooldown: Double
+    var useMonarchToken: Bool
+    var monarchTokenStyleId: Int
 }

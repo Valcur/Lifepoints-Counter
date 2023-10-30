@@ -11,7 +11,8 @@ import SwiftUI
 struct LifeCounterApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LifeCounterAppView(lifeCounterOptions: LifeOptions(useLifeCounter: true, useCommanderDamages: true, colorPaletteId: 1, nbrOfPlayers: 4, startingLife: 40, backgroundStyleId: 0, autoHideLifepointsCooldown: 99999, useMonarchToken: true, monarchTokenStyleId: 0), profiles: [], playWithTreachery: true)
         }
     }
 }
+

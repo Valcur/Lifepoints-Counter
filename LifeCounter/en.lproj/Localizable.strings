@@ -1,0 +1,180 @@
+// Mark: Tab bar
+
+"tab_play" = "Play";
+"tab_collection" = "Collection";
+"tab_options" = "Options";
+
+// Mark: Misc
+
+"cancel" = "Cancel";
+"confirm" = "Confirm";
+"continue" = "Continue";
+"delete" = "Delete";
+"exit" = "Exit";
+"discard" = "Discard";
+"disabled" = "Disabled";
+"plane" = "Plane";
+"phenomenon" = "Phenomenon";
+
+// Mark: Play
+
+"play_app_title" = "Planechase Companion";
+"play_mode" = "Play";
+"play_playClassic" = "Classic";
+"play_playEternities" = "Eternities Map";
+"play_playClassic_needMoreCards" = "You need at least 10 cards in your deck to play Classic";
+"play_playEternities_needMoreCards" = "You need at least 30 cards in your deck to play Eternities map";
+
+// Mark: Bubbles
+
+"premium_title" = "Support the app";
+"premium_content" = "- Separate your collection in up to 10 different decks \n- Change the background color \n- Change the dice style and color\n- More visual options\n- My deepest thanks";
+"premium_unknown" = "Unknown";
+"premium_month" = " / Month";
+"premium_lifetime" = " Lifetime";
+"premium_alreadyPremium" = "Already premium ?";
+"premium_restore" = "Restore";
+"premium_viewOur" = "View our ";
+"premium_policy" = "Privacy policy";
+"premium_info_title" = "Information";
+"premium_info_content" = "You may purchase an auto-renewing subscription through an In-App Purchase.\n\n • (in USD) Premium - 1 month ($1.99) \n\n • Your subscription will be charged to your iTunes account at confirmation of purchase and will automatically renew (at the duration selected) unless auto-renew is turned off at least 24 hours before the end of the current period.\n\n • Current subscription may not be cancelled during the active subscription period; however, you can manage your subscription and/or turn off auto-renewal by visiting your iTunes Account Settings after purchase\n\n • Being Premium will give you, for the duration of your subsription, access to 9 more deck slots, dice customization and various visual styles to personalize your experience.";
+
+"premium_lifetime_info_content" = "You may purchase a lifetime premium access through an In-App Purchase.\n\n • (in USD) Premium - Lifetime ($19.99) \n\n • Being Premium will give you access to 9 more deck slots, dice customization and various visual styles to personalize your experience.";
+
+
+"discord_title" = "Join us on Discord";
+"discord_content" = "Import the latest offial cards before release, share your custom Planechase cards, learn more about updates or ask for a new feature in our Discord server.";
+"discord_tapToJoin" = "Tap here to join";
+"discord_hide_title" = "Hide Discord invite";
+"discord_hide_content" = "You can still find a link in the options under 'Contact'";
+
+"whatsNew_title" = "Whats new";
+"whatsNew_content" = "- Press 'Download from Scryfall' to get the new Dr Who cards\n- Life counter now supports custom player name and background image, monarch token, auto hide when unused and mixing colors with background styles\n- Improved filter to sort your collection\n- New vertical split display style for cards to read text from both side in landscape mode\n- Rename you decks\n- Blurred background style behind cards\n- Hide the dice section toggle for players using a real dice\n- In classic mode, swipe right to go back to the previous plane\n- New lifetime Premium in-app purchase";
+"whatsNew_rateUs_title" = "Enjoying the app ?";
+"whatsNew_rateUs_content" = "Please tell us how we're doing.";
+"whatsNew_rateUs_button" = "Rate us in the App Store";
+"whatsNew_hide_title" = "Hide info about this update ?";
+"whatsNew_hide_content" = "For any question or suggestion feel free to ask on Discord.";
+
+// Mark: Collection
+
+"collection_scryfall" = "Download from Scryfall";
+"collection_import" = "Import";
+"collection_deckSize" = "Deck size";
+"collection_howToUse" = "Tap a card to add/remove it from your deck. Hold to delete it from your collection.";
+"collection_selectAll" = "Select all";
+"collection_unselectAll" = "Unselect all";
+"collection_SelectDeck" = "Select Deck";
+"collection_emptyCollection1" = "First, you need to add cards to your collection";
+"collection_emptyCollection2" = "- Use the Download from scryfall button to download and add to your collection all official Planechase cards.";
+"collection_emptyCollection3" = "- Use the Import button to add a custom card from your device.";
+"collection_delete_title" = "Are you sure you want to delete this plane ?";
+"collection_delete_content" = "There is no undo";
+"collection_empty_bubble" = "Your deck is empty, add cards from your collection to your deck";
+"collection_filter_onlyShow" = "Only show :";
+"collection_filter_official" = "Official";
+"collection_filter_unofficial" = "Imported";
+"collection_filter_present" = "Selected";
+"collection_filter_absent" = "Unselected";
+"collection_filter_absentAll" = "Not in any deck";
+"collection_rename_title" = "New deck name";
+"collection_rename_content" = "25 characters maximum";
+"collection_filter_title_source" = "Source :";
+"collection_filter_title_selection" = "Selection :";
+"collection_filter_title_type" = "Type :";
+"collection_filter_title_set" = "Set :";
+
+// Mark: Game
+
+"game_hellride_title" = "Hellride";
+"game_dice_pressToRoll" = "Press to roll";
+"game_dice_chaos" = "Chaos";
+"game_dice_planechase" = "Planeswalk";
+"game_dice_choice" = "Your choice";
+"game_dice_nothing" = "Nothing";
+"game_dice_resetCost" = "Reset cost";
+"game_tool_enablePlaneswalk" = "Enable Planeswalk";
+"game_tool_disablePlaneswalk" = "Disable Planeswalk";
+"game_tool_deckController" = "Deck Controller";
+"game_bubble_planeswalk" = "Hold on a plane to planeswalk";
+"game_exit_title" = "Are you sure you want to return to main menu ?";
+"game_exit_content" = "Game will be lost";
+"game_deckController_revealTop" = "Reveal top card";
+"game_deckController_close" = "Put all revealed card at the bottom in a random order and leave";
+"game_deckController_putTop" = "Put top";
+"game_deckController_putBottom" = "Put bottom";
+"game_deckController_planeswalk" = "Planeswalk";
+"game_deckController_planeswalkAdd" = "Add";
+
+"lifepoints_counters_title" = "Counters";
+"lifepoints_counters_poison" = "Poison";
+"lifepoints_counters_tax" = "Tax";
+"lifepoints_commander_title" = "Commander damages";
+"lifepoints_player" = "Player";
+"lifepoints_noProfile" = "Remove profile";
+
+// Mark: Options
+
+"options_optionsTitle" = "Options";
+"options_contactTitle" = "Contact";
+"options_thanksTitle" = "Thanks";
+"options_rulesTitle" = "Rules";
+"options_lifeTitle" = "Life";
+
+"options_backgroundColor" = "Background Color";
+"options_ui_title" = "Game UI";
+"options_ui_zoomType" = "Card display style";
+"options_ui_biggerCardsOnMap" = "Bigger cards on map";
+"options_ui_hellridePng" = "SUPER SECRET : use red_evil_portal.png for hellride";
+"options_ui_noHammer" = "Tools menu always visible";
+"options_ui_noDice" = "Hide dice";
+"options_blurredBackground" = "Blurred background effect";
+"options_dice_title" = "Dice";
+"options_dice_style" = "Dice style :";
+"options_dice_color" = "Dice color :";
+"options_dice_choiceFace" = "Add a face planeswalk/chaos that let the player choose";
+"options_dice_numberOfFace" = "Number of faces on the dice";
+"options_life_title" = "Life Counter";
+"options_life_useLifeCounter" = "Use life counter";
+"options_life_useCommanderDamages" = "Use commander damages (and other counters)";
+"options_life_colorPaletteId" = "Color palette :";
+"options_life_nbrPlayers" = "Number of players";
+"options_life_startingLife" = "Starting life";
+"options_autoHide" = "Hide lifepoints when unused";
+"options_background_style" = "Background style :";
+"options_monarch_title" = "Monarch token";
+"options_monarch_toggle" = "Enable monarch token";
+"options_monarch_style" = "Monarch token style :";
+"options_profiles_title" = "Player profiles";
+"options_profiles_intro" = "Save player names and background images. Choose them in game.";
+
+"options_contact_discord" = "Suggestion for the app ? Bugs that you want me to fix ?";
+"options_contact_discordJoin" = "Join us on Discord !";
+
+"options_thanks_wizards" = "Planechase Companion is an unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.";
+"options_thanks_planechase" = "Planeswalk image from Agung Rama";
+"options_thanks_chaos" = "Chaos image from Ken111";
+"options_thanks_hellride" = "Hellride image by upklyak from Freepik";
+"options_thanks_diceSkin1" = "Dice skin 1,2,3 and 4 by shiruji";
+"options_thanks_diceSkin2" = "Other dice skins by Freepik";
+"options_thanks_background" = "Background styles by Freepik";
+"options_thanks_monarch" = "Monarch crowns and king icons by Dental Care, iconixar, Freepik and max.icons";
+
+// Mark: Rules
+
+"options_rules_classic_Title" = "Classic";
+"options_rules_classic_01" = "Start a multiplayer game and reveal the top card of the shared planar deck. That is the plane that everybody is on, and its effects apply to all players.";
+"options_rules_classic_02" = "During each player's main phase, they may roll the six-sided planar die for a chance to take an action: If it lands on the planeswalker symbol the players must planeswalk and move on to the next plane - put the current plane on the bottom of the planar deck and reveal the next one. If it lands on the Chaos symbol, that player must trigger the Chaos ability of the plane.";
+"options_rules_classic_03" = "The first roll each turn is free, but if the player wants to roll the planar die more than once, they must pay (1) additional for each dice roll - the second roll each turn costs (1), the third roll costs (2), and so on.";
+
+
+"options_rules_eternitiesMap_Title" = "Eternities map";
+"options_rules_eternitiesMap_01" = "Unlike normal Planechase where you just flip cards over on a planar deck, in Eternities map you traverse a grid getting to somewhat choose what plane you are on.";
+"options_rules_eternitiesMap_02" = "You start in the center of a grid. Play the game like a classic Planechase. If you get the Planechase symbol then you have some choices to make.";
+"options_rules_eternitiesMap_03" = "You now get to choose which plane you move to. Read all four, see which is your favorite and move to the best plane. Once you moved, cards are revealed around your new location.";
+"options_rules_eternitiesMap_04" = "If the grid is empty in any diagonal direction you can 'hellride' into the nothingness. You're trading the safety net of knowing whats coming for moving two spaces. If you have revealed planes in the diagonal direction, you cannot 'hellride' there. You have to go the long way and work your way through the planes. Once you've hell ridden, you will just reveal more planes like normal.";
+"options_rules_eternitiesMap_05" = "Cards that are 4 or more planeswalk away from your location are removed.";
+
+"options_rules_lifepointsCounter_Title" = "Using lifepoint counter";
+"options_rules_lifepointsCounter_01"  = "Tap the top to add, tap the bottom to remove or hold and move up/down to add/remove.";
+"options_rules_lifepointsCounter_02"  = "Tap commander damages recap to open counters and commander damages panel. Tap to add, hold to reset. The panel dismiss itself after a few seconds.";

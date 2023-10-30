@@ -11,6 +11,28 @@
 		DBA758052AEE97C400DE2D16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758042AEE97C400DE2D16 /* ContentView.swift */; };
 		DBA758072AEE97C600DE2D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA758062AEE97C600DE2D16 /* Assets.xcassets */; };
 		DBA7580A2AEE97C600DE2D16 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA758092AEE97C600DE2D16 /* Preview Assets.xcassets */; };
+		DBA758192AEE9B7E00DE2D16 /* LifePointsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758182AEE9B7E00DE2D16 /* LifePointsViewModel.swift */; };
+		DBA7581B2AEE9B9400DE2D16 /* LifePointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7581A2AEE9B9400DE2D16 /* LifePointsView.swift */; };
+		DBA7581D2AEE9BA500DE2D16 /* LifePointsPlayerPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7581C2AEE9BA500DE2D16 /* LifePointsPlayerPanelView.swift */; };
+		DBA7581F2AEE9BB000DE2D16 /* LifePointsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7581E2AEE9BB000DE2D16 /* LifePointsPanelView.swift */; };
+		DBA758212AEE9BC300DE2D16 /* Blueprints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758202AEE9BC300DE2D16 /* Blueprints.swift */; };
+		DBA758232AEE9BD300DE2D16 /* Treachery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758222AEE9BD300DE2D16 /* Treachery.swift */; };
+		DBA758252AEE9BDD00DE2D16 /* LifePointsPlayerPanelView+Treachery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758242AEE9BDD00DE2D16 /* LifePointsPlayerPanelView+Treachery.swift */; };
+		DBA758272AEE9BEC00DE2D16 /* CommanderDamagesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758262AEE9BEC00DE2D16 /* CommanderDamagesPanel.swift */; };
+		DBA758292AEE9BF500DE2D16 /* MonarchTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758282AEE9BF500DE2D16 /* MonarchTokenView.swift */; };
+		DBA7582B2AEE9BFE00DE2D16 /* CircularButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7582A2AEE9BFE00DE2D16 /* CircularButtonView.swift */; };
+		DBA7582D2AEE9C7C00DE2D16 /* OG_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7582C2AEE9C7C00DE2D16 /* OG_Extensions.swift */; };
+		DBA7582F2AEE9D8E00DE2D16 /* CardSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7582E2AEE9D8E00DE2D16 /* CardSizes.swift */; };
+		DBA758312AEE9E2E00DE2D16 /* PlanechaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758302AEE9E2E00DE2D16 /* PlanechaseViewModel.swift */; };
+		DBA758332AEE9E4600DE2D16 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758322AEE9E4600DE2D16 /* SaveManager.swift */; };
+		DBA758362AEEB7DF00DE2D16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBA758382AEEB7DF00DE2D16 /* Localizable.strings */; };
+		DBA7583C2AEEBA6600DE2D16 /* OptionsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7583B2AEEBA6600DE2D16 /* OptionsPanel.swift */; };
+		DBA7583E2AEEBA7500DE2D16 /* LifeOptionsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7583D2AEEBA7500DE2D16 /* LifeOptionsPanel.swift */; };
+		DBA758412AEEBAAD00DE2D16 /* MenuNumberOfPlayerChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758402AEEBAAD00DE2D16 /* MenuNumberOfPlayerChoiceView.swift */; };
+		DBA758432AEEBAB800DE2D16 /* MenuStartingLifeChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758422AEEBAB800DE2D16 /* MenuStartingLifeChoiceView.swift */; };
+		DBA758452AEEBAED00DE2D16 /* OptionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758442AEEBAED00DE2D16 /* OptionsMenuView.swift */; };
+		DBA7584A2AEFE9C000DE2D16 /* AlternativeCountersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758492AEFE9C000DE2D16 /* AlternativeCountersView.swift */; };
+		DBA7584C2AEFED5100DE2D16 /* LifePointsPanelBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA7584B2AEFED5100DE2D16 /* LifePointsPanelBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +41,29 @@
 		DBA758042AEE97C400DE2D16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DBA758062AEE97C600DE2D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBA758092AEE97C600DE2D16 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DBA758182AEE9B7E00DE2D16 /* LifePointsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePointsViewModel.swift; sourceTree = "<group>"; };
+		DBA7581A2AEE9B9400DE2D16 /* LifePointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePointsView.swift; sourceTree = "<group>"; };
+		DBA7581C2AEE9BA500DE2D16 /* LifePointsPlayerPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePointsPlayerPanelView.swift; sourceTree = "<group>"; };
+		DBA7581E2AEE9BB000DE2D16 /* LifePointsPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePointsPanelView.swift; sourceTree = "<group>"; };
+		DBA758202AEE9BC300DE2D16 /* Blueprints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blueprints.swift; sourceTree = "<group>"; };
+		DBA758222AEE9BD300DE2D16 /* Treachery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treachery.swift; sourceTree = "<group>"; };
+		DBA758242AEE9BDD00DE2D16 /* LifePointsPlayerPanelView+Treachery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LifePointsPlayerPanelView+Treachery.swift"; sourceTree = "<group>"; };
+		DBA758262AEE9BEC00DE2D16 /* CommanderDamagesPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommanderDamagesPanel.swift; sourceTree = "<group>"; };
+		DBA758282AEE9BF500DE2D16 /* MonarchTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonarchTokenView.swift; sourceTree = "<group>"; };
+		DBA7582A2AEE9BFE00DE2D16 /* CircularButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButtonView.swift; sourceTree = "<group>"; };
+		DBA7582C2AEE9C7C00DE2D16 /* OG_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OG_Extensions.swift; sourceTree = "<group>"; };
+		DBA7582E2AEE9D8E00DE2D16 /* CardSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSizes.swift; sourceTree = "<group>"; };
+		DBA758302AEE9E2E00DE2D16 /* PlanechaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanechaseViewModel.swift; sourceTree = "<group>"; };
+		DBA758322AEE9E4600DE2D16 /* SaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveManager.swift; sourceTree = "<group>"; };
+		DBA758372AEEB7DF00DE2D16 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DBA758392AEEB83F00DE2D16 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DBA7583B2AEEBA6600DE2D16 /* OptionsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPanel.swift; sourceTree = "<group>"; };
+		DBA7583D2AEEBA7500DE2D16 /* LifeOptionsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeOptionsPanel.swift; sourceTree = "<group>"; };
+		DBA758402AEEBAAD00DE2D16 /* MenuNumberOfPlayerChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNumberOfPlayerChoiceView.swift; sourceTree = "<group>"; };
+		DBA758422AEEBAB800DE2D16 /* MenuStartingLifeChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuStartingLifeChoiceView.swift; sourceTree = "<group>"; };
+		DBA758442AEEBAED00DE2D16 /* OptionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsMenuView.swift; sourceTree = "<group>"; };
+		DBA758492AEFE9C000DE2D16 /* AlternativeCountersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeCountersView.swift; sourceTree = "<group>"; };
+		DBA7584B2AEFED5100DE2D16 /* LifePointsPanelBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePointsPanelBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +96,17 @@
 		DBA758012AEE97C400DE2D16 /* LifeCounter */ = {
 			isa = PBXGroup;
 			children = (
+				DBA7583A2AEEBA2100DE2D16 /* Options */,
+				DBA758152AEE9B5800DE2D16 /* LifePoints */,
 				DBA758022AEE97C400DE2D16 /* LifeCounterApp.swift */,
 				DBA758042AEE97C400DE2D16 /* ContentView.swift */,
 				DBA758062AEE97C600DE2D16 /* Assets.xcassets */,
 				DBA758082AEE97C600DE2D16 /* Preview Content */,
+				DBA7582C2AEE9C7C00DE2D16 /* OG_Extensions.swift */,
+				DBA7582E2AEE9D8E00DE2D16 /* CardSizes.swift */,
+				DBA758302AEE9E2E00DE2D16 /* PlanechaseViewModel.swift */,
+				DBA758322AEE9E4600DE2D16 /* SaveManager.swift */,
+				DBA758382AEEB7DF00DE2D16 /* Localizable.strings */,
 			);
 			path = LifeCounter;
 			sourceTree = "<group>";
@@ -65,6 +117,85 @@
 				DBA758092AEE97C600DE2D16 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DBA758152AEE9B5800DE2D16 /* LifePoints */ = {
+			isa = PBXGroup;
+			children = (
+				DBA758172AEE9B6C00DE2D16 /* Treachery */,
+				DBA758162AEE9B6500DE2D16 /* Views */,
+				DBA758182AEE9B7E00DE2D16 /* LifePointsViewModel.swift */,
+				DBA758202AEE9BC300DE2D16 /* Blueprints.swift */,
+			);
+			path = LifePoints;
+			sourceTree = "<group>";
+		};
+		DBA758162AEE9B6500DE2D16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBA758462AEFE92A00DE2D16 /* LifePointsView */,
+				DBA758282AEE9BF500DE2D16 /* MonarchTokenView.swift */,
+				DBA7582A2AEE9BFE00DE2D16 /* CircularButtonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DBA758172AEE9B6C00DE2D16 /* Treachery */ = {
+			isa = PBXGroup;
+			children = (
+				DBA758222AEE9BD300DE2D16 /* Treachery.swift */,
+				DBA758242AEE9BDD00DE2D16 /* LifePointsPlayerPanelView+Treachery.swift */,
+			);
+			path = Treachery;
+			sourceTree = "<group>";
+		};
+		DBA7583A2AEEBA2100DE2D16 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				DBA758442AEEBAED00DE2D16 /* OptionsMenuView.swift */,
+				DBA7583F2AEEBAA500DE2D16 /* OptionsPicker */,
+				DBA7583B2AEEBA6600DE2D16 /* OptionsPanel.swift */,
+				DBA7583D2AEEBA7500DE2D16 /* LifeOptionsPanel.swift */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
+		DBA7583F2AEEBAA500DE2D16 /* OptionsPicker */ = {
+			isa = PBXGroup;
+			children = (
+				DBA758402AEEBAAD00DE2D16 /* MenuNumberOfPlayerChoiceView.swift */,
+				DBA758422AEEBAB800DE2D16 /* MenuStartingLifeChoiceView.swift */,
+			);
+			path = OptionsPicker;
+			sourceTree = "<group>";
+		};
+		DBA758462AEFE92A00DE2D16 /* LifePointsView */ = {
+			isa = PBXGroup;
+			children = (
+				DBA7581A2AEE9B9400DE2D16 /* LifePointsView.swift */,
+				DBA758472AEFE93300DE2D16 /* LifePointsPlayerPanelView */,
+			);
+			path = LifePointsView;
+			sourceTree = "<group>";
+		};
+		DBA758472AEFE93300DE2D16 /* LifePointsPlayerPanelView */ = {
+			isa = PBXGroup;
+			children = (
+				DBA7581C2AEE9BA500DE2D16 /* LifePointsPlayerPanelView.swift */,
+				DBA758482AEFE93F00DE2D16 /* Views */,
+			);
+			path = LifePointsPlayerPanelView;
+			sourceTree = "<group>";
+		};
+		DBA758482AEFE93F00DE2D16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBA758262AEE9BEC00DE2D16 /* CommanderDamagesPanel.swift */,
+				DBA7581E2AEE9BB000DE2D16 /* LifePointsPanelView.swift */,
+				DBA758492AEFE9C000DE2D16 /* AlternativeCountersView.swift */,
+				DBA7584B2AEFED5100DE2D16 /* LifePointsPanelBackground.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,6 +240,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = DBA757F62AEE97C400DE2D16;
 			productRefGroup = DBA758002AEE97C400DE2D16 /* Products */;
@@ -126,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBA7580A2AEE97C600DE2D16 /* Preview Assets.xcassets in Resources */,
+				DBA758362AEEB7DF00DE2D16 /* Localizable.strings in Resources */,
 				DBA758072AEE97C600DE2D16 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,18 +270,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBA758292AEE9BF500DE2D16 /* MonarchTokenView.swift in Sources */,
+				DBA7583E2AEEBA7500DE2D16 /* LifeOptionsPanel.swift in Sources */,
+				DBA7581F2AEE9BB000DE2D16 /* LifePointsPanelView.swift in Sources */,
+				DBA7584A2AEFE9C000DE2D16 /* AlternativeCountersView.swift in Sources */,
+				DBA7584C2AEFED5100DE2D16 /* LifePointsPanelBackground.swift in Sources */,
+				DBA7583C2AEEBA6600DE2D16 /* OptionsPanel.swift in Sources */,
+				DBA758232AEE9BD300DE2D16 /* Treachery.swift in Sources */,
+				DBA7582B2AEE9BFE00DE2D16 /* CircularButtonView.swift in Sources */,
+				DBA758272AEE9BEC00DE2D16 /* CommanderDamagesPanel.swift in Sources */,
+				DBA758252AEE9BDD00DE2D16 /* LifePointsPlayerPanelView+Treachery.swift in Sources */,
+				DBA758412AEEBAAD00DE2D16 /* MenuNumberOfPlayerChoiceView.swift in Sources */,
+				DBA758452AEEBAED00DE2D16 /* OptionsMenuView.swift in Sources */,
+				DBA758332AEE9E4600DE2D16 /* SaveManager.swift in Sources */,
+				DBA758192AEE9B7E00DE2D16 /* LifePointsViewModel.swift in Sources */,
+				DBA758212AEE9BC300DE2D16 /* Blueprints.swift in Sources */,
 				DBA758052AEE97C400DE2D16 /* ContentView.swift in Sources */,
+				DBA7581D2AEE9BA500DE2D16 /* LifePointsPlayerPanelView.swift in Sources */,
+				DBA7582F2AEE9D8E00DE2D16 /* CardSizes.swift in Sources */,
+				DBA758312AEE9E2E00DE2D16 /* PlanechaseViewModel.swift in Sources */,
+				DBA758432AEEBAB800DE2D16 /* MenuStartingLifeChoiceView.swift in Sources */,
+				DBA7582D2AEE9C7C00DE2D16 /* OG_Extensions.swift in Sources */,
 				DBA758032AEE97C400DE2D16 /* LifeCounterApp.swift in Sources */,
+				DBA7581B2AEE9B9400DE2D16 /* LifePointsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DBA758382AEEB7DF00DE2D16 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBA758372AEEB7DF00DE2D16 /* en */,
+				DBA758392AEEB83F00DE2D16 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DBA7580B2AEE97C600DE2D16 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -209,6 +376,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -273,8 +441,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeLeft;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,8 +471,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeLeft;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
