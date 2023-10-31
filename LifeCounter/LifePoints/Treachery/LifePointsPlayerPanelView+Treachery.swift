@@ -107,7 +107,7 @@ extension LifePointsPlayerPanelView {
                         /*.mask(
                             LinearGradient(gradient: croppingGradient, startPoint: .leading, endPoint: .trailing)
                         )*/
-                        .offset(x: (geo.size.height / 4) * (putCardOnTheRight ? 1 : -1))
+                        .offset(x: (geo.size.height / 3) * (putCardOnTheRight ? 1 : -1))
                     }
                     if !putCardOnTheRight {
                         Spacer()

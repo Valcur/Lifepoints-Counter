@@ -15,8 +15,20 @@ class LifePointsViewModel: ObservableObject {
     init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
-        players = []
-
+        self.players = []
+        
+        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery)
+    }
+    
+    func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool) {
+        self.lastUsedSetup = SaveManager.getLastUsedSetup()
+        self.numberOfPlayer = numberOfPlayer
+        self.players = []
+        
+        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery)
+    }
+    
+    private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool) {
         var colors = [
             Color("\(colorPalette) Player 1"),
             Color("\(colorPalette) Player 2"),

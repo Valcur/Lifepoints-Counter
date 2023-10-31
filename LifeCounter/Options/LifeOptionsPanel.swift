@@ -212,15 +212,3 @@ struct PlayerCustomProfile: Codable, Identifiable {
         self.customImageData = customImageData
     }
 }
-
-struct LastUsedSetup: Codable {
-    var playersProfiles: [PlayerCustomProfile?]
-    var partnerEnabled: [Bool]
-    var alternativeCountersEnabled: [[String]]
-    
-    static func getDefaultSetup() -> LastUsedSetup {
-        return LastUsedSetup(playersProfiles: Array.init(repeating: nil, count: 8),
-                             partnerEnabled: Array.init(repeating: false, count: 8),
-                             alternativeCountersEnabled: Array.init(repeating: ["Poison", "Exp"], count: 8))
-    }
-}

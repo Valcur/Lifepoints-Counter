@@ -27,6 +27,20 @@ extension SaveManager {
         return LifeOptions(useLifeCounter: true, useCommanderDamages: true, colorPaletteId: 0, nbrOfPlayers: 4, startingLife: 40, backgroundStyleId: -1, autoHideLifepointsCooldown: -1,  useMonarchToken: true, monarchTokenStyleId: -1)
     }
     
+    static func saveOptions_TreacheryOptions(_ treacheryOptions: TreacheryOptions) {
+        if let encoded = try? JSONEncoder().encode(treacheryOptions) {
+            UserDefaults.standard.set(encoded, forKey: "TreacheryOptions")
+        }
+    }
+    
+    static func getOptions_TreacheryOptions() -> TreacheryOptions {
+        if let data = UserDefaults.standard.object(forKey: "TreacheryOptions") as? Data,
+           let treacheryOptions = try? JSONDecoder().decode(TreacheryOptions.self, from: data) {
+            return treacheryOptions
+        }
+        return TreacheryOptions(isTreacheryEnabled: false, isUsingUnco: true, isUsingRare: false, isUsingMythic: false)
+    }
+    
     static func saveOptions_LifePlayerProfiles(_ profiles: [PlayerCustomProfile]) {
         var profilesData = profiles
         for i in 0..<profilesData.count {

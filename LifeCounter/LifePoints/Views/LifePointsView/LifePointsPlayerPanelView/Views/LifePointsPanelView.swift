@@ -18,32 +18,29 @@ struct LifePointsPanelView: View {
     
     var body: some View {
         ZStack {
-            VStack {
+            VStack(spacing: 0) {
                 Spacer()
-                
                 if !isMiniView {
                     Text(playerName)
                         .font(.title3)
                         .foregroundColor(.white)
                         .shadow(color: isMiniView ? .clear : Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
-                    
-                    Spacer()
+                        .frame(height: 20)
                 }
                 
                 Text("\(lifepoints)")
-                    .font(.system(size: isMiniView ? 80 : (UIDevice.isIPhone ? 40 : 70)))
-                    .fontWeight(.bold)
+                    .font(.system(size: isMiniView ? 80 : (UIDevice.isIPhone ? 50 : 110)))
+                    //.fontWeight(.bold)
                     .foregroundColor(.white)
                     .shadow(color: isMiniView ? .clear : Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
-                    .offset(y: UIDevice.isIPhone && !isMiniView ? -10 : 0)
                 
                 if !isMiniView {
-                    Spacer()
+                    Rectangle()
+                        .opacity(0)
+                        .frame(height: 20)
                 }
-                
                 Spacer()
             }
-            
             
             if totalChange != 0 {
                 VStack {

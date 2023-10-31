@@ -12,9 +12,9 @@ struct LifeCounterAppView: View {
     let planeChaseVM: PlanechaseViewModel
     
     init(lifeCounterOptions: LifeOptions, profiles: [PlayerCustomProfile], playWithTreachery: Bool) {
-        lifePointsViewModel = LifePointsViewModel(numberOfPlayer: lifeCounterOptions.nbrOfPlayers,
-                                                  startingLife: lifeCounterOptions.startingLife, colorPalette: lifeCounterOptions.colorPaletteId, playWithTreachery: playWithTreachery)
         planeChaseVM = PlanechaseViewModel()
+        lifePointsViewModel = LifePointsViewModel(numberOfPlayer: planeChaseVM.lifeCounterOptions.nbrOfPlayers,
+                                                  startingLife: planeChaseVM.lifeCounterOptions.startingLife, colorPalette: planeChaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planeChaseVM.treacheryOptions.isTreacheryEnabled)
     }
     
     var body: some View {
@@ -26,7 +26,7 @@ struct LifeCounterAppView: View {
                 
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        planeChaseVM.gameVM.showLifePointsView.toggle()
+                        planeChaseVM.gameVM.showLifePointsView = true
                     }
                 }, label: {
                     Image(systemName: "xmark")
@@ -46,16 +46,4 @@ struct LifeCounterAppView: View {
 
 class GameViewModel: ObservableObject {
     @Published var showLifePointsView = true
-}
-
-struct LifeOptions: Codable {
-    var useLifeCounter: Bool
-    var useCommanderDamages: Bool
-    var colorPaletteId: Int
-    var nbrOfPlayers: Int
-    var startingLife: Int
-    var backgroundStyleId: Int
-    var autoHideLifepointsCooldown: Double
-    var useMonarchToken: Bool
-    var monarchTokenStyleId: Int
 }

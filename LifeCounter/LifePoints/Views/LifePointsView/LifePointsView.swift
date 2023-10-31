@@ -81,7 +81,7 @@ struct LifePointsView: View {
                                     gameVM.showLifePointsView.toggle()
                                 }
                             }, label: {
-                                Image(systemName: "xmark")
+                                Image(systemName: "gear")
                                     .imageButtonLabel(style: .noBackground)
                             })
                         }

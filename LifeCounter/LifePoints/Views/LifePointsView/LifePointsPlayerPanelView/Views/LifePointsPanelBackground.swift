@@ -35,18 +35,20 @@ extension LifePointsPlayerPanelView {
                         VisualEffectView(effect: UIBlurEffect(style: blurEffect))
                     } else {
                         //players[playerId].backgroundColor
-                        ZStack {
+                        
+                        LinearGradient(gradient: Gradient(colors: [player.backgroundColor, player.backgroundColor.opacity(0.9)]), startPoint: .bottomLeading, endPoint: .topTrailing)
+                        /*ZStack {
                             GeometryReader { geo in
                                 Image("BackgroundTest")
                                     .resizable()
                                     .scaledToFill()
                             }
                             LinearGradient(gradient: getGradient(player.backgroundColor), startPoint: .leading, endPoint: .trailing)
-                        }
+                        }*/
                     }
                 }
                 
-                if planechaseVM.isTreacheryEnable && !isMiniView {
+                if planechaseVM.treacheryOptions.isTreacheryEnabled && !isMiniView {
                     TreacheryCardView(player: $player, putCardOnTheRight: isPlayerOnOppositeSide)
                 }
                 

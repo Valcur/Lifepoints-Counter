@@ -23,7 +23,6 @@ struct LifePointsPlayerPanelView: View {
     let hasBeenChoosenRandomly: Bool
     @Binding var lifepointHasBeenUsedToggler: Bool
     @State private var showingCountersSheet = false
-    @State var showProfileSelector: Bool = false
     @State var showTreacheryPanel: Bool = false
     @State var showAlternativeCounters: Bool = false
     var isPlayerOnTheSide: Bool {
@@ -35,7 +34,6 @@ struct LifePointsPlayerPanelView: View {
     var hideUIElementOpacity: CGFloat {
         !isMiniView && (showAlternativeCounters) ? 0 : 1
     }
-    @State var profileChangeTimerProgress: CGFloat = 1
     @Binding var isAllowedToChangeProfile: Bool
     
     var body: some View {
@@ -57,12 +55,12 @@ struct LifePointsPlayerPanelView: View {
                         VStack {
                             HStack(alignment: .center) {
                                 ForEach(0..<player.counters.alternativeCounters.count, id: \.self) { i in
-                                    CounterRecapView(value: player.counters.alternativeCounters[i].value, imageName: player.counters.alternativeCounters[i].imageName, size: 70)
+                                    CounterRecapView(value: player.counters.alternativeCounters[i].value, imageName: player.counters.alternativeCounters[i].imageName)
                                 }
                             }
                             .opacity(hideUIElementOpacity)
                             Spacer()
-                        }
+                        }.padding(.top, 8)
                     }
 
                     VStack(spacing: 0) {
@@ -80,7 +78,7 @@ struct LifePointsPlayerPanelView: View {
                             }
                     }
                     
-                    if planechaseVM.isTreacheryEnable {
+                    if planechaseVM.treacheryOptions.isTreacheryEnabled {
                         GeometryReader { geo in
                             HStack {
                                 if isPlayerOnOppositeSide {
@@ -91,7 +89,7 @@ struct LifePointsPlayerPanelView: View {
                                     lifepointHasBeenUsedToggler.toggle()
                                 }, label: {
                                     Color.black
-                                        .frame(width: CardSizes.classic_widthForHeight(geo.size.height ) - (geo.size.height / 4))
+                                        .frame(width: CardSizes.classic_widthForHeight(geo.size.height ) - (geo.size.height / 3))
                                         .opacity(0.000001)
                                 })
                                 if !isPlayerOnOppositeSide {
@@ -101,77 +99,41 @@ struct LifePointsPlayerPanelView: View {
                         }
                     }
                     
-                    if planechaseVM.lifeCounterOptions.useCommanderDamages {
-                        CommanderRecapView(playerId: playerId, lifePoints: $player.lifePoints, playerCounters: $player.counters)
-                            .onTapGesture {
+                    if !showAlternativeCounters {
+                        VStack {
+                            Spacer()
+                            Button(action: {
                                 withAnimation(.easeInOut(duration: 0.3)) {
-                                    showingCountersSheet = true
+                                    showAlternativeCounters = true
                                 }
-                                lifepointHasBeenUsedToggler.toggle()
-                            }.offset(y: -20)
+                            }, label: {
+                                Rectangle()
+                                    .foregroundColor(.black.opacity(0.5))
+                                    .frame(width: 100, height: 100)
+                            })
+                            Spacer()
+                        }
                     }
                     
-                    if planechaseVM.lifeCounterProfiles.count > 0 {
-                        GeometryReader { geo in
-                            VStack  {
-                                Button(action: {
-                                    showProfileSelector = true
-                                    lifepointHasBeenUsedToggler.toggle()
-                                }, label: {
-                                    ZStack(alignment: .top) {
-                                        Color.black.opacity(0.000001).frame(width: 100, height: 80)
-                                        ZStack {
-                                            Image(systemName: "pencil")
-                                                .font(.title)
-                                                .foregroundColor(.white)
-                                            Circle()
-                                                .stroke(
-                                                    Color.white,
-                                                    style: StrokeStyle(
-                                                        lineWidth: 4,
-                                                        lineCap: .round
-                                                    )
-                                                )
-                                        }.frame(width: 45, height: 45).padding(8)
+                    if planechaseVM.lifeCounterOptions.useCommanderDamages {
+                        VStack {
+                            Spacer()
+                            CommanderRecapView(playerId: playerId, lifePoints: $player.lifePoints, playerCounters: $player.counters)
+                                .onTapGesture {
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        showingCountersSheet = true
                                     }
-                                }).iPhoneScaler(width: 100, height: 80, scaleEffect: 0.6, anchor: .top)
-                                Spacer()
-                            }.frame(maxWidth: .infinity)
-                        }.opacity(isAllowedToChangeProfile ? 1 : 0)
+                                    lifepointHasBeenUsedToggler.toggle()
+                                }
+                        }.padding(22)
                     }
                 
                     Group {
                         if showAlternativeCounters {
-                            AlternativeCountersView(counters: $player.counters.alternativeCounters, playerId: playerId)
-                            ZStack(alignment: .topLeading) {
-                                Button(action: {
-                                    withAnimation(.easeInOut(duration: 0.3)) {
-                                        showAlternativeCounters = false
-                                    }
-                                }, label: {
-                                    Image(systemName: "xmark")
-                                        .resizable()
-                                        .frame(width: 15, height: 15)
-                                        .genericButtonLabel()
-                                }).frame(width: 50)
-                            }
-                        } else {
-                            VStack {
-                                Spacer()
-                                Button(action: {
-                                    withAnimation(.easeInOut(duration: 0.3)) {
-                                        showAlternativeCounters = true
-                                    }
-                                }, label: {
-                                    Rectangle()
-                                        .foregroundColor(.black.opacity(0.5))
-                                        .frame(width: 100, height: 100)
-                                })
-                                Spacer()
-                            }
+                            AlternativeCountersView(counters: $player.counters.alternativeCounters, playerId: playerId, showAlternativeCounters: $showAlternativeCounters)
                         }
-                        if showProfileSelector {
-                            ProfileSelector(showSelector: $showProfileSelector, playerId: playerId, player: $player, lifepointHasBeenUsedToggler: $lifepointHasBeenUsedToggler)
+                        if isAllowedToChangeProfile {
+                            ProfileSelector(playerId: playerId, player: $player, lifepointHasBeenUsedToggler: $lifepointHasBeenUsedToggler)
                         }
                         if showTreacheryPanel {
                             TreacheryPanelView(treacheryData: $player.treachery, showPanel: $showTreacheryPanel, lifepointHasBeenUsedToggler: $lifepointHasBeenUsedToggler, isOnTheOppositeSide: isPlayerOnOppositeSide)
@@ -179,7 +141,7 @@ struct LifePointsPlayerPanelView: View {
                     }
                 }
                 
-            }.cornerRadius(isMiniView ? 0 : 0).padding(0).padding(.horizontal, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 2)).padding(.top, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 2))
+            }.cornerRadius(isMiniView ? 0 : 10).padding(0).padding(.horizontal, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 2)).padding(.top, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 2))
                 .gesture(DragGesture()
                     .onChanged { value in
                         if !showTreacheryPanel {
@@ -205,7 +167,7 @@ struct LifePointsPlayerPanelView: View {
             
             Color.black.opacity(player.lifePoints > 0 ? 0 : 0.7).allowsHitTesting(false)
             
-            Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).cornerRadius(0).padding(isMiniView ? 0 : (UIDevice.isIPhone ? 1 : 1)).allowsHitTesting(false)
+            Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).cornerRadius(10).padding(isMiniView ? 0 : (UIDevice.isIPhone ? 1 : 1)).allowsHitTesting(false)
         }
     }
     
@@ -232,18 +194,21 @@ struct LifePointsPlayerPanelView: View {
     struct CounterRecapView: View {
         let value: Int
         let imageName: String
-        let size: CGFloat
+        let size: CGFloat = 60
         
         var body: some View {
-            ZStack {
+            ZStack(alignment: .bottomLeading) {
                 Image(imageName)
                     .resizable()
                     .frame(width: size, height: size)
                     .foregroundColor(Color.white)
-                    .opacity(0.2)
+                    .opacity(0.6)
                 
                 Text("\(value)")
-                    .title()
+                    .foregroundColor(.white)
+                    .font(.system(size: 35))
+                    .fontWeight(.bold)
+                    .shadow(color: Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
             }.opacity(value > 0 ? 1 : 0)
         }
     }
@@ -251,45 +216,35 @@ struct LifePointsPlayerPanelView: View {
     struct ProfileSelector: View {
         @EnvironmentObject var lifePointsViewModel: LifePointsViewModel
         @EnvironmentObject var planechaseVM: PlanechaseViewModel
-        @Binding var showSelector: Bool
         let playerId: Int
         @Binding var player: PlayerProfile
         @Binding var lifepointHasBeenUsedToggler: Bool
         var body: some View {
-            VStack {
-                ScrollView(.vertical) {
-                    VStack {
-                        Button(action: {
-                            applyProfile(profile: nil, slot: playerId)
-                        }, label: {
-                            Text("lifepoints_noProfile".translate())
-                                .textButtonLabel()
-                        }).padding(.top, 5)
-                        ForEach(0..<planechaseVM.lifeCounterProfiles.count, id: \.self) { i in
-                            if let profile = planechaseVM.lifeCounterProfiles[i] {
-                                Button(action: {
-                                    applyProfile(profile: profile, slot: playerId)
-                                }, label: {
-                                    Text(profile.name)
-                                        .textButtonLabel(style: player.id == profile.id ? .secondary : .primary)
-                                })
+            HStack {
+                VStack {
+                    ScrollView(.vertical) {
+                        VStack {
+                            Button(action: {
+                                applyProfile(profile: nil, slot: playerId)
+                            }, label: {
+                                Text("lifepoints_noProfile".translate())
+                                    .textButtonLabel()
+                            }).padding(.top, 5)
+                            ForEach(0..<planechaseVM.lifeCounterProfiles.count, id: \.self) { i in
+                                if let profile = planechaseVM.lifeCounterProfiles[i] {
+                                    Button(action: {
+                                        applyProfile(profile: profile, slot: playerId)
+                                    }, label: {
+                                        Text(profile.name)
+                                            .textButtonLabel(style: player.id == profile.id ? .secondary : .primary)
+                                    })
+                                }
                             }
-                        }
-                    }.frame(maxWidth: .infinity)
-                }
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        showSelector = false
+                        }.frame(maxWidth: .infinity)
                     }
-                }, label: {
-                    ZStack {
-                        LinearGradient(colors: [Color.black.opacity(0.8), Color.black.opacity(0)], startPoint: .bottom, endPoint: .top)
-                        Text("cancel".translate())
-                            .font(.title)
-                            .foregroundColor(.white)
-                    }.frame(height: 50)
-                })
-            }.background(VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.systemMaterialDark)))
+                }.background(VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.systemMaterialDark))).frame(maxWidth: 250)
+                Spacer()
+            }
         }
         
         func applyProfile(profile: PlayerCustomProfile?, slot: Int) {
@@ -306,16 +261,12 @@ struct LifePointsPlayerPanelView: View {
                     player.backgroundImage = backgroundImage
                     player.id = profile.id
                     player.name = profile.name
-                    
-                    showSelector = false
                 }
             } else {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     player.backgroundImage = nil
                     player.id = UUID()
                     player.name = "\("lifepoints_player".translate()) \(playerId + 1)"
-                    
-                    showSelector = false
                 }
             }
             lifepointHasBeenUsedToggler.toggle()
@@ -358,71 +309,52 @@ struct LifePointsPlayerPanelView: View {
         @Binding var playerCounters: PlayerCounters
         
         var body: some View {
-            GeometryReader { geo in
-                HStack(alignment: .bottom) {
-                    Spacer()
-                    ZStack {
-                        Color.black.opacity(0.00001)
-                        
-                        if lifePointsViewModel.numberOfPlayer % 2 == 0 {
-                            EvenBlueprint(row1: AnyView(HStack(spacing: 0) {
-                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i - 1])
-                                        .commanderDamageToYourself(i - 1 == playerId)
-                                }
-                            }), row2: AnyView(HStack(spacing: 0) {
-                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers - 1])
-                                        .commanderDamageToYourself(i + halfNumberOfPlayers - 1 == playerId)
-                                }
-                            }))
-                        } else {
-                            UnevenBlueprint(row1: AnyView(HStack(spacing: 0) {
-                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i])
-                                        .commanderDamageToYourself(i == playerId)
-                                }
-                            }),
-                                            row2: AnyView(                    HStack(spacing: 0) {
-                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers])
-                                        .commanderDamageToYourself(i + halfNumberOfPlayers == playerId)
-                                }
-                            }),
-                                            sideElement: AnyView(CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[0])                        .commanderDamageToYourself(0 == playerId))
-                            )
-                        }
-                    }
-                    .frame(maxWidth: 200).frame(height: UIDevice.isIPhone ? 80 : 100)
-                    .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
-                    .frame(maxWidth: 200).frame(height: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 80 : 100))
-                    // iPhone scaling THIS IS UGLY AS FUCK
-                    .offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
-                    .offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)
-                    .scaleEffect(UIDevice.isIPhone ? 0.6 : 1, anchor: .bottom)
-                    
-                    if !isPlayerOnTheSide {
-                        Spacer()
-                    }
-                }.frame(maxHeight: .infinity, alignment: isPlayerOnTheSide ? .center : .bottom)                 .padding(.vertical, 0)
-            }
-        }
-        
-        struct CounterView: View {
-            let blurEffect: UIBlurEffect.Style = .systemThinMaterialDark
-            let imageName: String
-            let value: Int
-            
-            var body: some View {
+            HStack {
+                Spacer()
                 ZStack {
-                    VisualEffectView(effect: UIBlurEffect(style: blurEffect))
-                    VStack {
-                        Image(imageName)
-                        Text("\(value)")
-                            .title()
+                    Color.black.opacity(0.00001)
+                    
+                    if lifePointsViewModel.numberOfPlayer % 2 == 0 {
+                        EvenBlueprint(row1: AnyView(HStack(spacing: 0) {
+                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i - 1])
+                                    .commanderDamageToYourself(i - 1 == playerId)
+                            }
+                        }), row2: AnyView(HStack(spacing: 0) {
+                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers - 1])
+                                    .commanderDamageToYourself(i + halfNumberOfPlayers - 1 == playerId)
+                            }
+                        }))
+                    } else {
+                        UnevenBlueprint(row1: AnyView(HStack(spacing: 0) {
+                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i])
+                                    .commanderDamageToYourself(i == playerId)
+                            }
+                        }),
+                                        row2: AnyView(                    HStack(spacing: 0) {
+                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers])
+                                    .commanderDamageToYourself(i + halfNumberOfPlayers == playerId)
+                            }
+                        }),
+                                        sideElement: AnyView(CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[0])                        .commanderDamageToYourself(0 == playerId))
+                        )
                     }
-                }.frame(width: 40)
-            }
+                }
+                .frame(maxWidth: 200).frame(maxHeight: UIDevice.isIPhone ? 80 : 100)
+                .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
+                .frame(maxWidth: 200).frame(maxHeight: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 80 : 100))
+                // iPhone scaling THIS IS UGLY AS FUCK
+                .offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
+                .offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)
+                .scaleEffect(UIDevice.isIPhone ? 0.6 : 1, anchor: .bottom)
+                
+                if !isPlayerOnTheSide {
+                    Spacer()
+                }
+            }//.frame(maxHeight: .infinity, alignment: isPlayerOnTheSide ? .center : .bottom)
         }
         
         struct CommanderDamageRecapPanelView: View {

@@ -21,7 +21,7 @@ class PlanechaseViewModel: ObservableObject {
     @Published var showDiscordInvite = false
     @Published var paymentProcessing = false
     @Published var useBlurredBackground = false
-    @Published var isTreacheryEnable = true
+    @Published var treacheryOptions: TreacheryOptions
     
     init() {
         let optionToggles = SaveManager.getOptions_Toggles()
@@ -32,6 +32,7 @@ class PlanechaseViewModel: ObservableObject {
         useBlurredBackground = optionToggles.4
         lifeCounterOptions = SaveManager.getOptions_LifeOptions()
         lifeCounterProfiles = SaveManager.getOptions_LifePlayerProfiles()
+        treacheryOptions = SaveManager.getOptions_TreacheryOptions()
         
         gameVM = GameViewModel()
         isPremium = UserDefaults.standard.object(forKey: "IsPremium") as? Bool ?? false
@@ -43,6 +44,10 @@ class PlanechaseViewModel: ObservableObject {
             lifeCounterOptions = life
         }
         SaveManager.saveOptions_LifeOptions(life)
+    }
+    
+    func saveTreacheryOptions() {
+        SaveManager.saveOptions_TreacheryOptions(treacheryOptions)
     }
     
     func saveProfiles_Info() {
