@@ -26,6 +26,7 @@ struct LifePointsPanelView: View {
                         .foregroundColor(.white)
                         .shadow(color: isMiniView ? .clear : Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
                         .frame(height: 20)
+                        .offset(y: 10)
                 }
                 
                 Text("\(lifepoints)")

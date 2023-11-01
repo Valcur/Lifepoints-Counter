@@ -13,7 +13,7 @@ struct AlternativeCountersView: View {
     let playerId: Int
     @Binding var showAlternativeCounters: Bool
     @State var showCountersList: Bool = false
-    let existingCounters = ["Poison", "Exp", "Treasure", "CommanderTax", "Energy"]
+    let existingCounters = AlternativeCounter.existingCounters
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -169,6 +169,7 @@ struct AlternativeCountersView: View {
 }
 
 struct AlternativeCounter {
+    static let existingCounters = ["Poison", "Exp", "Treasure", "CommanderTax", "Energy"]
     var imageName: String
     var value: Int
     var enabled: Bool = true

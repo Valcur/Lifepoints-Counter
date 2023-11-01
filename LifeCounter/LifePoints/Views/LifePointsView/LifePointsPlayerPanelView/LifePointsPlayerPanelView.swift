@@ -51,18 +51,6 @@ struct LifePointsPlayerPanelView: View {
                     .opacity(hideUIElementOpacity)
                 
                 if !isMiniView {
-                    if planechaseVM.lifeCounterOptions.useCommanderDamages {
-                        VStack {
-                            HStack(alignment: .center) {
-                                ForEach(0..<player.counters.alternativeCounters.count, id: \.self) { i in
-                                    CounterRecapView(value: player.counters.alternativeCounters[i].value, imageName: player.counters.alternativeCounters[i].imageName)
-                                }
-                            }
-                            .opacity(hideUIElementOpacity)
-                            Spacer()
-                        }.padding(.top, 8)
-                    }
-
                     VStack(spacing: 0) {
                         Rectangle()
                             .opacity(0.0001)
@@ -99,6 +87,29 @@ struct LifePointsPlayerPanelView: View {
                         }
                     }
                     
+                    if planechaseVM.lifeCounterOptions.useCommanderDamages {
+                        VStack {
+                            HStack(alignment: .center, spacing: 0) {
+                                ForEach(0..<player.counters.alternativeCounters.count, id: \.self) { i in
+                                    if let value = player.counters.alternativeCounters[i].value, value > 0 {
+                                        CounterRecapView(value: value, counter: player.counters.alternativeCounters[i])
+                                            .padding(4)
+                                    }
+                                }
+                            }
+                            .background(VisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark)))
+                            .cornerRadius(8)
+                            .opacity(hideUIElementOpacity)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    showAlternativeCounters = true
+                                }
+                                lifepointHasBeenUsedToggler.toggle()
+                            }
+                            Spacer()
+                        }.padding(.top, 8)
+                    }
+                    
                     if !showAlternativeCounters {
                         VStack {
                             Spacer()
@@ -106,6 +117,7 @@ struct LifePointsPlayerPanelView: View {
                                 withAnimation(.easeInOut(duration: 0.3)) {
                                     showAlternativeCounters = true
                                 }
+                                lifepointHasBeenUsedToggler.toggle()
                             }, label: {
                                 Rectangle()
                                     .foregroundColor(.black.opacity(0.5))
@@ -141,7 +153,7 @@ struct LifePointsPlayerPanelView: View {
                     }
                 }
                 
-            }.cornerRadius(isMiniView ? 0 : 10).padding(0).padding(.horizontal, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 2)).padding(.top, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 2))
+            }.cornerRadius(isMiniView ? 0 : 20).padding(0).padding(.horizontal, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 4)).padding(.top, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 4))
                 .gesture(DragGesture()
                     .onChanged { value in
                         if !showTreacheryPanel {
@@ -167,7 +179,7 @@ struct LifePointsPlayerPanelView: View {
             
             Color.black.opacity(player.lifePoints > 0 ? 0 : 0.7).allowsHitTesting(false)
             
-            Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).cornerRadius(10).padding(isMiniView ? 0 : (UIDevice.isIPhone ? 1 : 1)).allowsHitTesting(false)
+            Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).cornerRadius(20).padding(isMiniView ? 0 : (UIDevice.isIPhone ? 1 : 1)).allowsHitTesting(false)
         }
     }
     
@@ -193,12 +205,12 @@ struct LifePointsPlayerPanelView: View {
     
     struct CounterRecapView: View {
         let value: Int
-        let imageName: String
-        let size: CGFloat = 60
+        let counter: AlternativeCounter
+        let size: CGFloat = 40
         
         var body: some View {
-            ZStack(alignment: .bottomLeading) {
-                Image(imageName)
+            VStack {
+                Image(counter.imageName)
                     .resizable()
                     .frame(width: size, height: size)
                     .foregroundColor(Color.white)
@@ -206,10 +218,10 @@ struct LifePointsPlayerPanelView: View {
                 
                 Text("\(value)")
                     .foregroundColor(.white)
-                    .font(.system(size: 35))
+                    .font(.system(size: 25))
                     .fontWeight(.bold)
                     .shadow(color: Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
-            }.opacity(value > 0 ? 1 : 0)
+            }
         }
     }
     
@@ -347,8 +359,8 @@ struct LifePointsPlayerPanelView: View {
                 .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
                 .frame(maxWidth: 200).frame(maxHeight: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 80 : 100))
                 // iPhone scaling THIS IS UGLY AS FUCK
-                .offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
-                .offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)
+                //.offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
+                //.offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)
                 .scaleEffect(UIDevice.isIPhone ? 0.6 : 1, anchor: .bottom)
                 
                 if !isPlayerOnTheSide {
