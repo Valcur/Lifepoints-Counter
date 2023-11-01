@@ -36,7 +36,7 @@ extension LifePointsPlayerPanelView {
                     } else {
                         //players[playerId].backgroundColor
                         
-                        LinearGradient(gradient: Gradient(colors: [player.backgroundColor, player.backgroundColor.opacity(0.9)]), startPoint: .bottomLeading, endPoint: .topTrailing)
+                        LinearGradient(gradient: Gradient(colors: [player.backgroundColor, player.backgroundColor.opacity(0.7)]), startPoint: .bottomLeading, endPoint: .topTrailing)
                         /*ZStack {
                             GeometryReader { geo in
                                 Image("BackgroundTest")

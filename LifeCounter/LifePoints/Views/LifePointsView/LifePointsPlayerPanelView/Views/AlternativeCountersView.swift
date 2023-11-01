@@ -28,29 +28,31 @@ struct AlternativeCountersView: View {
                             .frame(width: 2)
                     }
                 }
-                ZStack {
-                    Color.black
-                    if showCountersList {
-                        ScrollView(.vertical) {
-                            VStack {
-                                ForEach(0..<existingCounters.count, id: \.self) { i in
-                                    NewCounterButton(counterName: existingCounters[i], counters: $counters, showCountersList: $showCountersList)
-                                }
-                            }.padding(5)
-                        }.padding(.top, 50)
-                    } else {
-                        Button(action: {
-                            showCountersList = true
-                        }, label: {
-                            Image(systemName: "plus")
-                                .font(.title)
-                                .foregroundColor(.white)
-                        })
-                    }
-                }.frame(maxWidth: counters.count == 0 ? .infinity : 80)
-                    .onChange(of: counters.count) { _ in
-                    lifePointsViewModel.saveAlternativeCounters(playerId)
+                if counters.count < 5 {
+                    ZStack {
+                        Color.black
+                        if showCountersList {
+                            ScrollView(.vertical) {
+                                VStack {
+                                    ForEach(0..<existingCounters.count, id: \.self) { i in
+                                        NewCounterButton(counterName: existingCounters[i], counters: $counters, showCountersList: $showCountersList)
+                                    }
+                                }.padding(5)
+                            }.padding(.top, 50)
+                        } else {
+                            Button(action: {
+                                showCountersList = true
+                            }, label: {
+                                Image(systemName: "plus")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                            })
+                        }
+                    }.frame(maxWidth: counters.count == 0 ? .infinity : 80)
                 }
+            }
+            .onChange(of: counters.count) { _ in
+                lifePointsViewModel.saveAlternativeCounters(playerId)
             }
             Button(action: {
                 showAlternativeCounters = false
@@ -110,8 +112,8 @@ struct AlternativeCountersView: View {
         @State var prevValue: CGFloat = 0
         
         var body: some View {
-            ZStack(alignment: .top) {
-                VStack {
+            ZStack(alignment: .bottomLeading) {
+                VStack(alignment: .center) {
                     Spacer()
                     Text("\(counter.value)")
                         .title()
@@ -120,7 +122,7 @@ struct AlternativeCountersView: View {
                         .frame(width: 40, height: 40)
                         .foregroundColor(.white)
                     Spacer()
-                }
+                }.frame(maxWidth: .infinity)
                 VStack(spacing: 0) {
                     Rectangle()
                         .opacity(0.0001)

@@ -20,36 +20,32 @@ extension LifePointsPlayerPanelView {
         let playerId: Int
         
         var body: some View {
-            ZStack(alignment: .top) {
-                ScrollView(.vertical) {
-                    ScrollViewReader { reader in
-                        VStack {
-                            if playerId == 0 && lifePointsViewModel.numberOfPlayer % 2 == 1 {
-                                HStack(spacing: 20) {
-                                    PartnerSwitch(playerId: playerId)
-                                    CommanderVStack(playerCounters: $playerCounters, lifePoints: $lifePoints, playerId: playerId)
-                                }.padding(5).padding(.top, lifePointsViewModel.numberOfPlayer == 3 || !UIDevice.isIPhone ? 20 : 5)
-                            } else {
-                                VStack(spacing: UIDevice.isIPhone ? 0 : 20) {
-                                    CommanderVStack(playerCounters: $playerCounters, lifePoints: $lifePoints, playerId: playerId)
-                                    PartnerSwitch(playerId: playerId)
-                                    Spacer()
-                                }.padding(5).padding(.vertical, UIDevice.isIPhone ? 5 : 20)
-                            }
-                        }.padding(.bottom, 75).id(0)
-                        .onChange(of: showSheet) { _ in
-                            if showSheet {
-                                exitTimer?.invalidate()
-                                startExitTimer()
-                                reader.scrollTo(0, anchor: .top)
-                            }
-                        }
-                    }
+            VStack {
+                if playerId == 0 && lifePointsViewModel.numberOfPlayer % 2 == 1 {
+                    HStack(spacing: 20) {
+                        Spacer()
+                        PartnerSwitch(playerId: playerId)
+                        Spacer()
+                        CommanderVStack(playerCounters: $playerCounters, lifePoints: $lifePoints, playerId: playerId)
+                        Spacer()
+                    }.padding(5).padding(.top, lifePointsViewModel.numberOfPlayer == 3 || !UIDevice.isIPhone ? 20 : 5)
+                } else {
+                    VStack(spacing: UIDevice.isIPhone ? 0 : 20) {
+                        CommanderVStack(playerCounters: $playerCounters, lifePoints: $lifePoints, playerId: playerId)
+                        Spacer()
+                        PartnerSwitch(playerId: playerId)
+                    }.padding(5).padding(.vertical, UIDevice.isIPhone ? 5 : 20)
                 }
-                .onChange(of: playerCounters.commanderDamages) { _ in
+            }
+            .onChange(of: showSheet) { _ in
+                if showSheet {
                     exitTimer?.invalidate()
                     startExitTimer()
                 }
+            }
+            .onChange(of: playerCounters.commanderDamages) { _ in
+                exitTimer?.invalidate()
+                startExitTimer()
             }
         }
         
@@ -65,7 +61,10 @@ extension LifePointsPlayerPanelView {
             @EnvironmentObject var lifePointsViewModel: LifePointsViewModel
             let playerId: Int
             var isEnabled: Bool {
-                lifePointsViewModel.players[playerId].counters.commanderDamages[playerId].count == 2
+                if lifePointsViewModel.players.count > playerId {
+                    return lifePointsViewModel.players[playerId].counters.commanderDamages[playerId].count == 2
+                }
+                return false
             }
             
             var body: some View {
@@ -74,7 +73,7 @@ extension LifePointsPlayerPanelView {
                     lifePointsViewModel.savePartnerForPlayer(playerId)
                 }, label: {
                     Text("\(isEnabled ? "Disable" : "Enable") partner")
-                        .headline()
+                        .buttonLabel()
                 })
             }
         }
