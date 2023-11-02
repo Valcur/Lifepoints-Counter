@@ -51,19 +51,38 @@ struct LifePointsPlayerPanelView: View {
                     .opacity(hideUIElementOpacity)
                 
                 if !isMiniView {
-                    VStack(spacing: 0) {
-                        Rectangle()
-                            .opacity(0.0001)
-                            .onTapGesture {
-                                addLifepoint()
-                                startTotalChangeTimer()
+                    ZStack {
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Spacer()
+                                Image(systemName: "plus")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                    .opacity(0.5)
+                                Spacer()
+                                Spacer()
+                                Image(systemName: "minus")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                    .opacity(0.5)
+                                Spacer()
                             }
-                        Rectangle()
-                            .opacity(0.0001)
-                            .onTapGesture {
-                                removeLifepoint()
-                                startTotalChangeTimer()
-                            }
+                        }.padding(10)
+                        VStack(spacing: 0) {
+                            Rectangle()
+                                .opacity(0.0001)
+                                .onTapGesture {
+                                    addLifepoint()
+                                    startTotalChangeTimer()
+                                }
+                            Rectangle()
+                                .opacity(0.0001)
+                                .onTapGesture {
+                                    removeLifepoint()
+                                    startTotalChangeTimer()
+                                }
+                        }
                     }
                     
                     if planechaseVM.treacheryOptions.isTreacheryEnabled {
@@ -121,7 +140,7 @@ struct LifePointsPlayerPanelView: View {
                             }, label: {
                                 Rectangle()
                                     .foregroundColor(.black.opacity(0.5))
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 100, height: 150)
                             })
                             Spacer()
                         }
@@ -153,7 +172,7 @@ struct LifePointsPlayerPanelView: View {
                     }
                 }
                 
-            }.cornerRadius(isMiniView ? 0 : 20).padding(0).padding(.horizontal, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 4)).padding(.top, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 4))
+            }.cornerRadius(isMiniView ? 0 : 0).padding(0).padding(.horizontal, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 0)).padding(.top, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 0))
                 .gesture(DragGesture()
                     .onChanged { value in
                         if !showTreacheryPanel {
@@ -209,7 +228,7 @@ struct LifePointsPlayerPanelView: View {
         let size: CGFloat = 40
         
         var body: some View {
-            VStack {
+            VStack(spacing: 0) {
                 Image(counter.imageName)
                     .resizable()
                     .frame(width: size, height: size)
@@ -355,9 +374,9 @@ struct LifePointsPlayerPanelView: View {
                         )
                     }
                 }
-                .frame(maxWidth: 200).frame(maxHeight: UIDevice.isIPhone ? 80 : 100)
+                .frame(maxWidth: 200).frame(maxHeight: UIDevice.isIPhone ? 100 : 100)
                 .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
-                .frame(maxWidth: 200).frame(maxHeight: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 80 : 100))
+                .frame(maxWidth: 200).frame(maxHeight: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 100 : 100))
                 // iPhone scaling THIS IS UGLY AS FUCK
                 //.offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
                 //.offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)

@@ -160,7 +160,7 @@ struct AlternativeCountersView: View {
                 }, label: {
                     ZStack {
                         Color.black.opacity(0.00002)
-                        Image(systemName: "minus")
+                        Image(systemName: "xmark")
                             .font(.title)
                             .foregroundColor(.white)
                     }

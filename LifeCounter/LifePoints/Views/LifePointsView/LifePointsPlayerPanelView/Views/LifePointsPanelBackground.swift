@@ -34,9 +34,9 @@ extension LifePointsPlayerPanelView {
                     if planechaseVM.lifeCounterOptions.colorPaletteId == -1 {
                         VisualEffectView(effect: UIBlurEffect(style: blurEffect))
                     } else {
-                        //players[playerId].backgroundColor
+                        player.backgroundColor
                         
-                        LinearGradient(gradient: Gradient(colors: [player.backgroundColor, player.backgroundColor.opacity(0.7)]), startPoint: .bottomLeading, endPoint: .topTrailing)
+                        //LinearGradient(gradient: Gradient(colors: [player.backgroundColor, player.backgroundColor.opacity(0.5)]), startPoint: .topTrailing, endPoint: .bottomLeading)
                         /*ZStack {
                             GeometryReader { geo in
                                 Image("BackgroundTest")

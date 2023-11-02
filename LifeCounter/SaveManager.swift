@@ -83,7 +83,7 @@ extension SaveManager {
     static func saveLastUsedSetup(_ setup: LastUsedSetup) {
         if let encoded = try? JSONEncoder().encode(setup) {
             UserDefaults.standard.set(encoded, forKey: "LastUsedSetup")
-            print("yes")
+            print("Saving setup")
         }
     }
     

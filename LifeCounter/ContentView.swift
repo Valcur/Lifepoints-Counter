@@ -20,6 +20,7 @@ struct LifeCounterAppView: View {
     var body: some View {
         ZStack {
             // Options
+            
             ZStack(alignment: .bottomLeading) {
                 OptionsMenuView()
                     .environmentObject(planeChaseVM)

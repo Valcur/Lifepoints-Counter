@@ -21,6 +21,7 @@ extension LifePointsPlayerPanelView {
         
         var body: some View {
             VStack {
+                Text("Tap to increase, Hold to reset").headline()
                 if playerId == 0 && lifePointsViewModel.numberOfPlayer % 2 == 1 {
                     HStack(spacing: 20) {
                         Spacer()
