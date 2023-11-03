@@ -22,6 +22,7 @@ class PlanechaseViewModel: ObservableObject {
     @Published var paymentProcessing = false
     @Published var useBlurredBackground = false
     @Published var treacheryOptions: TreacheryOptions
+    @Published var treacheryData: TreacheryData
     
     init() {
         let optionToggles = SaveManager.getOptions_Toggles()
@@ -33,10 +34,12 @@ class PlanechaseViewModel: ObservableObject {
         lifeCounterOptions = SaveManager.getOptions_LifeOptions()
         lifeCounterProfiles = SaveManager.getOptions_LifePlayerProfiles()
         treacheryOptions = SaveManager.getOptions_TreacheryOptions()
+        treacheryData = TreacheryData()
         
         gameVM = GameViewModel()
         isPremium = UserDefaults.standard.object(forKey: "IsPremium") as? Bool ?? false
         showDiscordInvite = UserDefaults.standard.object(forKey: "ShowDiscordInvite") as? Bool ?? true
+        treacheryData.filter(getSelectedRarities())
     }
     
     func setLifeOptions(_ life: LifeOptions) {
@@ -60,5 +63,19 @@ class PlanechaseViewModel: ObservableObject {
     
     func saveToggles() {
         SaveManager.saveOptions_Toggles(bigCard: biggerCardsOnMap, hellride: useHellridePNG, noHammer: noHammerRow, noDice: noDice, blurredBackground: useBlurredBackground)
+    }
+    
+    func getSelectedRarities() -> [TreacheryData.Rarity] {
+        var rarities = [TreacheryData.Rarity]()
+        if treacheryOptions.isUsingUnco {
+            rarities.append(.unco)
+        }
+        if treacheryOptions.isUsingRare {
+            rarities.append(.rare)
+        }
+        if treacheryOptions.isUsingMythic {
+            rarities.append(.mythic)
+        }
+        return rarities
     }
 }

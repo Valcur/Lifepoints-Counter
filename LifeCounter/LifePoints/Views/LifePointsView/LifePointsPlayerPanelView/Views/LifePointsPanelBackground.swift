@@ -13,7 +13,7 @@ extension LifePointsPlayerPanelView {
         @Binding var player: PlayerProfile
         let isMiniView: Bool
         let isPlayerOnOppositeSide: Bool
-        let gradientOverlay = Gradient(colors: [.black.opacity(0.4), .black.opacity(0.1), .black.opacity(0.1), .black.opacity(0.1), .black.opacity(0.4)])
+        let gradientOverlay = Gradient(colors: [.black.opacity(0.2), .black.opacity(0.1), .black.opacity(0.1), .black.opacity(0.1), .black.opacity(0.2)])
         let blurEffect: UIBlurEffect.Style = .systemChromeMaterialDark
         
         var body: some View {

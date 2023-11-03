@@ -176,3 +176,11 @@
 "options_rules_lifepointsCounter_Title" = "Compteur de point de vie";
 "options_rules_lifepointsCounter_01"  = "Appuyer en haut pour rajouter des points de vie, sur le base pour en enlever. Ou gardez appuyé puis bouger de haut en bas pour ajouter/enlever rapidement";
 "options_rules_lifepointsCounter_02"  = "Appuyez sur le récapitulatif des dégâts de commander pour ouvrir le menu des compteurs. Appuyez sur un compteur pour augmenter. Gardez appuyé pour remettre à zéro. Le menu disparaît automatiquement après quelque secondes d'inactivité.";
+
+
+// Mark: Treachery
+"options_treachery_enable" = "Enable Treachery mode";
+"options_treachery_recommanded" = "If it’s your first game of Treachery, it is recommend using only uncommon Identities";
+"options_treachery_unco" = "Use uncommon Identities";
+"options_treachery_rare" = "Use rare Identities";
+"options_treachery_mythic" = "Use mythic Identities";

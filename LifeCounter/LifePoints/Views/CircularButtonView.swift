@@ -33,7 +33,8 @@ struct CircularButtonView: View {
                     VStack {
                         Button(action: {
                             lifePointsViewModel.newGame(numberOfPlayer: planechaseVM.lifeCounterOptions.nbrOfPlayers,
-                                                        startingLife: planechaseVM.lifeCounterOptions.startingLife, colorPalette: planechaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planechaseVM.treacheryOptions.isTreacheryEnabled)
+                                                        startingLife: planechaseVM.lifeCounterOptions.startingLife, colorPalette: planechaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planechaseVM.treacheryOptions.isTreacheryEnabled,
+                                                        treacheryData: planechaseVM.treacheryData)
                         }, label: {
                             Image(systemName: "arrow.counterclockwise.circle")
                                 .imageButtonLabel(style: .noBackground)
@@ -44,6 +45,8 @@ struct CircularButtonView: View {
                         buttons[0]
                         buttons[1]
                         buttons[2]
+                        
+                        Spacer()
                     }
                 }
             }

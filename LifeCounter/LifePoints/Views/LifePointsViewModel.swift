@@ -12,23 +12,23 @@ class LifePointsViewModel: ObservableObject {
     @Published var players: [PlayerProfile]
     @Published var lastUsedSetup: LastUsedSetup
     
-    init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool) {
+    init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
         
-        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery)
+        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData)
     }
     
-    func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool) {
+    func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
         
-        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery)
+        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData)
     }
     
-    private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool) {
+    private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData) {
         var colors = [
             Color("\(colorPalette) Player 1"),
             Color("\(colorPalette) Player 2"),
@@ -41,7 +41,7 @@ class LifePointsViewModel: ObservableObject {
         ]
         colors.shuffle()
         
-        var treacheryRoles: [TreacheryPlayer.TreacheryRole] = []
+        var treacheryRoles: [TreacheryRole] = []
         if playWithTreachery {
             treacheryRoles = TreacheryPlayer.getRandomizedRoleArray(nbrOfPlayer: numberOfPlayer)
         }
@@ -63,7 +63,7 @@ class LifePointsViewModel: ObservableObject {
             var role: TreacheryPlayer? = nil
             if playWithTreachery {
                 if treacheryRoles.count > 0 {
-                    role = TreacheryPlayer(role: treacheryRoles.removeFirst())
+                    role = TreacheryPlayer(role: treacheryRoles.removeFirst(), data: treacheryData)
                 }
             }
             
@@ -82,6 +82,8 @@ class LifePointsViewModel: ObservableObject {
         let isPartnerEnabled = players[playerId].counters.commanderDamages[playerId].count == 2
         for i in 0..<players.count {
             if isPartnerEnabled {
+                let commanderDamages = players[i].counters.commanderDamages[playerId][1]
+                players[i].lifePoints += commanderDamages
                 players[i].counters.commanderDamages[playerId].remove(at: 1)
             } else {
                 players[i].counters.commanderDamages[playerId].append(0)

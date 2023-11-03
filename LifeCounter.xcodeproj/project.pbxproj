@@ -66,6 +66,7 @@
 		DBA758492AEFE9C000DE2D16 /* AlternativeCountersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeCountersView.swift; sourceTree = "<group>"; };
 		DBA7584B2AEFED5100DE2D16 /* LifePointsPanelBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePointsPanelBackground.swift; sourceTree = "<group>"; };
 		DBA7584D2AF14F5D00DE2D16 /* LP_Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LP_Structs.swift; sourceTree = "<group>"; };
+		DBA7584F2AF5207300DE2D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +99,7 @@
 		DBA758012AEE97C400DE2D16 /* LifeCounter */ = {
 			isa = PBXGroup;
 			children = (
+				DBA7584F2AF5207300DE2D16 /* Info.plist */,
 				DBA7583A2AEEBA2100DE2D16 /* Options */,
 				DBA758152AEE9B5800DE2D16 /* LifePoints */,
 				DBA758022AEE97C400DE2D16 /* LifeCounterApp.swift */,
@@ -442,6 +444,7 @@
 				DEVELOPMENT_TEAM = RDT93YL76H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeCounter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -472,6 +475,7 @@
 				DEVELOPMENT_TEAM = RDT93YL76H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeCounter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
