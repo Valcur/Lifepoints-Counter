@@ -40,7 +40,7 @@ struct TreacheryPlayer {
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
     
-    static func getRandomizedRoleArray(nbrOfPlayer: Int) -> [TreacheryRole] {
+    static func getRandomizedRoleArray(nbrOfPlayer: Int, data: TreacheryData) -> [TreacheryPlayer] {
         var array = [TreacheryRole]()
         if nbrOfPlayer >= 2 {
             array.append(.leader)
@@ -64,7 +64,25 @@ struct TreacheryPlayer {
         if nbrOfPlayer >= 8 {
             array.append(.traitor)
         }
-        return array.shuffled()
+        array = array.shuffled()
+        
+        var roles = [TreacheryPlayer]()
+        
+        let backup_leaders = data.leaders
+        let backup_guardians = data.guardians
+        let backup_assassins = data.assassins
+        let backup_traitors = data.traitors
+        
+        for _ in array {
+            roles.append(TreacheryPlayer(role: array.removeFirst(), data: data))
+        }
+        
+        data.leaders = backup_leaders
+        data.guardians = backup_guardians
+        data.assassins = backup_assassins
+        data.traitors = backup_traitors
+        
+        return roles
     }
 }
 
@@ -105,34 +123,34 @@ class TreacheryData: ObservableObject {
     let allAssassins = [
         TreacheryRoleData(name: "The Ambitious Queen", rarity: .unco, role: .assassin),
         TreacheryRoleData(name: "The Beastmaster", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Bio-Engineer", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Corpse Snatcher", rarity: .unco, role: .assassin),
+        TreacheryRoleData(name: "The Bio-Engineer", rarity: .mythic, role: .assassin),
+        TreacheryRoleData(name: "The Corpse Snatcher", rarity: .rare, role: .assassin),
         TreacheryRoleData(name: "The Demon", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Depths Caller", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Madwoman", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Necromancer", rarity: .unco, role: .assassin),
+        TreacheryRoleData(name: "The Depths Caller", rarity: .mythic, role: .assassin),
+        TreacheryRoleData(name: "The Madwoman", rarity: .rare, role: .assassin),
+        TreacheryRoleData(name: "The Necromancer", rarity: .rare, role: .assassin),
         TreacheryRoleData(name: "The Pyromancer", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Rebel General", rarity: .unco, role: .assassin),
+        TreacheryRoleData(name: "The Rebel General", rarity: .rare, role: .assassin),
         TreacheryRoleData(name: "The Seer", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Shapeshifting Slayer", rarity: .unco, role: .assassin),
+        TreacheryRoleData(name: "The Shapeshifting Slayer", rarity: .mythic, role: .assassin),
         TreacheryRoleData(name: "The Sigil Mage", rarity: .unco, role: .assassin),
         TreacheryRoleData(name: "The Sorceress", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The War Shaman", rarity: .unco, role: .assassin),
-        TreacheryRoleData(name: "The Witch", rarity: .unco, role: .assassin),
+        TreacheryRoleData(name: "The War Shaman", rarity: .rare, role: .assassin),
+        TreacheryRoleData(name: "The Witch", rarity: .rare, role: .assassin)
     ]
     
     let allTraitors = [
         TreacheryRoleData(name: "The Banisher", rarity: .unco, role: .traitor),
-        TreacheryRoleData(name: "The Cleaner", rarity: .unco, role: .traitor),
-        TreacheryRoleData(name: "The Ferryman", rarity: .unco, role: .traitor),
+        TreacheryRoleData(name: "The Cleaner", rarity: .rare, role: .traitor),
+        TreacheryRoleData(name: "The Ferryman", rarity: .mythic, role: .traitor),
         TreacheryRoleData(name: "The Gatekeeper", rarity: .unco, role: .traitor),
         TreacheryRoleData(name: "The Grenadier", rarity: .unco, role: .traitor),
-        TreacheryRoleData(name: "The Metamorph", rarity: .unco, role: .traitor),
+        TreacheryRoleData(name: "The Metamorph", rarity: .mythic, role: .traitor),
         TreacheryRoleData(name: "The Oneiromancer", rarity: .unco, role: .traitor),
-        //TreacheryRoleData(name: "The Puppet Master", rarity: .unco, role: .traitor),
-        TreacheryRoleData(name: "The Reflector", rarity: .unco, role: .traitor),
-        TreacheryRoleData(name: "The Time Bender", rarity: .unco, role: .traitor),
-        TreacheryRoleData(name: "The Wearer of Masks", rarity: .unco, role: .traitor),
+        //TreacheryRoleData(name: "The Puppet Master", rarity: .mythic, role: .traitor),
+        TreacheryRoleData(name: "The Reflector", rarity: .rare, role: .traitor),
+        TreacheryRoleData(name: "The Time Bender", rarity: .rare, role: .traitor),
+        //TreacheryRoleData(name: "The Wearer of Masks", rarity: .mythic, role: .traitor),
     ]
     
     var leaders = [TreacheryRoleData]()
@@ -178,13 +196,25 @@ class TreacheryData: ObservableObject {
     func getRandomRole(_ role: TreacheryRole) -> TreacheryRoleData? {
         switch role {
         case .leader:
-            return leaders.randomElement()
+            if let index = leaders.indices.randomElement() {
+                return leaders.remove(at: index)
+            }
+            return allLeaders.randomElement()
         case .guardian:
-            return guardians.randomElement()
+            if let index = guardians.indices.randomElement() {
+                return guardians.remove(at: index)
+            }
+            return allGuardians.randomElement()
         case .assassin:
-            return assassins.randomElement()
+            if let index = assassins.indices.randomElement() {
+                return assassins.remove(at: index)
+            }
+            return allAssassins.randomElement()
         case .traitor:
-            return traitors.randomElement()
+            if let index = traitors.indices.randomElement() {
+                return traitors.remove(at: index)
+            }
+            return allTraitors.randomElement()
         }
     }
     

@@ -11,13 +11,12 @@ struct CircularButtonView: View {
     @EnvironmentObject var planechaseVM: PlanechaseViewModel
     @EnvironmentObject var lifePointsViewModel: LifePointsViewModel
     @State var showMenu: Bool = true
-    let spacing: CGFloat = 80
     let buttons: [AnyView]
     @Binding var lifepointHasBeenUsedToggler: Bool
     
     var body: some View {
-        HStack(alignment: .top) {
-            if /*UIDevice.isIPad*/ true {
+        if UIDevice.isIPhone {
+            HStack(alignment: .top) {
                 Button(action: {
                     withAnimation(.spring()) {
                         showMenu.toggle()
@@ -49,6 +48,25 @@ struct CircularButtonView: View {
                         Spacer()
                     }
                 }
+            }
+        } else {
+            VStack {
+                Button(action: {
+                    lifePointsViewModel.newGame(numberOfPlayer: planechaseVM.lifeCounterOptions.nbrOfPlayers,
+                                                startingLife: planechaseVM.lifeCounterOptions.startingLife, colorPalette: planechaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planechaseVM.treacheryOptions.isTreacheryEnabled,
+                                                treacheryData: planechaseVM.treacheryData)
+                }, label: {
+                    Image(systemName: "arrow.counterclockwise.circle")
+                        .imageButtonLabel(style: .noBackground)
+                })
+                
+                Spacer()
+                
+                buttons[0]
+                buttons[1]
+                buttons[2]
+                
+                Spacer()
             }
         }
     }

@@ -29,6 +29,7 @@ class LifePointsViewModel: ObservableObject {
     }
     
     private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData) {
+        let treacheryEnabled = playWithTreachery && treacheryData.getAllRole().count > 0
         var colors = [
             Color("\(colorPalette) Player 1"),
             Color("\(colorPalette) Player 2"),
@@ -41,9 +42,9 @@ class LifePointsViewModel: ObservableObject {
         ]
         colors.shuffle()
         
-        var treacheryRoles: [TreacheryRole] = []
-        if playWithTreachery {
-            treacheryRoles = TreacheryPlayer.getRandomizedRoleArray(nbrOfPlayer: numberOfPlayer)
+        var treacheryRoles: [TreacheryPlayer] = []
+        if treacheryEnabled {
+            treacheryRoles = TreacheryPlayer.getRandomizedRoleArray(nbrOfPlayer: numberOfPlayer, data: treacheryData)
         }
         
         for i in 1...numberOfPlayer {
@@ -61,10 +62,8 @@ class LifePointsViewModel: ObservableObject {
             }
             
             var role: TreacheryPlayer? = nil
-            if playWithTreachery {
-                if treacheryRoles.count > 0 {
-                    role = TreacheryPlayer(role: treacheryRoles.removeFirst(), data: treacheryData)
-                }
+            if treacheryEnabled {
+                role = treacheryRoles.removeFirst()
             }
             
             players.append(PlayerProfile(id: id, name: name, backgroundColor: colors[i - 1], backgroundImage: backgroundImage, lifePoints: startingLife, counters: PlayerCounters(countersEnabled: lastUsedSetup.alternativeCountersEnabled[i - 1]), treachery: role))

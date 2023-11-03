@@ -136,24 +136,24 @@ struct LifePointsPlayerPanelView: View {
                         }.padding(.top, 8)
                     }
                     
-                    if !showAlternativeCounters {
-                        VStack {
-                            Spacer()
-                            Button(action: {
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    showAlternativeCounters = true
-                                }
-                                lifepointHasBeenUsedToggler.toggle()
-                            }, label: {
-                                Rectangle()
-                                    .foregroundColor(.black.opacity(0.00005))
-                                    .frame(width: 100, height: UIDevice.isIPhone ? 100 : 150)
-                            })
-                            Spacer()
-                        }
-                    }
-                    
                     if planechaseVM.lifeCounterOptions.useCommanderDamages {
+                        if !showAlternativeCounters {
+                            VStack {
+                                Spacer()
+                                Button(action: {
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        showAlternativeCounters = true
+                                    }
+                                    lifepointHasBeenUsedToggler.toggle()
+                                }, label: {
+                                    Rectangle()
+                                        .foregroundColor(.black.opacity(0.00005))
+                                        .frame(width: 100, height: UIDevice.isIPhone ? 100 : 150)
+                                })
+                                Spacer()
+                            }
+                        }
+                        
                         VStack {
                             Spacer()
                             CommanderRecapView(playerId: playerId, lifePoints: $player.lifePoints, playerCounters: $player.counters)
