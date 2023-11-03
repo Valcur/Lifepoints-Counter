@@ -103,7 +103,7 @@ extension Image {
             .frame(width: customSize, height: customSize)
             .foregroundColor(.white)
             .padding()
-            .frame(width: 60, height: 60)
+            .frame(width: style == .noBackground ? 40 : 60, height: style == .noBackground ? 40 : 60)
             .blurredBackground(style: style)
             .padding(5)
     }

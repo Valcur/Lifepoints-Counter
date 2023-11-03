@@ -66,6 +66,9 @@ struct LifePointsView: View {
                                         withAnimation(.easeInOut(duration: 0.3)) {
                                             isAllowedToChangeProfile.toggle()
                                         }
+                                        if isAllowedToChangeProfile == false {
+                                            planechaseVM.saveProfiles_Info()
+                                        }
                                     }, label: {
                                         Image(systemName: "pencil")
                                             .imageButtonLabel(style: .noBackground)

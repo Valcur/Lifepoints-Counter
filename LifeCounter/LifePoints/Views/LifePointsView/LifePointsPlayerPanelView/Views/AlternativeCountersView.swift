@@ -14,15 +14,26 @@ struct AlternativeCountersView: View {
     @Binding var showAlternativeCounters: Bool
     @State var showCountersList: Bool = false
     let existingCounters = AlternativeCounter.existingCounters
+    @State var exitTimer: Timer?
+    @State var hasOneOfTheValuesChanged = false
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
             HStack {
                 ForEach(0..<counters.count, id: \.self) { i in
-                    CounterView(counter: $counters[i], counters: $counters)
+                    if i != 0 {
+                        Rectangle()
+                            .foregroundColor(.black)
+                            .frame(width: 2)
+                    } else {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 2)
+                    }
+                    CounterView(counter: $counters[i], counters: $counters, hasOneOfTheValuesChanged: $hasOneOfTheValuesChanged)
                         .allowsHitTesting(counters[i].enabled)
-                    if i != counters.count - 1 {
+                    if i == 4 {
                         Rectangle()
                             .foregroundColor(.black)
                             .frame(width: 2)
@@ -53,15 +64,26 @@ struct AlternativeCountersView: View {
             }
             .onChange(of: counters.count) { _ in
                 lifePointsViewModel.saveAlternativeCounters(playerId)
+                
+                exitTimer?.invalidate()
+                startExitTimer()
             }
-            Button(action: {
+            .onChange(of: hasOneOfTheValuesChanged) { _ in
+                exitTimer?.invalidate()
+                startExitTimer()
+            }
+            .onAppear() {
+                exitTimer?.invalidate()
+                startExitTimer()
+            }
+        }
+    }
+
+    private func startExitTimer() {
+        exitTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
+            withAnimation(.easeInOut(duration: 0.3)) {
                 showAlternativeCounters = false
-            }, label: {
-                Image(systemName: "xmark")
-                    .resizable()
-                    .frame(width: 15, height: 15)
-                    .genericButtonLabel()
-            }).frame(width: 50)
+            }
         }
     }
     
@@ -109,10 +131,11 @@ struct AlternativeCountersView: View {
     struct CounterView: View {
         @Binding var counter: AlternativeCounter
         @Binding var counters: [AlternativeCounter]
+        @Binding var hasOneOfTheValuesChanged: Bool
         @State var prevValue: CGFloat = 0
         
         var body: some View {
-            ZStack(alignment: .bottomLeading) {
+            ZStack(alignment: .bottom) {
                 VStack(alignment: .center) {
                     Spacer()
                     Text("\(counter.value)")
@@ -128,12 +151,14 @@ struct AlternativeCountersView: View {
                         .opacity(0.0001)
                         .onTapGesture {
                             counter.value += 1
+                            hasOneOfTheValuesChanged.toggle()
                         }
                     Rectangle()
                         .opacity(0.0001)
                         .onTapGesture {
                             if counter.value > 0 {
                                 counter.value -= 1
+                                hasOneOfTheValuesChanged.toggle()
                             }
                         }
                 }
@@ -151,6 +176,9 @@ struct AlternativeCountersView: View {
                             counter.value += 1
                         }
                     }
+                    .onEnded({ _ in
+                        hasOneOfTheValuesChanged.toggle()
+                    })
                 )
                 Button(action: {
                     counter.enabled = false

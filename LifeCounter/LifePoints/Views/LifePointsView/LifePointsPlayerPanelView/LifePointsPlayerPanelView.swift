@@ -51,24 +51,30 @@ struct LifePointsPlayerPanelView: View {
                     .opacity(hideUIElementOpacity)
                 
                 if !isMiniView {
+                    
                     ZStack {
                         HStack {
-                            Spacer()
+                            if !isPlayerOnOppositeSide {
+                                Spacer()
+                            }
                             VStack {
                                 Spacer()
                                 Image(systemName: "plus")
-                                    .font(.title)
+                                    .font(UIDevice.isIPhone ? .title3 : .title)
                                     .foregroundColor(.white)
                                     .opacity(0.5)
                                 Spacer()
                                 Spacer()
                                 Image(systemName: "minus")
-                                    .font(.title)
+                                    .font(UIDevice.isIPhone ? .title3 : .title)
                                     .foregroundColor(.white)
                                     .opacity(0.5)
                                 Spacer()
                             }
-                        }.padding(10)
+                            if isPlayerOnOppositeSide {
+                                Spacer()
+                            }
+                        }.padding(15)
                         VStack(spacing: 0) {
                             Rectangle()
                                 .opacity(0.0001)
@@ -119,6 +125,7 @@ struct LifePointsPlayerPanelView: View {
                             .background(VisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark)))
                             .cornerRadius(8)
                             .opacity(hideUIElementOpacity)
+                            .scaleEffect(UIDevice.isIPhone ? 0.8 : 1, anchor: .top)
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.3)) {
                                     showAlternativeCounters = true
@@ -139,8 +146,8 @@ struct LifePointsPlayerPanelView: View {
                                 lifepointHasBeenUsedToggler.toggle()
                             }, label: {
                                 Rectangle()
-                                    .foregroundColor(.black.opacity(0.5))
-                                    .frame(width: 100, height: 150)
+                                    .foregroundColor(.black.opacity(0.00005))
+                                    .frame(width: 100, height: UIDevice.isIPhone ? 100 : 150)
                             })
                             Spacer()
                         }
@@ -156,7 +163,7 @@ struct LifePointsPlayerPanelView: View {
                                     }
                                     lifepointHasBeenUsedToggler.toggle()
                                 }
-                        }.padding(22)
+                        }
                     }
                 
                     Group {
@@ -279,7 +286,7 @@ struct LifePointsPlayerPanelView: View {
         }
         
         func applyProfile(profile: PlayerCustomProfile?, slot: Int) {
-            let oldPartnerValue = player.partnerEnabled
+            //let oldPartnerValue = player.partnerEnabled
             if let profile = profile {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     var backgroundImage: UIImage? = nil
@@ -304,10 +311,11 @@ struct LifePointsPlayerPanelView: View {
             lifePointsViewModel.lastUsedSetup.playersProfiles[playerId] = profile
             cancelLastUsedSlot(slot: playerId)
             planechaseVM.saveProfiles_Info()
+            /*
             if player.partnerEnabled != oldPartnerValue {
                 lifePointsViewModel.togglePartnerForPlayer(playerId)
                 lifePointsViewModel.savePartnerForPlayer(playerId)
-            }
+            }*/
         }
         
         func cancelLastUsedSlot(slot: Int) {
@@ -374,13 +382,14 @@ struct LifePointsPlayerPanelView: View {
                         )
                     }
                 }
-                .frame(maxWidth: 200).frame(maxHeight: UIDevice.isIPhone ? 100 : 100)
+                .frame(maxWidth: 200).frame(height: UIDevice.isIPhone ? 100 : 100)
                 .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
-                .frame(maxWidth: 200).frame(maxHeight: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 100 : 100))
+                .frame(maxWidth: 200).frame(height: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 100 : 100))
                 // iPhone scaling THIS IS UGLY AS FUCK
                 //.offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
                 //.offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)
                 .scaleEffect(UIDevice.isIPhone ? 0.6 : 1, anchor: .bottom)
+                .padding(.bottom, UIDevice.isIPhone ? 0 : 20)
                 
                 if !isPlayerOnTheSide {
                     Spacer()

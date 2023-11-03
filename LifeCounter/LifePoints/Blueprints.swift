@@ -16,7 +16,7 @@ struct EvenBlueprint: View {
         VStack(spacing: 0) {
             row1.rotationEffect(.degrees(180))
             row2
-        }.ignoresSafeArea()
+        }
     }
 }
 
@@ -44,10 +44,10 @@ struct UnevenBlueprint: View {
                     row2
                 }
                 sideElement
-                    .frame(width: geo.size.height, height: geo.size.height / unevenScalerDivider)
+                    .frame(width: geo.size.height, height: geo.size.height / unevenScalerDivider).clipped()
                     .rotationEffect(.degrees(-90))
                     .frame(width: geo.size.height / unevenScalerDivider)
             }
-        }.ignoresSafeArea()
+        }
     }
 }

@@ -22,7 +22,7 @@ struct LifePointsPanelView: View {
                 Spacer()
                 if !isMiniView {
                     Text(playerName)
-                        .font(.title3)
+                        .font(.system(size: (UIDevice.isIPhone ? 15 : 20)))
                         .foregroundColor(.white)
                         .shadow(color: isMiniView ? .clear : Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
                         .frame(height: 20)
@@ -30,7 +30,7 @@ struct LifePointsPanelView: View {
                 }
                 
                 Text("\(lifepoints)")
-                    .font(.system(size: isMiniView ? 80 : (UIDevice.isIPhone ? 50 : 110)))
+                    .font(.system(size: isMiniView ? 80 : (UIDevice.isIPhone ? 60 : 110)))
                     //.fontWeight(.bold)
                     .foregroundColor(.white)
                     .shadow(color: isMiniView ? .clear : Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
