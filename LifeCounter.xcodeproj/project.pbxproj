@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB28F3ED2AF66DC20084C088 /* TreacheryOptionsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28F3EC2AF66DC20084C088 /* TreacheryOptionsPanel.swift */; };
 		DBA758032AEE97C400DE2D16 /* LifeCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758022AEE97C400DE2D16 /* LifeCounterApp.swift */; };
 		DBA758052AEE97C400DE2D16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758042AEE97C400DE2D16 /* ContentView.swift */; };
 		DBA758072AEE97C600DE2D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA758062AEE97C600DE2D16 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB28F3EC2AF66DC20084C088 /* TreacheryOptionsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreacheryOptionsPanel.swift; sourceTree = "<group>"; };
 		DBA757FF2AEE97C400DE2D16 /* LifeCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA758022AEE97C400DE2D16 /* LifeCounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCounterApp.swift; sourceTree = "<group>"; };
 		DBA758042AEE97C400DE2D16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				DBA7583F2AEEBAA500DE2D16 /* OptionsPicker */,
 				DBA7583B2AEEBA6600DE2D16 /* OptionsPanel.swift */,
 				DBA7583D2AEEBA7500DE2D16 /* LifeOptionsPanel.swift */,
+				DB28F3EC2AF66DC20084C088 /* TreacheryOptionsPanel.swift */,
 			);
 			path = Options;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				DBA7584A2AEFE9C000DE2D16 /* AlternativeCountersView.swift in Sources */,
 				DBA7584C2AEFED5100DE2D16 /* LifePointsPanelBackground.swift in Sources */,
 				DBA7583C2AEEBA6600DE2D16 /* OptionsPanel.swift in Sources */,
+				DB28F3ED2AF66DC20084C088 /* TreacheryOptionsPanel.swift in Sources */,
 				DBA758232AEE9BD300DE2D16 /* Treachery.swift in Sources */,
 				DBA7582B2AEE9BFE00DE2D16 /* CircularButtonView.swift in Sources */,
 				DBA758272AEE9BEC00DE2D16 /* CommanderDamagesPanel.swift in Sources */,

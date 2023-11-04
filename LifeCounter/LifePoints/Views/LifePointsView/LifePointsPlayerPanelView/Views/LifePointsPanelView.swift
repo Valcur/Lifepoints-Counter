@@ -15,6 +15,7 @@ struct LifePointsPanelView: View {
     @Binding var totalChange: Int
     let isMiniView: Bool
     let inverseChangeSide: Bool
+    let isPlayerOnSide: Bool
     
     var body: some View {
         ZStack {
@@ -41,7 +42,7 @@ struct LifePointsPanelView: View {
                         .frame(height: 20)
                 }
                 Spacer()
-            }
+            }.offset(y: !isMiniView && isPlayerOnSide ? 20 : 0)
             
             if totalChange != 0 {
                 VStack {

@@ -180,7 +180,8 @@
 
 // Mark: Treachery
 "options_treachery_enable" = "Enable Treachery mode";
-"options_treachery_recommanded" = "If it’s your first game of Treachery, it is recommend using only uncommon Identities";
+"options_treachery_link" = "Press here to learn how to play the Treachery variant";
+"options_treachery_recommanded" = "If it’s your first game of Treachery, it is recommend to use only uncommon Identities";
 "options_treachery_unco" = "Use uncommon Identities";
 "options_treachery_rare" = "Use rare Identities";
 "options_treachery_mythic" = "Use mythic Identities";

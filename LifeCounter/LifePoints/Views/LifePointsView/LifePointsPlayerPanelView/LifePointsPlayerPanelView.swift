@@ -46,7 +46,7 @@ struct LifePointsPlayerPanelView: View {
             ZStack(alignment: .bottom) {
                 LifePointsPanelBackground(player: $player, isMiniView: isMiniView, isPlayerOnOppositeSide: isPlayerOnOppositeSide)
                 
-                LifePointsPanelView(playerName: player.name, lifepoints: $player.lifePoints, totalChange: $totalChange, isMiniView: isMiniView, inverseChangeSide: isPlayerOnOppositeSide || isPlayerOnTheSide)
+                LifePointsPanelView(playerName: player.name, lifepoints: $player.lifePoints, totalChange: $totalChange, isMiniView: isMiniView, inverseChangeSide: isPlayerOnOppositeSide || isPlayerOnTheSide, isPlayerOnSide: isPlayerOnTheSide)
                     .cornerRadius(15)
                     .opacity(hideUIElementOpacity)
                 
@@ -179,7 +179,12 @@ struct LifePointsPlayerPanelView: View {
                     }
                 }
                 
-            }.cornerRadius(isMiniView ? 0 : 0).padding(0).padding(.horizontal, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 0)).padding(.top, isMiniView ? 0 : (isPlayerOnTheSide ? 0 : 0))
+                Color.black.opacity(player.lifePoints > 0 ? 0 : 0.7).allowsHitTesting(false)
+                
+                Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).allowsHitTesting(false)
+            }.cornerRadius(isMiniView ? 0 : 0)
+                .padding(.top, isMiniView ? 0 : 1)
+                .padding(.horizontal, isMiniView || isPlayerOnTheSide ? 0 : 1)
                 .gesture(DragGesture()
                     .onChanged { value in
                         if !showTreacheryPanel {
@@ -202,10 +207,6 @@ struct LifePointsPlayerPanelView: View {
                 )
                 .allowsHitTesting(!showingCountersSheet)
                 .opacity(!showingCountersSheet ? 1 : 0)
-            
-            Color.black.opacity(player.lifePoints > 0 ? 0 : 0.7).allowsHitTesting(false)
-            
-            Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).cornerRadius(20).padding(isMiniView ? 0 : (UIDevice.isIPhone ? 1 : 1)).allowsHitTesting(false)
         }
     }
     
@@ -246,7 +247,6 @@ struct LifePointsPlayerPanelView: View {
                     .foregroundColor(.white)
                     .font(.system(size: 25))
                     .fontWeight(.bold)
-                    .shadow(color: Color("ShadowColorDarker"), radius: 3, x: 0, y: 0)
             }
         }
     }
@@ -350,46 +350,56 @@ struct LifePointsPlayerPanelView: View {
         var body: some View {
             HStack {
                 Spacer()
-                ZStack {
-                    Color.black.opacity(0.00001)
+                VStack {
+                    Spacer()
                     
-                    if lifePointsViewModel.numberOfPlayer % 2 == 0 {
-                        EvenBlueprint(row1: AnyView(HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i - 1])
-                                    .commanderDamageToYourself(i - 1 == playerId)
-                            }
-                        }), row2: AnyView(HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers - 1])
-                                    .commanderDamageToYourself(i + halfNumberOfPlayers - 1 == playerId)
-                            }
-                        }))
+                    ZStack {
+                        Color.black.opacity(0.00001)
+                        
+                        if lifePointsViewModel.numberOfPlayer % 2 == 0 {
+                            EvenBlueprint(row1: AnyView(HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i - 1])
+                                        .commanderDamageToYourself(i - 1 == playerId)
+                                }
+                            }), row2: AnyView(HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers - 1])
+                                        .commanderDamageToYourself(i + halfNumberOfPlayers - 1 == playerId)
+                                }
+                            }))
+                        } else {
+                            UnevenBlueprint(row1: AnyView(HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i])
+                                        .commanderDamageToYourself(i == playerId)
+                                }
+                            }),
+                                            row2: AnyView(                    HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers])
+                                        .commanderDamageToYourself(i + halfNumberOfPlayers == playerId)
+                                }
+                            }),
+                                            sideElement: AnyView(CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[0])                        .commanderDamageToYourself(0 == playerId))
+                            )
+                        }
+                    }
+                    .frame(maxWidth: 200).frame(height: UIDevice.isIPhone ? 100 : 100)
+                    .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
+                    .frame(maxWidth: 200).frame(height: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 100 : 100))
+                    // iPhone scaling THIS IS UGLY AS FUCK
+                    //.offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
+                    //.offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)
+                    .scaleEffect(UIDevice.isIPhone ? 0.6 : 1, anchor: .bottom)
+                    //.padding(.bottom, UIDevice.isIPhone ? 0 : 20)
+                    
+                    if isPlayerOnTheSide {
+                        Spacer()
                     } else {
-                        UnevenBlueprint(row1: AnyView(HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i])
-                                    .commanderDamageToYourself(i == playerId)
-                            }
-                        }),
-                                        row2: AnyView(                    HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[i + halfNumberOfPlayers])
-                                    .commanderDamageToYourself(i + halfNumberOfPlayers == playerId)
-                            }
-                        }),
-                                        sideElement: AnyView(CommanderDamageRecapPanelView(damageTaken: $playerCounters.commanderDamages[0])                        .commanderDamageToYourself(0 == playerId))
-                        )
+                        Spacer().frame(height: UIDevice.isIPhone ? 10 : 20)
                     }
                 }
-                .frame(maxWidth: 200).frame(height: UIDevice.isIPhone ? 100 : 100)
-                .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
-                .frame(maxWidth: 200).frame(height: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 100 : 100))
-                // iPhone scaling THIS IS UGLY AS FUCK
-                //.offset(y: UIDevice.isIPhone ? (isPlayerOnTheSide ? -60 : 0) : (isPlayerOnTheSide ? 20 : 0))
-                //.offset(x: isPlayerOnTheSide ? (UIDevice.isIPhone ? 110 : 10) : 0)
-                .scaleEffect(UIDevice.isIPhone ? 0.6 : 1, anchor: .bottom)
-                .padding(.bottom, UIDevice.isIPhone ? 0 : 20)
                 
                 if !isPlayerOnTheSide {
                     Spacer()

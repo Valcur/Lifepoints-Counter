@@ -32,7 +32,7 @@ extension OptionsMenuView {
                         MenuNumberOfPlayerChoiceView(numberOfPlayers: 4)
                         MenuNumberOfPlayerChoiceView(numberOfPlayers: 5)
                         MenuNumberOfPlayerChoiceView(numberOfPlayers: 6)
-                        if !UIDevice.isIPhone {
+                        if !UIDevice.isIPhone && false {
                             MenuNumberOfPlayerChoiceView(numberOfPlayers: 7)
                             MenuNumberOfPlayerChoiceView(numberOfPlayers: 8)
                         }

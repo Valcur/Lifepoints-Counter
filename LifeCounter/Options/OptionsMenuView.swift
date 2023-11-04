@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OptionsMenuView: View {
     @EnvironmentObject var planechaseVM: PlanechaseViewModel
-    @State var selectedMenu: MenuSelection = .life
+    @State var selectedMenu: MenuSelection = .options
     
     var body: some View {
         ZStack {
@@ -17,11 +17,11 @@ struct OptionsMenuView: View {
             
             HStack {
                 VStack(alignment: .leading, spacing: 20) {
-                    MenuSelectionView(menu: .life, selectedMenu: $selectedMenu)
-                    
                     MenuSelectionView(menu: .options, selectedMenu: $selectedMenu)
                     
-                    MenuSelectionView(menu: .rules, selectedMenu: $selectedMenu)
+                    MenuSelectionView(menu: .treachery, selectedMenu: $selectedMenu)
+                    
+                    //MenuSelectionView(menu: .rules, selectedMenu: $selectedMenu)
                     
                     MenuSelectionView(menu: .contact, selectedMenu: $selectedMenu)
                     
@@ -31,7 +31,7 @@ struct OptionsMenuView: View {
                 }.frame(width: 200).padding(.top, 15)
                 
                 if selectedMenu == .options {
-                    OptionsPanel()
+                    LifeOptionsPanel()
                 } else if selectedMenu == .contact {
                     ContactPanel()
                 } else if selectedMenu == .thanks {
@@ -40,6 +40,8 @@ struct OptionsMenuView: View {
                     RulesPanel()
                 } else if selectedMenu == .life {
                     LifeOptionsPanel()
+                } else if selectedMenu == .treachery {
+                    TreacheryOptionsPanel()
                 }
             }
         }
@@ -161,6 +163,7 @@ struct OptionsMenuView: View {
         case thanks
         case rules
         case life
+        case treachery
         
         func title() -> String {
             switch self {
@@ -174,6 +177,8 @@ struct OptionsMenuView: View {
                 return "options_rulesTitle".translate()
             case .life:
                 return "options_lifeTitle".translate()
+            case .treachery:
+                return "Treachery"
             }
         }
     }
