@@ -31,9 +31,6 @@ struct LifePointsPlayerPanelView: View {
     var isPlayerOnOppositeSide: Bool {
         (playerId < lifePointsViewModel.numberOfPlayer / 2 + lifePointsViewModel.numberOfPlayer % 2) && (!isPlayerOnTheSide)
     }
-    var hideUIElementOpacity: CGFloat {
-        !isMiniView && (showAlternativeCounters) ? 0 : 1
-    }
     @Binding var isAllowedToChangeProfile: Bool
     
     var body: some View {
@@ -42,7 +39,6 @@ struct LifePointsPlayerPanelView: View {
             
             LifePointsPanelView(playerName: player.name, lifepoints: $player.lifePoints, totalChange: $totalChange, isMiniView: isMiniView, inverseChangeSide: isPlayerOnOppositeSide || isPlayerOnTheSide, isPlayerOnSide: isPlayerOnTheSide)
                 .cornerRadius(15)
-                .opacity(hideUIElementOpacity)
             
             if !isMiniView {
                 
@@ -118,7 +114,6 @@ struct LifePointsPlayerPanelView: View {
                         }
                         .background(VisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark)))
                         .cornerRadius(8)
-                        .opacity(hideUIElementOpacity)
                         .scaleEffect(UIDevice.isIPhone ? 0.8 : 1, anchor: .top)
                         .onTapGesture {
                             withAnimation(.easeInOut(duration: 0.3)) {
@@ -226,17 +221,33 @@ struct LifePointsPlayerPanelView: View {
         let size: CGFloat = 40
         
         var body: some View {
-            VStack(spacing: 0) {
-                Image(counter.imageName)
-                    .resizable()
-                    .frame(width: size, height: size)
-                    .foregroundColor(Color.white)
-                    .opacity(0.6)
-                
-                Text("\(value)")
-                    .foregroundColor(.white)
-                    .font(.system(size: 25))
-                    .fontWeight(.bold)
+            if true {
+                ZStack(alignment: .bottomTrailing) {
+                    Image(counter.imageName)
+                        .resizable()
+                        .frame(width: size, height: size)
+                        .foregroundColor(Color.white)
+                        .opacity(0.6)
+                        .padding(.bottom, 20)
+                    
+                    Text("\(value)")
+                        .foregroundColor(.white)
+                        .font(.system(size: 25))
+                        .fontWeight(.bold)
+                }.padding(.horizontal, 2)
+            } else {
+                VStack(spacing: 0) {
+                    Image(counter.imageName)
+                        .resizable()
+                        .frame(width: size, height: size)
+                        .foregroundColor(Color.white)
+                        .opacity(0.6)
+                    
+                    Text("\(value)")
+                        .foregroundColor(.white)
+                        .font(.system(size: 25))
+                        .fontWeight(.bold)
+                }
             }
         }
     }

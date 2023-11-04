@@ -78,6 +78,7 @@ class LifePointsViewModel: ObservableObject {
     }
     
     func togglePartnerForPlayer(_ playerId: Int) {
+        if playerId >= players.count || playerId >= players[playerId].counters.commanderDamages.count { return }
         let isPartnerEnabled = players[playerId].counters.commanderDamages[playerId].count == 2
         for i in 0..<players.count {
             if isPartnerEnabled {

@@ -16,6 +16,7 @@ struct AlternativeCountersView: View {
     let existingCounters = AlternativeCounter.existingCounters
     @State var exitTimer: Timer?
     @State var hasOneOfTheValuesChanged = false
+    let maxNumberOfCounters = 4
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -33,18 +34,18 @@ struct AlternativeCountersView: View {
                     }
                     CounterView(counter: $counters[i], counters: $counters, hasOneOfTheValuesChanged: $hasOneOfTheValuesChanged)
                         .allowsHitTesting(counters[i].enabled)
-                    if i == 4 {
+                    if i == maxNumberOfCounters - 1 {
                         Rectangle()
                             .foregroundColor(.black)
                             .frame(width: 2)
                     }
                 }
-                if counters.count < 5 {
+                if counters.count < maxNumberOfCounters {
                     ZStack {
                         Color.black
                         if showCountersList {
                             ScrollView(.vertical) {
-                                VStack {
+                                VStack(spacing: 5) {
                                     ForEach(0..<existingCounters.count, id: \.self) { i in
                                         NewCounterButton(counterName: existingCounters[i], counters: $counters, showCountersList: $showCountersList)
                                     }
@@ -59,7 +60,7 @@ struct AlternativeCountersView: View {
                                     .foregroundColor(.white)
                             })
                         }
-                    }.frame(maxWidth: counters.count == 0 ? .infinity : 80)
+                    }.frame(maxWidth: counters.count == 0 ? .infinity : 90)
                 }
             }
             .onChange(of: counters.count) { _ in
@@ -110,7 +111,7 @@ struct AlternativeCountersView: View {
                             Text(counterName)
                                 .headline()
                         }
-                    }).frame(width: 80).background(VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))).cornerRadius(5)
+                    }).frame(width: 80, height: 80).background(VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))).cornerRadius(5)
                 }
             }
             .onAppear() {
