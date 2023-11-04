@@ -20,31 +20,35 @@ extension LifePointsPlayerPanelView {
         let playerId: Int
         
         var body: some View {
-            ScrollView(.vertical) {
-                VStack {
-                    Text("Tap to increase, Hold to reset").headline()
+            ZStack {
+                //ScrollView(.vertical) {
                     if playerId == 0 && lifePointsViewModel.numberOfPlayer % 2 == 1 {
                         HStack(spacing: 20) {
                             Spacer()
-                            PartnerSwitch(playerId: playerId)
+                            VStack {
+                                Spacer()
+                                Text("Tap to increase, Hold to reset").headline()
+                                Spacer()
+                                PartnerSwitch(playerId: playerId)
+                                Spacer()
+                            }
                             Spacer()
                             CommanderVStack(playerCounters: $playerCounters, lifePoints: $lifePoints, playerId: playerId)
                             Spacer()
-                        }.padding(5).padding(.top, lifePointsViewModel.numberOfPlayer == 3 || !UIDevice.isIPhone ? 20 : 5)
+                        }.padding(5).offset(x: 100)
                     } else {
                         VStack(spacing: UIDevice.isIPhone ? 0 : 20) {
+                            Text("Tap to increase, Hold to reset").headline()
                             CommanderVStack(playerCounters: $playerCounters, lifePoints: $lifePoints, playerId: playerId)
                             Spacer()
                             PartnerSwitch(playerId: playerId)
                         }.padding(5).padding(.vertical, UIDevice.isIPhone ? 5 : 20)
                     }
-                }
-            }
-            .onChange(of: showSheet) { _ in
-                if showSheet {
-                    exitTimer?.invalidate()
-                    startExitTimer()
-                }
+                //}
+            }.background(Color.black)
+            .onAppear() {
+                exitTimer?.invalidate()
+                startExitTimer()
             }
             .onChange(of: playerCounters.commanderDamages) { _ in
                 exitTimer?.invalidate()
@@ -111,10 +115,7 @@ extension LifePointsPlayerPanelView {
             }
             
             var body: some View {
-                VStack(alignment: .leading, spacing: UIDevice.isIPhone ? 3 : 15) {
-                    /*Text("lifepoints_commander_title".translate())
-                        .headline()*/
-                    
+                GeometryReader { geo in
                     ZStack {
                         if lifePointsViewModel.numberOfPlayer % 2 == 0 {
                             EvenBlueprint(row1: AnyView(HStack(spacing: 0) {
@@ -146,11 +147,12 @@ extension LifePointsPlayerPanelView {
                             )
                         }
                     }
-                    .rotationEffect(.degrees(rotationAngle))
-                    // OMG WHAT THE FUCK
-                    .frame(height: UIDevice.isIPhone ? (rotationAngle == 90 ? 110 : 90) : 150)
-                    .frame(maxWidth: rotationAngle == 90 ? (UIDevice.isIPhone ? (lifePointsViewModel.numberOfPlayer == 3 ? 250 : 150) : 230) : 300)
-                    .offset(y: rotationAngle == 90 ? 25 : 0)
+                    .frame(width: rotationAngle == 90 ? geo.size.height : geo.size.width,
+                           height: UIDevice.isIPhone ? 100 : 200)
+                    .rotationEffect(.degrees(rotationAngle), anchor: rotationAngle == 90 ? .topTrailing : .center)
+                    .offset(y: rotationAngle == 90 ? geo.size.height : 0)
+                    //.frame(height: UIDevice.isIPhone ? (rotationAngle == 90 ? geo.size.height : 90) : 150)
+                    //.frame(maxWidth: rotationAngle == 90 ? (UIDevice.isIPhone ? (lifePointsViewModel.numberOfPlayer == 3 ? 250 : 150) : 230) : 300)
                 }
             }
         }

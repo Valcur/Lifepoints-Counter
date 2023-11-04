@@ -29,7 +29,7 @@ struct UnevenBlueprint: View {
     var unevenScalerDivider: CGFloat {
         let nbrOfPlayer = lifePointsViewModel.numberOfPlayer
         if nbrOfPlayer == 5 {
-            return UIDevice.isIPhone ? 2.1 : 2.6
+            return UIDevice.isIPhone ? 1.95 : 2.6
         } else  if nbrOfPlayer == 7 {
             return UIDevice.isIPhone ? 2.3 : 3
         }

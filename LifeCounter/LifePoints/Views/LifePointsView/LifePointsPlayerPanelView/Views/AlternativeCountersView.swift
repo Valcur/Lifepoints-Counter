@@ -49,7 +49,7 @@ struct AlternativeCountersView: View {
                                         NewCounterButton(counterName: existingCounters[i], counters: $counters, showCountersList: $showCountersList)
                                     }
                                 }.padding(5)
-                            }.padding(.top, 50)
+                            }//.padding(.top, 50)
                         } else {
                             Button(action: {
                                 showCountersList = true
@@ -80,7 +80,7 @@ struct AlternativeCountersView: View {
     }
 
     private func startExitTimer() {
-        exitTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
+        exitTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { timer in
             withAnimation(.easeInOut(duration: 0.3)) {
                 showAlternativeCounters = false
             }
@@ -110,7 +110,7 @@ struct AlternativeCountersView: View {
                             Text(counterName)
                                 .headline()
                         }
-                    }).frame(maxWidth: .infinity).background(VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))).cornerRadius(5)
+                    }).frame(width: 80).background(VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))).cornerRadius(5)
                 }
             }
             .onAppear() {
