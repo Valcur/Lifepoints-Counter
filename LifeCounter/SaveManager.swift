@@ -41,10 +41,10 @@ extension SaveManager {
         return TreacheryOptions(isTreacheryEnabled: false, isUsingUnco: true, isUsingRare: false, isUsingMythic: false)
     }
     
-    static func saveOptions_LifePlayerProfiles(_ profiles: [PlayerCustomProfile]) {
-        var profilesData = [PlayerCustomProfileData]()
+    static func saveOptions_LifePlayerProfiles(_ profiles: [PlayerCustomProfileInfo]) {
+        var profilesData = [PlayerCustomProfile]()
         for profile in profiles {
-            profilesData.append(PlayerCustomProfileData(profile: profile))
+            profilesData.append(PlayerCustomProfile(profile: profile))
         }
         /*
         for i in 0..<profilesData.count {
@@ -56,7 +56,7 @@ extension SaveManager {
         }
     }
     
-    static func saveOptions_LifePlayerProfiles_CustomImage(_ profiles: [PlayerCustomProfile], i: Int) {
+    static func saveOptions_LifePlayerProfiles_CustomImage(_ profiles: [PlayerCustomProfileInfo], i: Int) {
         let profile = profiles[i]
         if let data = profile.customImage?.pngData() {
             let encoded = try! PropertyListEncoder().encode(data)
@@ -64,21 +64,21 @@ extension SaveManager {
         }
     }
     
-    static func deleteOptions_LifePlayerProfile_CustomImage(profile: PlayerCustomProfile) {
+    static func deleteOptions_LifePlayerProfile_CustomImage(profile: PlayerCustomProfileInfo) {
         UserDefaults.standard.removeObject(forKey: "ProfileImage_\(profile.id)")
     }
     
-    static func getOptions_LifePlayerProfiles() -> [PlayerCustomProfile] {
+    static func getOptions_LifePlayerProfiles() -> [PlayerCustomProfileInfo] {
         if let data = UserDefaults.standard.object(forKey: "LifePlayerProfilesOptions") as? Data,
-            var profilesData = try? JSONDecoder().decode([PlayerCustomProfileData].self, from: data) {
+            var profilesData = try? JSONDecoder().decode([PlayerCustomProfile].self, from: data) {
             // Get images
-            var profiles = [PlayerCustomProfile]()
+            var profiles = [PlayerCustomProfileInfo]()
             for i in 0..<profilesData.count {
                 if let data = UserDefaults.standard.data(forKey: "ProfileImage_\(profilesData[i].id)") {
                     let decoded = try! PropertyListDecoder().decode(Data.self, from: data)
                     profilesData[i].customImageData = decoded
                 }
-                profiles.append(PlayerCustomProfile(profileData: profilesData[i]))
+                profiles.append(PlayerCustomProfileInfo(profileData: profilesData[i]))
             }
             return profiles
         }

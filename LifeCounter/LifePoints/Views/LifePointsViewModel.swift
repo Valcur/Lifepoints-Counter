@@ -12,7 +12,7 @@ class LifePointsViewModel: ObservableObject {
     @Published var players: [PlayerProfile]
     @Published var lastUsedSetup: LastUsedSetup
     
-    init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfile]) {
+    init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfileInfo]) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
@@ -20,7 +20,7 @@ class LifePointsViewModel: ObservableObject {
         iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
     }
     
-    func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfile]) {
+    func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfileInfo]) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
@@ -28,7 +28,7 @@ class LifePointsViewModel: ObservableObject {
         iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
     }
     
-    private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfile]) {
+    private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfileInfo]) {
         let treacheryEnabled = playWithTreachery && treacheryData.getAllRole().count > 0
         var colors = [
             Color("\(colorPalette) Player 1"),

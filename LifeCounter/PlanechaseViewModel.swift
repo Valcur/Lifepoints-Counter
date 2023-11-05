@@ -16,7 +16,7 @@ class PlanechaseViewModel: ObservableObject {
     @Published var noHammerRow: Bool
     @Published var noDice: Bool
     @Published var lifeCounterOptions: LifeOptions
-    var lifeCounterProfiles: [PlayerCustomProfile]
+    var lifeCounterProfiles: [PlayerCustomProfileInfo]
     @Published var isPremium = false
     @Published var showDiscordInvite = false
     @Published var paymentProcessing = false

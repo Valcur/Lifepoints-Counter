@@ -10,7 +10,7 @@ import SwiftUI
 extension OptionsMenuView {
     struct LifeOptionsPanel: View {
         @EnvironmentObject var planechaseVM: PlanechaseViewModel
-        @State var profiles: [PlayerCustomProfile] = []
+        @State var profiles: [PlayerCustomProfileInfo] = []
         
         var body: some View {
             VStack(alignment: .leading, spacing: 15) {
@@ -67,7 +67,7 @@ extension OptionsMenuView {
                             if planechaseVM.lifeCounterProfiles.count >= 10 {
                                 return
                             }
-                            planechaseVM.lifeCounterProfiles.append(PlayerCustomProfile(name: "\("lifepoints_player".translate()) \(planechaseVM.lifeCounterProfiles.count + 1)"))
+                            planechaseVM.lifeCounterProfiles.append(PlayerCustomProfileInfo(name: "\("lifepoints_player".translate()) \(planechaseVM.lifeCounterProfiles.count + 1)"))
                             planechaseVM.saveProfiles_Info()
                             profiles = planechaseVM.lifeCounterProfiles
                         }, label: {
@@ -91,17 +91,17 @@ extension OptionsMenuView {
         struct CustomProfileView: View {
             @EnvironmentObject var planechaseVM: PlanechaseViewModel
             let profileIndex: Int
-            var profile: PlayerCustomProfile {
+            var profile: PlayerCustomProfileInfo {
                 if profileIndex < planechaseVM.lifeCounterProfiles.count {
                     return planechaseVM.lifeCounterProfiles[profileIndex]
                 }
-                return PlayerCustomProfile()
+                return PlayerCustomProfileInfo()
             }
             @State var profileName = ""
             @State var showingImagePicker: Bool = false
             @State private var inputImage: UIImage?
             @State var saveChangesTimer: Timer?
-            @Binding var profiles: [PlayerCustomProfile]
+            @Binding var profiles: [PlayerCustomProfileInfo]
             @State var imageView: Image?
             private let maxNameLength = 15
             let profileId: UUID
@@ -201,7 +201,7 @@ extension OptionsMenuView {
     }
 }
 
-struct PlayerCustomProfile: Identifiable {
+struct PlayerCustomProfileInfo: Identifiable {
     var id = UUID()
     var name: String
     var customImage: UIImage?
@@ -211,7 +211,7 @@ struct PlayerCustomProfile: Identifiable {
         self.customImage = customImage
     }
     
-    init(profileData: PlayerCustomProfileData) {
+    init(profileData: PlayerCustomProfile) {
         self.id = profileData.id
         self.name = profileData.name
         if let imageData = profileData.customImageData {
@@ -222,7 +222,7 @@ struct PlayerCustomProfile: Identifiable {
     }
 }
 
-struct PlayerCustomProfileData: Codable, Identifiable {
+struct PlayerCustomProfile: Codable, Identifiable {
     var id = UUID()
     var name: String
     var customImageData: Data?
@@ -232,7 +232,7 @@ struct PlayerCustomProfileData: Codable, Identifiable {
         self.customImageData = customImageData
     }
     
-    init(profile: PlayerCustomProfile) {
+    init(profile: PlayerCustomProfileInfo) {
         self.id = profile.id
         self.name = profile.name
         self.customImageData = nil

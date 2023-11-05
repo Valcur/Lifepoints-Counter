@@ -44,7 +44,7 @@ extension LifePointsPlayerPanelView {
         }
         
         struct ProfileSelectorView: View {
-            let profile: PlayerCustomProfile
+            let profile: PlayerCustomProfileInfo
             let isSelected: Bool
             var body: some View {
                 GeometryReader { geo in
@@ -65,7 +65,7 @@ extension LifePointsPlayerPanelView {
             }
         }
         
-        func applyProfile(profile: PlayerCustomProfile?, slot: Int) {
+        func applyProfile(profile: PlayerCustomProfileInfo?, slot: Int) {
             if let profile = profile {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     var backgroundImage: UIImage? = nil
