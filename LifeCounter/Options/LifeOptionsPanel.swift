@@ -127,6 +127,7 @@ extension OptionsMenuView {
                         .onChange(of: inputImage) { _ in saveProfileImage() }
                         .sheet(isPresented: $showingImagePicker) {
                             ImagePicker(image: $inputImage).preferredColorScheme(.dark)
+                                .ignoresSafeArea()
                         }
                     
                     TextField("", text: $profileName)
@@ -175,7 +176,7 @@ extension OptionsMenuView {
             private func saveProfileImage() {
                 guard let inputImage = inputImage else { return }
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    planechaseVM.lifeCounterProfiles[profileIndex].customImageData = inputImage.pngData()
+                    planechaseVM.lifeCounterProfiles[profileIndex].customImage = inputImage
                     planechaseVM.saveProfiles_Image(index: profileIndex)
                     profiles = planechaseVM.lifeCounterProfiles
                     updateImageView()
@@ -184,10 +185,8 @@ extension OptionsMenuView {
             
             private func updateImageView() {
                 DispatchQueue.main.async {
-                    if let imageData = profile.customImageData {
-                        if let image = UIImage(data: imageData) {
-                            imageView = Image(uiImage: image)
-                        }
+                    if let image = profile.customImage {
+                        imageView = Image(uiImage: image)
                     }
                 }
             }
@@ -202,7 +201,28 @@ extension OptionsMenuView {
     }
 }
 
-struct PlayerCustomProfile: Codable, Identifiable {
+struct PlayerCustomProfile: Identifiable {
+    var id = UUID()
+    var name: String
+    var customImage: UIImage?
+    
+    init(name: String = "", customImage: UIImage? = nil) {
+        self.name = name
+        self.customImage = customImage
+    }
+    
+    init(profileData: PlayerCustomProfileData) {
+        self.id = profileData.id
+        self.name = profileData.name
+        if let imageData = profileData.customImageData {
+            if let image = UIImage(data: imageData) {
+                customImage = image
+            }
+        }
+    }
+}
+
+struct PlayerCustomProfileData: Codable, Identifiable {
     var id = UUID()
     var name: String
     var customImageData: Data?
@@ -211,4 +231,11 @@ struct PlayerCustomProfile: Codable, Identifiable {
         self.name = name
         self.customImageData = customImageData
     }
+    
+    init(profile: PlayerCustomProfile) {
+        self.id = profile.id
+        self.name = profile.name
+        self.customImageData = nil
+    }
 }
+

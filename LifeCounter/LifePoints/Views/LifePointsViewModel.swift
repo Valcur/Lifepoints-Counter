@@ -12,23 +12,23 @@ class LifePointsViewModel: ObservableObject {
     @Published var players: [PlayerProfile]
     @Published var lastUsedSetup: LastUsedSetup
     
-    init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData) {
+    init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfile]) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
         
-        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData)
+        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
     }
     
-    func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData) {
+    func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfile]) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
         
-        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData)
+        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
     }
     
-    private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData) {
+    private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfile]) {
         let treacheryEnabled = playWithTreachery && treacheryData.getAllRole().count > 0
         var colors = [
             Color("\(colorPalette) Player 1"),
@@ -51,11 +51,11 @@ class LifePointsViewModel: ObservableObject {
             var backgroundImage: UIImage? = nil
             var name = "\("lifepoints_player".translate()) \(i)"
             var id = UUID()
-            if let customProfile = lastUsedSetup.playersProfiles[i - 1] {
-                name = customProfile.name
-                id = customProfile.id
-                if let imageData = customProfile.customImageData {
-                    if let image = UIImage(data: imageData) {
+            if let customProfileId = lastUsedSetup.playersProfilesIds[i - 1] {
+                if let customProfile = customProfiles.first(where: { $0.id == customProfileId }) {
+                    name = customProfile.name
+                    id = customProfile.id
+                    if let image = customProfile.customImage {
                         backgroundImage = image
                     }
                 }

@@ -42,7 +42,7 @@ struct LifePointsView: View {
                                             playersChoosenRandomly[player] = false
                                         }
                                     }, label: {
-                                        Image(systemName: "dice.fill")
+                                        Image(systemName: "questionmark.square")
                                             .imageButtonLabel(style: .noBackground)
                                     })
                                 ),
@@ -67,7 +67,7 @@ struct LifePointsView: View {
                                             isAllowedToChangeProfile.toggle()
                                         }
                                         if isAllowedToChangeProfile == false {
-                                            planechaseVM.saveProfiles_Info()
+                                            SaveManager.saveLastUsedSetup(lifePointsViewModel.lastUsedSetup)
                                         }
                                     }, label: {
                                         Image(systemName: "pencil")

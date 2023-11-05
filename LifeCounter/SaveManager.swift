@@ -42,10 +42,14 @@ extension SaveManager {
     }
     
     static func saveOptions_LifePlayerProfiles(_ profiles: [PlayerCustomProfile]) {
-        var profilesData = profiles
+        var profilesData = [PlayerCustomProfileData]()
+        for profile in profiles {
+            profilesData.append(PlayerCustomProfileData(profile: profile))
+        }
+        /*
         for i in 0..<profilesData.count {
             profilesData[i].customImageData = nil
-        }
+        }*/
         print(profilesData)
         if let encoded = try? JSONEncoder().encode(profilesData) {
             UserDefaults.standard.set(encoded, forKey: "LifePlayerProfilesOptions")
@@ -54,7 +58,7 @@ extension SaveManager {
     
     static func saveOptions_LifePlayerProfiles_CustomImage(_ profiles: [PlayerCustomProfile], i: Int) {
         let profile = profiles[i]
-        if let data = profile.customImageData {
+        if let data = profile.customImage?.pngData() {
             let encoded = try! PropertyListEncoder().encode(data)
             UserDefaults.standard.set(encoded, forKey: "ProfileImage_\(profile.id)")
         }
@@ -66,15 +70,16 @@ extension SaveManager {
     
     static func getOptions_LifePlayerProfiles() -> [PlayerCustomProfile] {
         if let data = UserDefaults.standard.object(forKey: "LifePlayerProfilesOptions") as? Data,
-            var profiles = try? JSONDecoder().decode([PlayerCustomProfile].self, from: data) {
+            var profilesData = try? JSONDecoder().decode([PlayerCustomProfileData].self, from: data) {
             // Get images
-            for i in 0..<profiles.count {
-                if let data = UserDefaults.standard.data(forKey: "ProfileImage_\(profiles[i].id)") {
+            var profiles = [PlayerCustomProfile]()
+            for i in 0..<profilesData.count {
+                if let data = UserDefaults.standard.data(forKey: "ProfileImage_\(profilesData[i].id)") {
                     let decoded = try! PropertyListDecoder().decode(Data.self, from: data)
-                    profiles[i].customImageData = decoded
+                    profilesData[i].customImageData = decoded
                 }
+                profiles.append(PlayerCustomProfile(profileData: profilesData[i]))
             }
-            
             return profiles
         }
         return []

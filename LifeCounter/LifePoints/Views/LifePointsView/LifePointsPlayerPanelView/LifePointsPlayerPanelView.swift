@@ -31,6 +31,9 @@ struct LifePointsPlayerPanelView: View {
     var isPlayerOnOppositeSide: Bool {
         (playerId < lifePointsViewModel.numberOfPlayer / 2 + lifePointsViewModel.numberOfPlayer % 2) && (!isPlayerOnTheSide)
     }
+    var isInAPanel: Bool {
+        return showingCountersSheet || showTreacheryPanel || showAlternativeCounters || isAllowedToChangeProfile
+    }
     @Binding var isAllowedToChangeProfile: Bool
     
     var body: some View {
@@ -175,7 +178,7 @@ struct LifePointsPlayerPanelView: View {
             //.padding(.horizontal, isMiniView || isPlayerOnTheSide ? 0 : 1)
             .gesture(DragGesture()
                 .onChanged { value in
-                    if !showTreacheryPanel {
+                    if !isInAPanel {
                         let newValue = value.translation.height
                         if newValue > prevValue + 6 {
                             prevValue = newValue
@@ -188,7 +191,7 @@ struct LifePointsPlayerPanelView: View {
                     }
                 }
                 .onEnded({ _ in
-                    if !showTreacheryPanel {
+                    if !isInAPanel {
                         startTotalChangeTimer()
                     }
                 })
@@ -249,90 +252,6 @@ struct LifePointsPlayerPanelView: View {
                         .fontWeight(.bold)
                 }
             }
-        }
-    }
-    
-    struct ProfileSelector: View {
-        @EnvironmentObject var lifePointsViewModel: LifePointsViewModel
-        @EnvironmentObject var planechaseVM: PlanechaseViewModel
-        let playerId: Int
-        @Binding var player: PlayerProfile
-        @Binding var lifepointHasBeenUsedToggler: Bool
-        var body: some View {
-            HStack {
-                VStack {
-                    ScrollView(.vertical) {
-                        VStack {
-                            Button(action: {
-                                applyProfile(profile: nil, slot: playerId)
-                            }, label: {
-                                Text("lifepoints_noProfile".translate())
-                                    .textButtonLabel()
-                            }).padding(.top, 5)
-                            ForEach(0..<planechaseVM.lifeCounterProfiles.count, id: \.self) { i in
-                                if let profile = planechaseVM.lifeCounterProfiles[i] {
-                                    Button(action: {
-                                        applyProfile(profile: profile, slot: playerId)
-                                    }, label: {
-                                        Text(profile.name)
-                                            .textButtonLabel(style: player.id == profile.id ? .secondary : .primary)
-                                    })
-                                }
-                            }
-                        }.frame(maxWidth: .infinity)
-                    }
-                }.background(VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.systemMaterialDark))).frame(maxWidth: 250)
-                Spacer()
-            }
-        }
-        
-        func applyProfile(profile: PlayerCustomProfile?, slot: Int) {
-            //let oldPartnerValue = player.partnerEnabled
-            if let profile = profile {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    var backgroundImage: UIImage? = nil
-                    if let imageData = profile.customImageData {
-                        if let image = UIImage(data: imageData) {
-                            backgroundImage = image
-                        }
-                    }
-                    
-                    player.backgroundImage = backgroundImage
-                    player.id = profile.id
-                    player.name = profile.name
-                }
-            } else {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    player.backgroundImage = nil
-                    player.id = UUID()
-                    player.name = "\("lifepoints_player".translate()) \(playerId + 1)"
-                }
-            }
-            lifepointHasBeenUsedToggler.toggle()
-            lifePointsViewModel.lastUsedSetup.playersProfiles[playerId] = profile
-            cancelLastUsedSlot(slot: playerId)
-            planechaseVM.saveProfiles_Info()
-            /*
-            if player.partnerEnabled != oldPartnerValue {
-                lifePointsViewModel.togglePartnerForPlayer(playerId)
-                lifePointsViewModel.savePartnerForPlayer(playerId)
-            }*/
-        }
-        
-        func cancelLastUsedSlot(slot: Int) {
-            for i in 0..<lifePointsViewModel.players.count {
-                if lifePointsViewModel.players[i].id == player.id && i != slot {
-                    print("Found at \(i) for \(slot)")
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        lifePointsViewModel.lastUsedSetup.playersProfiles[i] = nil
-                        lifePointsViewModel.players[i].backgroundImage = nil
-                        lifePointsViewModel.players[i].id = UUID()
-                        lifePointsViewModel.players[i].name = "\("lifepoints_player".translate()) \(i + 1)"
-                    }
-                }
-            }
-            SaveManager.saveLastUsedSetup(lifePointsViewModel.lastUsedSetup)
-            print(lifePointsViewModel.lastUsedSetup)
         }
     }
     

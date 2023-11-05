@@ -8,12 +8,12 @@
 import Foundation
 
 struct LastUsedSetup: Codable {
-    var playersProfiles: [PlayerCustomProfile?]
+    var playersProfilesIds: [UUID?]
     var partnerEnabled: [Bool]
     var alternativeCountersEnabled: [[String]]
     
     static func getDefaultSetup() -> LastUsedSetup {
-        return LastUsedSetup(playersProfiles: Array.init(repeating: nil, count: 8),
+        return LastUsedSetup(playersProfilesIds: Array.init(repeating: nil, count: 8),
                              partnerEnabled: Array.init(repeating: false, count: 8),
                              alternativeCountersEnabled: Array.init(repeating: ["Poison", "Exp"], count: 8))
     }

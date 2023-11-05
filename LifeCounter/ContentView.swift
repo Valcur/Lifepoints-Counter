@@ -14,7 +14,8 @@ struct LifeCounterAppView: View {
     init(lifeCounterOptions: LifeOptions, profiles: [PlayerCustomProfile], playWithTreachery: Bool) {
         planeChaseVM = PlanechaseViewModel()
         lifePointsViewModel = LifePointsViewModel(numberOfPlayer: planeChaseVM.lifeCounterOptions.nbrOfPlayers,
-                                                  startingLife: planeChaseVM.lifeCounterOptions.startingLife, colorPalette: planeChaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planeChaseVM.treacheryOptions.isTreacheryEnabled, treacheryData: planeChaseVM.treacheryData)
+                                                  startingLife: planeChaseVM.lifeCounterOptions.startingLife, colorPalette: planeChaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planeChaseVM.treacheryOptions.isTreacheryEnabled, treacheryData: planeChaseVM.treacheryData,
+                                                  customProfiles: planeChaseVM.lifeCounterProfiles)
     }
     
     var body: some View {

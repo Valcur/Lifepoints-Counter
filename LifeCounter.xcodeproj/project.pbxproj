@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DB28F3ED2AF66DC20084C088 /* TreacheryOptionsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28F3EC2AF66DC20084C088 /* TreacheryOptionsPanel.swift */; };
+		DB28F3EF2AF7AD6E0084C088 /* ProfileSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28F3EE2AF7AD6E0084C088 /* ProfileSelectorView.swift */; };
 		DBA758032AEE97C400DE2D16 /* LifeCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758022AEE97C400DE2D16 /* LifeCounterApp.swift */; };
 		DBA758052AEE97C400DE2D16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA758042AEE97C400DE2D16 /* ContentView.swift */; };
 		DBA758072AEE97C600DE2D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA758062AEE97C600DE2D16 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		DB28F3EC2AF66DC20084C088 /* TreacheryOptionsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreacheryOptionsPanel.swift; sourceTree = "<group>"; };
+		DB28F3EE2AF7AD6E0084C088 /* ProfileSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectorView.swift; sourceTree = "<group>"; };
 		DBA757FF2AEE97C400DE2D16 /* LifeCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA758022AEE97C400DE2D16 /* LifeCounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCounterApp.swift; sourceTree = "<group>"; };
 		DBA758042AEE97C400DE2D16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				DBA7581E2AEE9BB000DE2D16 /* LifePointsPanelView.swift */,
 				DBA758492AEFE9C000DE2D16 /* AlternativeCountersView.swift */,
 				DBA7584B2AEFED5100DE2D16 /* LifePointsPanelBackground.swift */,
+				DB28F3EE2AF7AD6E0084C088 /* ProfileSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				DBA758192AEE9B7E00DE2D16 /* LifePointsViewModel.swift in Sources */,
 				DBA7584E2AF14F5D00DE2D16 /* LP_Structs.swift in Sources */,
 				DBA758212AEE9BC300DE2D16 /* Blueprints.swift in Sources */,
+				DB28F3EF2AF7AD6E0084C088 /* ProfileSelectorView.swift in Sources */,
 				DBA758052AEE97C400DE2D16 /* ContentView.swift in Sources */,
 				DBA7581D2AEE9BA500DE2D16 /* LifePointsPlayerPanelView.swift in Sources */,
 				DBA7582F2AEE9D8E00DE2D16 /* CardSizes.swift in Sources */,
