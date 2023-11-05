@@ -123,7 +123,7 @@ struct PlayerCounters {
     init(countersEnabled: [String]) {
         self.alternativeCounters = []
         for counter in countersEnabled {
-            alternativeCounters.append(AlternativeCounter(imageName: counter, value: 0))
+            alternativeCounters.append(AlternativeCounter(imageName: counter, value: 11))
         }
         self.commanderDamages = [[0], [0], [0], [0], [0], [0], [0], [0]]
     }

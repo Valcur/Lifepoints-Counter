@@ -117,7 +117,7 @@ struct LifePointsPlayerPanelView: View {
                         }
                         .background(VisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark)))
                         .cornerRadius(8)
-                        .scaleEffect(UIDevice.isIPhone ? 0.8 : 1, anchor: .top)
+                        .scaleEffect(UIDevice.isIPhone ? 0.65 : 1, anchor: .top)
                         .onTapGesture {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 showAlternativeCounters = true
@@ -125,7 +125,7 @@ struct LifePointsPlayerPanelView: View {
                             lifepointHasBeenUsedToggler.toggle()
                         }
                         Spacer()
-                    }.padding(.top, 8)
+                    }.padding(.top, UIDevice.isIPhone ? 4 : 8)
                     
                     if !showAlternativeCounters {
                         VStack {

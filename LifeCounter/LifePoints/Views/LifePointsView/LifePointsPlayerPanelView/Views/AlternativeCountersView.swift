@@ -36,7 +36,7 @@ struct AlternativeCountersView: View {
                         .allowsHitTesting(counters[i].enabled)
                     if i == maxNumberOfCounters - 1 {
                         Rectangle()
-                            .foregroundColor(.black)
+                            .foregroundColor(.clear)
                             .frame(width: 2)
                     }
                 }

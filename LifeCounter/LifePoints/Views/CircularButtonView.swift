@@ -31,6 +31,7 @@ struct CircularButtonView: View {
                             .padding()
                             .frame(width: 40, height: 40)
                             .rotationEffect(.degrees(showMenu ? 180 : 0))
+                            .offset(x: 15)
                     })
                     
                     if showMenu {

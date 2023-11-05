@@ -35,7 +35,7 @@ extension LifePointsPlayerPanelView {
                             Spacer()
                             CommanderVStack(playerCounters: $playerCounters, lifePoints: $lifePoints, playerId: playerId)
                             Spacer()
-                        }.padding(5).offset(x: 100)
+                        }.padding(5)
                     } else {
                         VStack(spacing: UIDevice.isIPhone ? 0 : 20) {
                             Text("Tap to increase, Hold to reset").headline()
@@ -151,6 +151,7 @@ extension LifePointsPlayerPanelView {
                            height: UIDevice.isIPhone ? 100 : 200)
                     .rotationEffect(.degrees(rotationAngle), anchor: rotationAngle == 90 ? .topTrailing : .center)
                     .offset(y: rotationAngle == 90 ? geo.size.height : 0)
+                    .frame(width: rotationAngle == 90 ? (UIDevice.isIPhone ? 100 : 200) : geo.size.width)
                     //.frame(height: UIDevice.isIPhone ? (rotationAngle == 90 ? geo.size.height : 90) : 150)
                     //.frame(maxWidth: rotationAngle == 90 ? (UIDevice.isIPhone ? (lifePointsViewModel.numberOfPlayer == 3 ? 250 : 150) : 230) : 300)
                 }

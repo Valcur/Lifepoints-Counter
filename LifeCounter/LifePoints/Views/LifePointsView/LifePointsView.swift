@@ -86,6 +86,7 @@ struct LifePointsView: View {
                             }, label: {
                                 Image(systemName: "gear")
                                     .imageButtonLabel(style: .noBackground)
+                                    .offset(x: 10)
                             })
                         }
                     }
