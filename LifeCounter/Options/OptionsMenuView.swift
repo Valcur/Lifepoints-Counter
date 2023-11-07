@@ -116,17 +116,37 @@ struct OptionsMenuView: View {
     
     struct ContactPanel: View {
         var body: some View {
-            VStack(spacing: 20) {
-                Text("options_contact_discord".translate())
-                    .headline()
-                
-                Link(destination: URL(string: "https://discord.com/invite/wzm7bu6KDJ")!) {
-                    VStack {
-                        Text("options_contact_discordJoin".translate()).headline()
-                        Image("Discord")
-                            .resizable()
-                            .frame(width: 280, height: 78)
+            VStack(spacing: 40) {
+                VStack(spacing: 20) {
+                    Text("options_contact_discord".translate())
+                        .headline()
+                    
+                    Link(destination: URL(string: "https://discord.com/invite/wzm7bu6KDJ")!) {
+                        VStack {
+                            Text("options_contact_discordJoin".translate()).headline()
+                            Image("Discord")
+                                .resizable()
+                                .frame(width: 280, height: 78)
+                        }
                     }
+                }
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("options_contact_link_title".translate())
+                            .title()
+                        
+                        Link(destination: URL(string: "https://apps.apple.com/us/app/planechase-companion/id6445894290?platform=iphone")!) {
+                            Text("options_contact_linkPC".translate()).underlinedLink()
+                        }
+                        Link(destination: URL(string: "https://against-the-horde.com")!) {
+                            Text("options_contact_linkHordeWeb".translate()).underlinedLink()
+                        }
+                        Link(destination: URL(string: "https://apps.apple.com/us/app/against-the-horde/id1631351942?platform=iphone")!) {
+                            Text("options_contact_linkHordeiOS".translate()).underlinedLink()
+                        }
+                    }
+                    Spacer()
                 }
             }.scrollablePanel()
         }
@@ -138,18 +158,10 @@ struct OptionsMenuView: View {
                 Text("options_thanks_wizards".translate())
                     .headline()
                     .padding(.bottom, 40)
-                Text("options_thanks_planechase".translate())
+                
+                Text("options_thanks_appIcon".translate())
                     .headline()
-                Text("options_thanks_chaos".translate())
-                    .headline()
-                Text("options_thanks_hellride".translate())
-                    .headline()
-                Text("options_thanks_diceSkin1".translate())
-                    .headline()
-                Text("options_thanks_diceSkin2".translate())
-                    .headline()
-                Text("options_thanks_background".translate())
-                    .headline()
+
                 Text("options_thanks_monarch".translate())
                     .headline()
                 // shield by Maniprasanth

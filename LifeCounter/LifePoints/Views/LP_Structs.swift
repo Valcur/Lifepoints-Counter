@@ -15,7 +15,7 @@ struct LastUsedSetup: Codable {
     static func getDefaultSetup() -> LastUsedSetup {
         return LastUsedSetup(playersProfilesIds: Array.init(repeating: nil, count: 8),
                              partnerEnabled: Array.init(repeating: false, count: 8),
-                             alternativeCountersEnabled: Array.init(repeating: ["Poison", "Exp"], count: 8))
+                             alternativeCountersEnabled: Array.init(repeating: ["Poison", "Tax"], count: 8))
     }
 }
 

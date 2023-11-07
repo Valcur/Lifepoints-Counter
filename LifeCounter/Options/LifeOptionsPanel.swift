@@ -50,6 +50,9 @@ extension OptionsMenuView {
                         MenuStartingLifeChoiceView(startingLife: 50)
                         MenuStartingLifeChoiceView(startingLife: 60)
                     }
+                    
+                    Toggle("options_toggle_+/-".translate(), isOn: $planechaseVM.showPlusMinus)
+                        .font(.subheadline).foregroundColor(.white)
                 }
                 
                 Group {
@@ -82,6 +85,9 @@ extension OptionsMenuView {
             }.scrollablePanel()
             .onChange(of: planechaseVM.lifeCounterOptions.useCommanderDamages) { _ in
                 planechaseVM.setLifeOptions(planechaseVM.lifeCounterOptions)
+            }
+            .onChange(of: planechaseVM.showPlusMinus) { _ in
+                planechaseVM.saveToggles()
             }
             .onAppear() {
                 profiles = planechaseVM.lifeCounterProfiles

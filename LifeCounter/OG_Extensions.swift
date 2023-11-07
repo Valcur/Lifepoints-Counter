@@ -140,6 +140,14 @@ extension Text {
             .fixedSize(horizontal: false, vertical: true)
             //.fontWeight(.bold)
     }
+    
+    func underlinedLink() -> some View {
+        self
+            .font(.headline)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .underline()
+    }
 }
 
 extension UIImage {

@@ -50,10 +50,11 @@ struct AlternativeCountersView: View {
                                         NewCounterButton(counterName: existingCounters[i], counters: $counters, showCountersList: $showCountersList)
                                     }
                                 }.padding(5)
-                            }//.padding(.top, 50)
+                            }
                         } else {
                             Button(action: {
                                 showCountersList = true
+                                startExitTimer()
                             }, label: {
                                 Image(systemName: "plus")
                                     .font(.title)
@@ -66,22 +67,20 @@ struct AlternativeCountersView: View {
             .onChange(of: counters.count) { _ in
                 lifePointsViewModel.saveAlternativeCounters(playerId)
                 
-                exitTimer?.invalidate()
                 startExitTimer()
             }
             .onChange(of: hasOneOfTheValuesChanged) { _ in
-                exitTimer?.invalidate()
                 startExitTimer()
             }
             .onAppear() {
-                exitTimer?.invalidate()
                 startExitTimer()
             }
         }
     }
 
     private func startExitTimer() {
-        exitTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { timer in
+        exitTimer?.invalidate()
+        exitTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
             withAnimation(.easeInOut(duration: 0.3)) {
                 showAlternativeCounters = false
             }
@@ -155,6 +154,8 @@ struct AlternativeCountersView: View {
                             hasOneOfTheValuesChanged.toggle()
                         }
                     Rectangle()
+                        .foregroundColor(.white).frame(height: 1).opacity(0.7)
+                    Rectangle()
                         .opacity(0.0001)
                         .onTapGesture {
                             if counter.value > 0 {
@@ -200,7 +201,7 @@ struct AlternativeCountersView: View {
 }
 
 struct AlternativeCounter {
-    static let existingCounters = ["Poison", "Exp", "Treasure", "CommanderTax", "Energy"]
+    static let existingCounters = ["Poison", "XP", "Treasure", "Tax", "Energy"]
     var imageName: String
     var value: Int
     var enabled: Bool = true

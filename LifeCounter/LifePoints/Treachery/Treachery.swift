@@ -17,7 +17,7 @@ struct TreacheryPlayer {
     
     init(role: TreacheryRole, data: TreacheryData) {
         self.role = role
-        self.isRoleRevealed = true //role == .leader ? true : false
+        self.isRoleRevealed = role == .leader ? true : false
         let roleData = data.getRandomRole(role) ?? TreacheryData.TreacheryRoleData(name: "", rarity: .unco, role: .traitor)
         self.roleUrl = roleData.roleUrl
         self.cardImageName = roleData.name

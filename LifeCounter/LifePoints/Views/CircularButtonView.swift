@@ -31,11 +31,13 @@ struct CircularButtonView: View {
                             .padding()
                             .frame(width: 40, height: 40)
                             .rotationEffect(.degrees(showMenu ? 180 : 0))
-                            .offset(x: 15)
+                            .offset(x: UIDevice.isIPhone ? 15 : 0)
                     })
                     
                     if showMenu {
                         VStack {
+                            Spacer()
+                            
                             Button(action: {
                                 showingRestartAlert = true
                             }, label: {
@@ -46,18 +48,18 @@ struct CircularButtonView: View {
                                     .frame(width: 40, height: 40)
                             })
                             
-                            Spacer()
-                            
                             buttons[0]
                             buttons[1]
                             buttons[2]
                             
                             Spacer()
-                        }
+                        }.padding(.top, 50)
                     }
                 }
             } else {
                 VStack {
+                    Spacer()
+                    
                     Button(action: {
                         showingRestartAlert = true
                     }, label: {
@@ -68,21 +70,19 @@ struct CircularButtonView: View {
                             .frame(width: 40, height: 40)
                     })
                     
-                    Spacer()
-                    
                     buttons[0]
                     buttons[1]
                     buttons[2]
                     
                     Spacer()
-                }
+                }.padding(.top, 50)
             }
         }
         .alert(isPresented: $showingRestartAlert) {
             Alert(
                 title: Text("game_exit_title".translate()),
                 message: Text("game_exit_content".translate()),
-                primaryButton: .destructive(Text("exit".translate())) {
+                primaryButton: .destructive(Text("confirm".translate())) {
                     lifePointsViewModel.newGame(numberOfPlayer: planechaseVM.lifeCounterOptions.nbrOfPlayers,
                                                 startingLife: planechaseVM.lifeCounterOptions.startingLife, colorPalette: planechaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planechaseVM.treacheryOptions.isTreacheryEnabled,
                                                 treacheryData: planechaseVM.treacheryData,

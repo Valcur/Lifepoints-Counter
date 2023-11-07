@@ -46,28 +46,30 @@ struct LifePointsPlayerPanelView: View {
             if !isMiniView {
                 
                 ZStack {
-                    HStack {
-                        if !isPlayerOnOppositeSide {
-                            Spacer()
-                        }
-                        VStack {
-                            Spacer()
-                            Image(systemName: "plus")
-                                .font(UIDevice.isIPhone ? .title3 : .title)
-                                .foregroundColor(.white)
-                                .opacity(0.5)
-                            Spacer()
-                            Spacer()
-                            Image(systemName: "minus")
-                                .font(UIDevice.isIPhone ? .title3 : .title)
-                                .foregroundColor(.white)
-                                .opacity(0.5)
-                            Spacer()
-                        }
-                        if isPlayerOnOppositeSide {
-                            Spacer()
-                        }
-                    }.padding(15)
+                    if planechaseVM.showPlusMinus {
+                        HStack {
+                            if !isPlayerOnOppositeSide {
+                                Spacer()
+                            }
+                            VStack {
+                                Spacer()
+                                Image(systemName: "plus")
+                                    .font(UIDevice.isIPhone ? .title3 : .title)
+                                    .foregroundColor(.white)
+                                    .opacity(0.5)
+                                Spacer()
+                                Spacer()
+                                Image(systemName: "minus")
+                                    .font(UIDevice.isIPhone ? .title3 : .title)
+                                    .foregroundColor(.white)
+                                    .opacity(0.5)
+                                Spacer()
+                            }
+                            if isPlayerOnOppositeSide {
+                                Spacer()
+                            }
+                        }.padding(15)
+                    }
                     VStack(spacing: 0) {
                         Rectangle()
                             .opacity(0.0001)
@@ -94,9 +96,9 @@ struct LifePointsPlayerPanelView: View {
                                 showTreacheryPanel = true
                                 lifepointHasBeenUsedToggler.toggle()
                             }, label: {
-                                Color.black
+                                Color.red
                                     .frame(width: CardSizes.classic_widthForHeight(geo.size.height ) - (geo.size.height / 3))
-                                    .opacity(0.000001)
+                                    .opacity(0.00001)
                             })
                             if !isPlayerOnOppositeSide {
                                 Spacer()

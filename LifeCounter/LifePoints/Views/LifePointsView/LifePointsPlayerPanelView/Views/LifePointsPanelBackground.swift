@@ -53,7 +53,7 @@ extension LifePointsPlayerPanelView {
                 }
                 
                 Color.black.opacity(0.1)
-            }
+            }.allowsHitTesting(false)
         }
         
         func getGradient(_ color: Color) -> Gradient {

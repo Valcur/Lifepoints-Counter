@@ -23,10 +23,7 @@ extension OptionsMenuView {
                     
                     Link(destination: URL(string: "https://mtgtreachery.net/en/")!, label: {
                         Text("options_treachery_link".translate())
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .underline()
+                            .underlinedLink()
                     })
                     
                     Toggle("options_treachery_enable".translate(), isOn: $planechaseVM.treacheryOptions.isTreacheryEnabled)

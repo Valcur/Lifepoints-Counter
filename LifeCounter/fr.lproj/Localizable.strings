@@ -96,8 +96,8 @@
 "game_tool_disablePlaneswalk" = "Annuler Planeswalk";
 "game_tool_deckController" = "Contrôle du deck";
 "game_bubble_planeswalk" = "Maintenez appuyé sur un plan pour planewalker";
-"game_exit_title" = "Êtes-vous sûr de vouloir retourner au menu principal ?";
-"game_exit_content" = "La partie sera perdue.";
+"game_exit_title" = "Êtes-vous sûr de vouloir commencer une nouvelle partie ?";
+"game_exit_content" = "La partie en cours sera perdue.";
 "game_deckController_revealTop" = "Révéler la carte du dessus";
 "game_deckController_close" = "Mettre les cartes révélées en dessous aléatoirement et quitter";
 "game_deckController_putTop" = "Au dessus";
@@ -150,14 +150,15 @@
 "options_contact_discord" = "Des suggestion sur l'app ? Un bug que vous aimeriez que je règle ?";
 "options_contact_discordJoin" = "Rejoignez nous sur Discord !";
 
-"options_thanks_wizards" = "Planechase Companion is an unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.";
+"options_thanks_wizards" = "This app is an unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.";
 "options_thanks_planechase" = "Image Planeswalk de Agung Rama";
 "options_thanks_chaos" = "Image Chaos par Ken111";
 "options_thanks_hellride" = "Image Hellride par upklyak de Freepik";
 "options_thanks_diceSkin1" = "Skin de dé 1,2,3 et 4 par shiruji";
 "options_thanks_diceSkin2" = "Autres styles de dé par Freepik";
 "options_thanks_background" = "Styles de fond par Freepik";
-"options_thanks_monarch" = "Jeton monarque par Dental Care, iconixar, Freepik et max.icons";
+"options_thanks_monarch" = "Autres icones par Dental Care, iconixar, Freepik et max.icons";
+"options_thanks_appIcon" = "Icone de l'app par max.icons";
 
 // Mark: Rules
 
@@ -179,9 +180,15 @@
 
 
 // Mark: Treachery
-"options_treachery_enable" = "Enable Treachery mode";
-"options_treachery_link" = "Press here to learn how to play the Treachery variant";
-"options_treachery_recommanded" = "If it’s your first game of Treachery, it is recommend to use only uncommon Identities";
-"options_treachery_unco" = "Use uncommon Identities";
-"options_treachery_rare" = "Use rare Identities";
-"options_treachery_mythic" = "Use mythic Identities";
+"options_toggle_+/-" = "Afficher les marques +/-";
+"options_contact_link_title" = "Découvrez mes autres applications MTG";
+"options_contact_linkPC" = "Planechase Companion - iOS";
+"options_contact_linkHordeWeb" = "Against the Horde - Web";
+"options_contact_linkHordeiOS" = "Against the Horde - iOS";
+
+"options_treachery_enable" = "Activer le mode Treachery";
+"options_treachery_link" = "Appuyez ici pour découvrir comment jouer au mode Treachery";
+"options_treachery_recommanded" = "Pour votre première partie, il est recommandé de n'utiliser que les identités de rareté unco";
+"options_treachery_unco" = "Utiliser les identités unco";
+"options_treachery_rare" = "Utiliser les identités rare";
+"options_treachery_mythic" = "Utiliser les identités mythique";
