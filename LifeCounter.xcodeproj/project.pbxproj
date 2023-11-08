@@ -131,13 +131,13 @@
 			isa = PBXGroup;
 			children = (
 				DBA758172AEE9B6C00DE2D16 /* Treachery */,
-				DBA758162AEE9B6500DE2D16 /* Views */,
+				DBA758162AEE9B6500DE2D16 /* LifePointsView */,
 				DBA758202AEE9BC300DE2D16 /* Blueprints.swift */,
 			);
 			path = LifePoints;
 			sourceTree = "<group>";
 		};
-		DBA758162AEE9B6500DE2D16 /* Views */ = {
+		DBA758162AEE9B6500DE2D16 /* LifePointsView */ = {
 			isa = PBXGroup;
 			children = (
 				DBA758182AEE9B7E00DE2D16 /* LifePointsViewModel.swift */,
@@ -146,7 +146,7 @@
 				DBA7582A2AEE9BFE00DE2D16 /* CircularButtonView.swift */,
 				DBA7584D2AF14F5D00DE2D16 /* LP_Structs.swift */,
 			);
-			path = Views;
+			path = LifePointsView;
 			sourceTree = "<group>";
 		};
 		DBA758172AEE9B6C00DE2D16 /* Treachery */ = {

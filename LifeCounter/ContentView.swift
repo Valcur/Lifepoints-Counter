@@ -43,7 +43,7 @@ struct LifeCounterAppView: View {
                 .environmentObject(planeChaseVM.gameVM)
                 .ignoresSafeArea()
         }
-        .background(Color.black)
+        .background(Color.black.ignoresSafeArea())
     }
 }
 

@@ -46,10 +46,7 @@ extension SaveManager {
         for profile in profiles {
             profilesData.append(PlayerCustomProfile(profile: profile))
         }
-        /*
-        for i in 0..<profilesData.count {
-            profilesData[i].customImageData = nil
-        }*/
+
         print(profilesData)
         if let encoded = try? JSONEncoder().encode(profilesData) {
             UserDefaults.standard.set(encoded, forKey: "LifePlayerProfilesOptions")
