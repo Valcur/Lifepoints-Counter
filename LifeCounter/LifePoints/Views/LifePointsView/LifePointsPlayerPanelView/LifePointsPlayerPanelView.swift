@@ -35,6 +35,7 @@ struct LifePointsPlayerPanelView: View {
         return showingCountersSheet || showTreacheryPanel || showAlternativeCounters || isAllowedToChangeProfile
     }
     @Binding var isAllowedToChangeProfile: Bool
+    @Binding var showMonarchToken: Bool
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -174,7 +175,7 @@ struct LifePointsPlayerPanelView: View {
             Color.black.opacity(player.lifePoints > 0 ? 0 : 0.7).allowsHitTesting(false)
             
             Color.clear.border(Color.white, width: 4)
-                .opacity(lifePointsViewModel.currentMonarchId == playerId && !isInAPanel ? 1 : 0)
+                .opacity(lifePointsViewModel.currentMonarchId == playerId && !isInAPanel && showMonarchToken ? 1 : 0)
                 .allowsHitTesting(false)
             
             Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).allowsHitTesting(false)
@@ -202,6 +203,11 @@ struct LifePointsPlayerPanelView: View {
                     }
                 })
             )
+            .onChange(of: isInAPanel) { value in
+                if lifePointsViewModel.currentMonarchId == playerId {
+                    showMonarchToken = !value
+                }
+            }
     }
     
     private func addLifepoint() {
