@@ -91,36 +91,37 @@ struct LifePointsView: View {
                         }
                     }
                     
-                    if lifePointsViewModel.numberOfPlayer % 2 == 0 {
-                        EvenBlueprint(row1:
-                                        AnyView(HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                LifePointsPlayerPanelView(playerId: i - 1, player: $lifePointsViewModel.players[i - 1], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i - 1], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
-                            }
-                        }), row2:
-                                        AnyView(HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                LifePointsPlayerPanelView(playerId: i + halfNumberOfPlayers - 1, player: $lifePointsViewModel.players[i + halfNumberOfPlayers - 1], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i + halfNumberOfPlayers - 1], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
-                            }
-                        }))
-                    } else {
-                        UnevenBlueprint(row1: AnyView(HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                LifePointsPlayerPanelView(playerId: i, player: $lifePointsViewModel.players[i], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
-                            }
-                        }),
-                                        row2: AnyView(                    HStack(spacing: 0) {
-                            ForEach(1...halfNumberOfPlayers, id: \.self) { i in
-                                LifePointsPlayerPanelView(playerId: i + halfNumberOfPlayers, player: $lifePointsViewModel.players[i + halfNumberOfPlayers], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i + halfNumberOfPlayers], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
-                            }
-                        }),
-                                        sideElement: AnyView(LifePointsPlayerPanelView(playerId: 0, player: $lifePointsViewModel.players[0], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[0], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile))
-                        )
-                    }
-                }
-                
-                if !isMiniView {
-                    MonarchTokenView(lifepointHasBeenUsedToggler: $hideLifeTimerToggler).opacity(showMonarchToken ? 1 : 0)
+                    ZStack {
+                        if lifePointsViewModel.numberOfPlayer % 2 == 0 {
+                            EvenBlueprint(row1:
+                                            AnyView(HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    LifePointsPlayerPanelView(playerId: i - 1, player: $lifePointsViewModel.players[i - 1], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i - 1], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
+                                }
+                            }), row2:
+                                            AnyView(HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    LifePointsPlayerPanelView(playerId: i + halfNumberOfPlayers - 1, player: $lifePointsViewModel.players[i + halfNumberOfPlayers - 1], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i + halfNumberOfPlayers - 1], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
+                                }
+                            }))
+                        } else {
+                            UnevenBlueprint(row1: AnyView(HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    LifePointsPlayerPanelView(playerId: i, player: $lifePointsViewModel.players[i], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
+                                }
+                            }),
+                                            row2: AnyView(                    HStack(spacing: 0) {
+                                ForEach(1...halfNumberOfPlayers, id: \.self) { i in
+                                    LifePointsPlayerPanelView(playerId: i + halfNumberOfPlayers, player: $lifePointsViewModel.players[i + halfNumberOfPlayers], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[i + halfNumberOfPlayers], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile)
+                                }
+                            }),
+                                            sideElement: AnyView(LifePointsPlayerPanelView(playerId: 0, player: $lifePointsViewModel.players[0], isMiniView: isMiniView, hasBeenChoosenRandomly: playersChoosenRandomly[0], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, isAllowedToChangeProfile: $isAllowedToChangeProfile))
+                            )
+                        }
+                        if !isMiniView {
+                            MonarchTokenView(lifepointHasBeenUsedToggler: $hideLifeTimerToggler).opacity(showMonarchToken ? 1 : 0)
+                        }
+                    }.clipped()
                 }
             }.frame(width: geo.size.width, height: geo.size.height)
                 .background(

@@ -11,11 +11,13 @@ class LifePointsViewModel: ObservableObject {
     @Published var numberOfPlayer: Int
     @Published var players: [PlayerProfile]
     @Published var lastUsedSetup: LastUsedSetup
+    @Published var currentMonarchId: Int
     
     init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfileInfo]) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
+        self.currentMonarchId = -1
         
         iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
     }
@@ -24,6 +26,7 @@ class LifePointsViewModel: ObservableObject {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
+        self.currentMonarchId = -1
         
         iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
     }

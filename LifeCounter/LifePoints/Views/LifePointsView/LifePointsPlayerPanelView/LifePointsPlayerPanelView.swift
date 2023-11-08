@@ -173,6 +173,10 @@ struct LifePointsPlayerPanelView: View {
             
             Color.black.opacity(player.lifePoints > 0 ? 0 : 0.7).allowsHitTesting(false)
             
+            Color.clear.border(Color.white, width: 4)
+                .opacity(lifePointsViewModel.currentMonarchId == playerId && !isInAPanel ? 1 : 0)
+                .allowsHitTesting(false)
+            
             Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).allowsHitTesting(false)
         }.cornerRadius(isMiniView ? 0 : 0)
             .padding(0)
