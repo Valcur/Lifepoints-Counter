@@ -20,27 +20,34 @@ extension LifePointsPlayerPanelView {
             ]
         
         var body: some View {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack {
-                    Button(action: {
-                        applyProfile(profile: nil, slot: playerId)
-                    }, label: {
-                        Text("lifepoints_noProfile".translate())
-                            .textButtonLabel()
-                    }).padding(.top, 5)
-                    LazyVGrid(columns: columns, spacing: 5) {
-                        ForEach(0..<planechaseVM.lifeCounterProfiles.count, id: \.self) { i in
-                            if let profile = planechaseVM.lifeCounterProfiles[i] {
-                                Button(action: {
-                                    applyProfile(profile: profile, slot: playerId)
-                                }, label: {
-                                    ProfileSelectorView(profile: profile, isSelected: player.id == profile.id)
-                                }).padding(0)
-                            }
+            ZStack {
+                if planechaseVM.lifeCounterProfiles.count == 0 {
+                    Text("options_noProfilesYet").headline()
+                        .padding(.horizontal, 30)
+                } else {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack {
+                            Button(action: {
+                                applyProfile(profile: nil, slot: playerId)
+                            }, label: {
+                                Text("lifepoints_noProfile".translate())
+                                    .textButtonLabel()
+                            }).padding(.top, 5)
+                            LazyVGrid(columns: columns, spacing: 5) {
+                                ForEach(0..<planechaseVM.lifeCounterProfiles.count, id: \.self) { i in
+                                    if let profile = planechaseVM.lifeCounterProfiles[i] {
+                                        Button(action: {
+                                            applyProfile(profile: profile, slot: playerId)
+                                        }, label: {
+                                            ProfileSelectorView(profile: profile, isSelected: player.id == profile.id)
+                                        }).padding(0)
+                                    }
+                                }
+                            }.frame(maxWidth: .infinity).padding(5)
                         }
-                    }.frame(maxWidth: .infinity).padding(5)
+                    }
                 }
-            }.background(VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.systemMaterialDark))).border(Color.black, width: 2)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity).background(VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.systemMaterialDark))).border(Color.black, width: 2)
         }
         
         struct ProfileSelectorView: View {

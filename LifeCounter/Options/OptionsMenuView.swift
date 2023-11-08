@@ -21,7 +21,7 @@ struct OptionsMenuView: View {
                     
                     MenuSelectionView(menu: .treachery, selectedMenu: $selectedMenu)
                     
-                    //MenuSelectionView(menu: .rules, selectedMenu: $selectedMenu)
+                    MenuSelectionView(menu: .rules, selectedMenu: $selectedMenu)
                     
                     MenuSelectionView(menu: .contact, selectedMenu: $selectedMenu)
                     
@@ -66,40 +66,6 @@ struct OptionsMenuView: View {
     struct RulesPanel: View {
         var body: some View {
             VStack(alignment: .leading, spacing: 30) {
-                Text("options_rules_classic_Title".translate())
-                    .title()
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("options_rules_classic_01".translate())
-                        .headline()
-                    
-                    Text("options_rules_classic_02".translate())
-                        .headline()
-                    
-                    Text("options_rules_classic_03".translate())
-                        .headline()
-                }
-                
-                Text("options_rules_eternitiesMap_Title".translate())
-                    .title()
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("options_rules_eternitiesMap_01".translate())
-                        .headline()
-                    
-                    Text("options_rules_eternitiesMap_02".translate())
-                        .headline()
-                    
-                    Text("options_rules_eternitiesMap_03".translate())
-                        .headline()
-                    
-                    Text("options_rules_eternitiesMap_04".translate())
-                        .headline()
-                    
-                    Text("options_rules_eternitiesMap_05".translate())
-                        .headline()
-                }
-                
                 Text("options_rules_lifepointsCounter_Title".translate())
                     .title()
                 
@@ -108,6 +74,9 @@ struct OptionsMenuView: View {
                         .headline()
                     
                     Text("options_rules_lifepointsCounter_02".translate())
+                        .headline()
+                    
+                    Text("options_rules_lifepointsCounter_03".translate())
                         .headline()
                 }
             }.scrollablePanel()

@@ -118,7 +118,7 @@
 "options_optionsTitle" = "Options";
 "options_contactTitle" = "Contact";
 "options_thanksTitle" = "Thanks";
-"options_rulesTitle" = "Rules";
+"options_rulesTitle" = "How to";
 "options_lifeTitle" = "Life";
 
 "options_backgroundColor" = "Background Color";
@@ -176,9 +176,15 @@
 "options_rules_eternitiesMap_04" = "If the grid is empty in any diagonal direction you can 'hellride' into the nothingness. You're trading the safety net of knowing whats coming for moving two spaces. If you have revealed planes in the diagonal direction, you cannot 'hellride' there. You have to go the long way and work your way through the planes. Once you've hell ridden, you will just reveal more planes like normal.";
 "options_rules_eternitiesMap_05" = "Cards that are 4 or more planeswalk away from your location are removed.";
 
+
+
+
+
+
 "options_rules_lifepointsCounter_Title" = "Using lifepoint counter";
 "options_rules_lifepointsCounter_01"  = "Tap the top to add, tap the bottom to remove or hold and move up/down to add/remove.";
-"options_rules_lifepointsCounter_02"  = "Tap commander damages recap to open counters and commander damages panel. Tap to add, hold to reset. The panel dismiss itself after a few seconds.";
+"options_rules_lifepointsCounter_02"  = "Tap commander damages recap to open the commander damages panel. Tap to add, hold to reset. The panel dismiss itself after a few seconds.";
+"options_rules_lifepointsCounter_03"  = "Tap commander the life total or the counters recap to open the counters panel. Tap the top to add, tap the bottom to remove or hold and move up/down to add/remove. The panel dismiss itself after a few seconds.";
 
 
 // Mark: Treachery
@@ -187,6 +193,8 @@
 "options_contact_linkPC" = "Planechase Companion - iOS";
 "options_contact_linkHordeWeb" = "Against the Horde - Web";
 "options_contact_linkHordeiOS" = "Against the Horde - iOS";
+
+"options_noProfilesYet" = "Create profiles in the options to add custom names and background images";
 
 "options_treachery_enable" = "Enable Treachery mode";
 "options_treachery_link" = "Press here to learn how to play the Treachery variant";
