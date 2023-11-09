@@ -190,6 +190,7 @@
 
 // Mark: Treachery
 "options_toggle_+/-" = "Afficher les marques +/-";
+"options_toggle_bigerLifeTotal" = "Bigger life total";
 "options_contact_link_title" = "Découvrez mes autres applications MTG";
 "options_contact_linkPC" = "Planechase Companion - iOS";
 "options_contact_linkHordeWeb" = "Against the Horde - Web";

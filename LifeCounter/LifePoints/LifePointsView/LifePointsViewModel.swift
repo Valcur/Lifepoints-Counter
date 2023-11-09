@@ -12,23 +12,28 @@ class LifePointsViewModel: ObservableObject {
     @Published var players: [PlayerProfile]
     @Published var lastUsedSetup: LastUsedSetup
     @Published var currentMonarchId: Int
+    @Published var isGameReady: Bool
     
     init(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfileInfo]) {
         self.lastUsedSetup = SaveManager.getLastUsedSetup()
         self.numberOfPlayer = numberOfPlayer
         self.players = []
         self.currentMonarchId = -1
+        self.isGameReady = false
         
         iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
     }
     
     func newGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfileInfo]) {
-        self.lastUsedSetup = SaveManager.getLastUsedSetup()
-        self.numberOfPlayer = numberOfPlayer
-        self.players = []
-        self.currentMonarchId = -1
-        
-        iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
+        self.isGameReady = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            self.lastUsedSetup = SaveManager.getLastUsedSetup()
+            self.numberOfPlayer = numberOfPlayer
+            self.players = []
+            self.currentMonarchId = -1
+            
+            self.iniGame(numberOfPlayer: numberOfPlayer, startingLife: startingLife, colorPalette: colorPalette, playWithTreachery: playWithTreachery, treacheryData: treacheryData, customProfiles: customProfiles)
+        }
     }
     
     private func iniGame(numberOfPlayer: Int, startingLife: Int, colorPalette: Int, playWithTreachery: Bool, treacheryData: TreacheryData, customProfiles: [PlayerCustomProfileInfo]) {
@@ -77,6 +82,10 @@ class LifePointsViewModel: ObservableObject {
             if lastUsedSetup.partnerEnabled[i] {
                 togglePartnerForPlayer(i)
             }
+        }
+        
+        withAnimation(.easeInOut(duration: 0.5)) {
+            self.isGameReady = true
         }
     }
     

@@ -49,6 +49,9 @@ extension OptionsMenuView {
                     
                     Toggle("options_toggle_+/-".translate(), isOn: $planechaseVM.showPlusMinus)
                         .font(.subheadline).foregroundColor(.white)
+                    
+                    Toggle("options_toggle_bigerLifeTotal".translate(), isOn: $planechaseVM.biggerLifeTotal)
+                        .font(.subheadline).foregroundColor(.white)
                 }
                 
                 Group {
@@ -83,7 +86,10 @@ extension OptionsMenuView {
                 planechaseVM.setLifeOptions(planechaseVM.lifeCounterOptions)
             }
             .onChange(of: planechaseVM.showPlusMinus) { _ in
-                planechaseVM.saveToggles()
+                planechaseVM.saveLifeToggles()
+            }
+            .onChange(of: planechaseVM.biggerLifeTotal) { _ in
+                planechaseVM.saveLifeToggles()
             }
             .onAppear() {
                 profiles = planechaseVM.lifeCounterProfiles

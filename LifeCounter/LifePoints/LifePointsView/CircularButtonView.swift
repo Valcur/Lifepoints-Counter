@@ -14,6 +14,7 @@ struct CircularButtonView: View {
     let buttons: [AnyView]
     @Binding var lifepointHasBeenUsedToggler: Bool
     @State private var showingRestartAlert = false
+    @Binding var showMonarchToken: Bool
     
     var body: some View {
         ZStack {
@@ -83,6 +84,7 @@ struct CircularButtonView: View {
                 title: Text("game_exit_title".translate()),
                 message: Text("game_exit_content".translate()),
                 primaryButton: .destructive(Text("confirm".translate())) {
+                    showMonarchToken = false
                     lifePointsViewModel.newGame(numberOfPlayer: planechaseVM.lifeCounterOptions.nbrOfPlayers,
                                                 startingLife: planechaseVM.lifeCounterOptions.startingLife, colorPalette: planechaseVM.lifeCounterOptions.colorPaletteId, playWithTreachery: planechaseVM.treacheryOptions.isTreacheryEnabled,
                                                 treacheryData: planechaseVM.treacheryData,
