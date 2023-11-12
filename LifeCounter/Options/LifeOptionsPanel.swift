@@ -224,7 +224,7 @@ struct PlayerCustomProfileInfo: Identifiable {
         self.name = profileData.name
         if let imageData = profileData.customImageData {
             if let image = UIImage(data: imageData) {
-                customImage = image
+                customImage = image.compressImage()
             }
         }
     }
