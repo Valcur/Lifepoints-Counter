@@ -129,7 +129,7 @@ extension SaveManager {
     
     static func getOptions_LifeToggles() -> (Bool, Bool) {
         let showPlusMinus = UserDefaults.standard.object(forKey: "ShowPlusMinus") as? Bool ?? true
-        let biggerLifeTotal = UserDefaults.standard.object(forKey: "BiggerLifeTotal") as? Bool ?? false
+        let biggerLifeTotal = UserDefaults.standard.object(forKey: "BiggerLifeTotal") as? Bool ?? true
         return (showPlusMinus, biggerLifeTotal)
     }
 }
