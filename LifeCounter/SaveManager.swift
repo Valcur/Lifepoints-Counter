@@ -122,14 +122,16 @@ extension SaveManager {
         return (bigCards, hellRide, noHammer, noDice, blurredBackground)
     }
     
-    static func saveOptions_LifeToggles(showPlusMinus: Bool, biggerLifeTotal: Bool) {
+    static func saveOptions_LifeToggles(showPlusMinus: Bool, biggerLifeTotal: Bool, fullscreenCommanderAndCounters: Bool) {
         UserDefaults.standard.set(showPlusMinus, forKey: "ShowPlusMinus")
         UserDefaults.standard.set(biggerLifeTotal, forKey: "BiggerLifeTotal")
+        UserDefaults.standard.set(fullscreenCommanderAndCounters, forKey: "FullscreenCommanderAndCounters")
     }
     
-    static func getOptions_LifeToggles() -> (Bool, Bool) {
+    static func getOptions_LifeToggles() -> (Bool, Bool, Bool) {
         let showPlusMinus = UserDefaults.standard.object(forKey: "ShowPlusMinus") as? Bool ?? true
         let biggerLifeTotal = UserDefaults.standard.object(forKey: "BiggerLifeTotal") as? Bool ?? true
-        return (showPlusMinus, biggerLifeTotal)
+        let fullscreenCommanderAndCounters = UserDefaults.standard.object(forKey: "FullscreenCommanderAndCounters") as? Bool ?? UIDevice.isIPhone
+        return (showPlusMinus, biggerLifeTotal, UIDevice.isIPhone ? fullscreenCommanderAndCounters : false)
     }
 }

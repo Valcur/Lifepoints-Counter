@@ -17,6 +17,7 @@ class PlanechaseViewModel: ObservableObject {
     @Published var noDice: Bool
     @Published var showPlusMinus: Bool
     @Published var biggerLifeTotal: Bool
+    @Published var fullscreenCommanderAndCounters: Bool
     @Published var lifeCounterOptions: LifeOptions
     var lifeCounterProfiles: [PlayerCustomProfileInfo]
     @Published var isPremium = false
@@ -36,6 +37,7 @@ class PlanechaseViewModel: ObservableObject {
         let lifeOptionToggles = SaveManager.getOptions_LifeToggles()
         showPlusMinus = lifeOptionToggles.0
         biggerLifeTotal = lifeOptionToggles.1
+        fullscreenCommanderAndCounters = lifeOptionToggles.2
         lifeCounterOptions = SaveManager.getOptions_LifeOptions()
         lifeCounterProfiles = SaveManager.getOptions_LifePlayerProfiles()
         treacheryOptions = SaveManager.getOptions_TreacheryOptions()
@@ -71,7 +73,7 @@ class PlanechaseViewModel: ObservableObject {
     }
     
     func saveLifeToggles() {
-        SaveManager.saveOptions_LifeToggles(showPlusMinus: showPlusMinus, biggerLifeTotal: biggerLifeTotal)
+        SaveManager.saveOptions_LifeToggles(showPlusMinus: showPlusMinus, biggerLifeTotal: biggerLifeTotal, fullscreenCommanderAndCounters: fullscreenCommanderAndCounters)
     }
     
     func getSelectedRarities() -> [TreacheryData.Rarity] {

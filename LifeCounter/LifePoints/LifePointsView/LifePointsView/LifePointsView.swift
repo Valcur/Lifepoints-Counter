@@ -27,12 +27,20 @@ struct LifePointsView: View {
         playersChoosenRandomly = Array(repeating: false, count: 8)
     }
     
+    func choosePlayerRandomly() {
+        let player = Int.random(in: 0..<lifePointsViewModel.numberOfPlayer)
+        playersChoosenRandomly[player] = true
+        withAnimation(.easeInOut(duration: 1).delay(0.15)) {
+            playersChoosenRandomly[player] = false
+        }
+    }
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
                 HStack {
                     if !isMiniView {
-                        VStack(alignment: .leading) {
+                        ZStack(alignment: .bottomLeading) {
                             CircularButtonView(buttons: [
                                 AnyView(
                                     Button(action: {
@@ -89,7 +97,9 @@ struct LifePointsView: View {
                                             .opacity(showDiceRoller ? 0.7 : 1)
                                     })
                                 )
-                            ], lifepointHasBeenUsedToggler: $hideLifeTimerToggler, showMonarchToken: $showMonarchToken)
+                            ], lifepointHasBeenUsedToggler: $hideLifeTimerToggler,
+                                showMonarchToken: $showMonarchToken,
+                                playersChoosenRandomly: $playersChoosenRandomly)
                             
                             Spacer()
                             
@@ -100,7 +110,7 @@ struct LifePointsView: View {
                             }, label: {
                                 Image(systemName: "gear")
                                     .imageButtonLabel(style: .noBackground)
-                                    .offset(x: UIDevice.isIPhone ? 10 : 0)
+                                    .offset(x: UIDevice.isIPhone ? 7 : 0, y: UIDevice.isIPhone ? -10 : 0)
                             })
                         }
                     }
@@ -145,6 +155,7 @@ struct LifePointsView: View {
                         Spacer()
                     }
                 }
+                FullScreenView(fullscreenView: $lifePointsViewModel.fullscreenView)
             }.frame(width: geo.size.width, height: geo.size.height)
                 .background(
                     Color.black.opacity(isMiniView ? 0 : 1)
