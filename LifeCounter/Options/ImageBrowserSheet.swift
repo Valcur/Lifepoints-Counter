@@ -25,20 +25,21 @@ struct ImageBrowserSheet: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                HStack {
-                    Button(action: {
-                        searchField = ""
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .buttonLabel()
-                    })
-                    TextField("Search", text: $searchField, onCommit: {
-                        searchCards()
-                    })
+        ZStack(alignment: .bottomTrailing) {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Button(action: {
+                            searchField = ""
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .buttonLabel()
+                        })
+                        TextField("Search", text: $searchField, onCommit: {
+                            searchCards()
+                        })
                         .font(.title2)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -46,45 +47,54 @@ struct ImageBrowserSheet: View {
                         .padding(.horizontal, 10)
                         .blurredBackground()
                         .cornerRadius(5)
-                    Button(action: {
-                        searchCards()
-                    }, label: {
-                        Text("Search")
-                            .buttonLabel()
-                    })
-                }.padding(10).blurredBackground()
-                if status == .random {
-                    HStack {
-                        Text("Random images").title()
-                        Spacer()
                         Button(action: {
-                            imagesUrl = []
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                iniRandomImages()
-                            }
+                            searchCards()
                         }, label: {
-                            Image(systemName: "arrow.clockwise")
-                                .font(.headline)
-                                .foregroundColor(.white)
+                            Text("Search")
                                 .buttonLabel()
                         })
+                    }.padding(10).blurredBackground()
+                    if status == .random {
+                        HStack {
+                            Text("Random images").title()
+                            Spacer()
+                            Button(action: {
+                                imagesUrl = []
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    iniRandomImages()
+                                }
+                            }, label: {
+                                Image(systemName: "arrow.clockwise")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .buttonLabel()
+                            })
+                        }
+                    } else if status == .searching {
+                        Text("Searching...").title()
+                    } else if status == .searched {
+                        Text("Results").title()
                     }
-                } else if status == .searching {
-                    Text("Searching...").title()
-                } else if status == .searched {
-                    Text("Results").title()
-                }
-                LazyVGrid(columns: gridItemLayout, spacing: 10) {
-                    ForEach(0..<imagesUrl.count, id: \.self) { i in
-                        ImageView(imageUrl: imagesUrl[i].0,
-                                  profileImage: $image,
-                                  shouldBeDismissed: $shouldBeDismissed)
-                        .id(imagesUrl[i].1)
+                    LazyVGrid(columns: gridItemLayout, spacing: 10) {
+                        ForEach(0..<imagesUrl.count, id: \.self) { i in
+                            ImageView(imageUrl: imagesUrl[i].0,
+                                      profileImage: $image,
+                                      shouldBeDismissed: $shouldBeDismissed)
+                            .id(imagesUrl[i].1)
+                        }
                     }
-                }
-                Spacer()
+                    Spacer()
+                }.padding(10)
             }
-        }.background(Color.black)
+            if UIDevice.isIPhone {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("close".translate())
+                        .textButtonLabel()
+                })
+            }
+        }.background(Color.black.ignoresSafeArea())
         .onAppear() {
             iniRandomImages()
         }

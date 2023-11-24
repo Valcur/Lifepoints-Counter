@@ -27,7 +27,8 @@ extension LifePointsPlayerPanelView {
                                 .clipped()
                         }
                         if !isMiniView {
-                            LinearGradient(gradient: gradientOverlay, startPoint: .leading, endPoint: .trailing)
+                            //LinearGradient(gradient: gradientOverlay, startPoint: .leading, endPoint: .trailing)
+                            Color.black.opacity(0.15)
                         }
                     }
                 } else {
