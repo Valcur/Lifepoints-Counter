@@ -16,6 +16,7 @@
 "plane" = "Plane";
 "phenomenon" = "Phenomenon";
 "close" = "Close";
+"reset" = "Reset";
 
 // Mark: Play
 
@@ -148,6 +149,8 @@
 "options_monarch_style" = "Monarch token style :";
 "options_profiles_title" = "Player profiles";
 "options_profiles_intro" = "Save player names and background images. Choose them in game.";
+"options_profiles_search" = "Search";
+"options_profiles_cardName" = "Card name...";
 
 "options_contact_discord" = "Suggestion for the app ? Bugs that you want me to fix ?";
 "options_contact_discordJoin" = "Join us on Discord !";
@@ -205,3 +208,7 @@
 "options_treachery_unco" = "Use uncommon Identities";
 "options_treachery_rare" = "Use rare Identities";
 "options_treachery_mythic" = "Use mythic Identities";
+"options_treachery_player" = "Player";
+"options_treachery_players" = "Players";
+"options_treachery_role" = "Role";
+"options_treachery_roleRepartition" = "Roles distribution :";

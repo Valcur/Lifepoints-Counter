@@ -55,26 +55,36 @@ extension SaveManager {
     
     static func saveOptions_LifePlayerProfiles_CustomImage(_ profiles: [PlayerCustomProfileInfo], i: Int) {
         let profile = profiles[i]
-        if let data = profile.customImage?.pngData() {
-            let encoded = try! PropertyListEncoder().encode(data)
-            UserDefaults.standard.set(encoded, forKey: "ProfileImage_\(profile.id)")
+        if let image = profile.customImage {
+            saveUIImage(uiImage: image, fileName: "ProfileImage_\(profile.id).txt")
         }
     }
     
     static func deleteOptions_LifePlayerProfile_CustomImage(profile: PlayerCustomProfileInfo) {
-        UserDefaults.standard.removeObject(forKey: "ProfileImage_\(profile.id)")
+        SaveManager.deleteFromFileManager(fileName: "ProfileImage_\(profile.id).txt")
     }
     
     static func getOptions_LifePlayerProfiles() -> [PlayerCustomProfileInfo] {
         if let data = UserDefaults.standard.object(forKey: "LifePlayerProfilesOptions") as? Data,
             var profilesData = try? JSONDecoder().decode([PlayerCustomProfile].self, from: data) {
-            // Get images
             var profiles = [PlayerCustomProfileInfo]()
             for i in 0..<profilesData.count {
-                if let data = UserDefaults.standard.data(forKey: "ProfileImage_\(profilesData[i].id)") {
-                    let decoded = try! PropertyListDecoder().decode(Data.self, from: data)
+                // Get image
+                // HANDLING DEPRECATED SYSTEM
+                if let deprecatedData = UserDefaults.standard.data(forKey: "ProfileImage_\(profilesData[i].id)") {
+                    print("Removing deprecated profile image data")
+                    let decoded = try! PropertyListDecoder().decode(Data.self, from: deprecatedData)
                     profilesData[i].customImageData = decoded
+                    // Remove deprecated image system
+                    UserDefaults.standard.removeObject(forKey: "ProfileImage_\(profilesData[i].id)")
+                    if let image = UIImage(data: decoded) {
+                        saveUIImage(uiImage: image, fileName: "ProfileImage_\(profilesData[i].id).txt")
+                    }
+                // END OF HANDLING DEPRECATED SYSTEM
+                } else {
+                    profilesData[i].customImageData = SaveManager.getSavedUIImageData(fileName: "ProfileImage_\(profilesData[i].id).txt")
                 }
+                
                 profiles.append(PlayerCustomProfileInfo(profileData: profilesData[i]))
             }
             return profiles
@@ -132,6 +142,73 @@ extension SaveManager {
         let showPlusMinus = UserDefaults.standard.object(forKey: "ShowPlusMinus") as? Bool ?? true
         let biggerLifeTotal = UserDefaults.standard.object(forKey: "BiggerLifeTotal") as? Bool ?? true
         let fullscreenCommanderAndCounters = UserDefaults.standard.object(forKey: "FullscreenCommanderAndCounters") as? Bool ?? UIDevice.isIPhone
-        return (showPlusMinus, biggerLifeTotal, UIDevice.isIPhone ? fullscreenCommanderAndCounters : false)
+        return (showPlusMinus, biggerLifeTotal, fullscreenCommanderAndCounters)
+    }
+    
+    static func getTreacheryRolesRepartition() -> [TreacheryRole] {
+        if let data = UserDefaults.standard.object(forKey: "TreacheryRolesRepartition") as? Data,
+           let decoded = try? JSONDecoder().decode([TreacheryRole].self, from: data) {
+            return decoded
+        }
+        return TreacheryRole.getDefault()
+    }
+    
+    static func saveTreacheryRolesRepartition(_ roles: [TreacheryRole]) {
+        if let encoded = try? JSONEncoder().encode(roles) {
+            UserDefaults.standard.set(encoded, forKey: "TreacheryRolesRepartition")
+        }
+    }
+}
+
+// File Manager
+extension SaveManager {
+    static func deleteFromFileManager(fileName: String) {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let customImageURL = documentsURL.appendingPathComponent(fileName)
+        do {
+            try FileManager.default.removeItem(at: customImageURL)
+            print("Successfully deleted file")
+        } catch {
+            print("Error deleting file: \(error)")
+        }
+    }
+    
+    static func getSavedUIImageData(fileName: String) -> Data? {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let customImageURL = documentsURL.appendingPathComponent(fileName)
+        
+        do {
+            let data = try Data(contentsOf: customImageURL)
+            let decoded = try! PropertyListDecoder().decode(Data.self, from: data)
+            return decoded
+        } catch {
+            print("Error reading custom image: \(error)")
+            return nil
+        }
+    }
+    
+    static func getSavedUIImage(fileName: String) -> UIImage? {
+        guard let decoded = getSavedUIImageData(fileName: fileName) else {
+            return nil
+        }
+        guard let inputImage = UIImage(data: decoded) else {
+            return nil
+        }
+        return inputImage
+    }
+    
+    static func saveUIImage(uiImage: UIImage?, fileName: String) {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let customImageURL = documentsURL.appendingPathComponent(fileName)
+        
+        guard let image = uiImage else { return }
+        guard let data = image.jpegData(compressionQuality: 0.5) else { return }
+        let encoded = try! PropertyListEncoder().encode(data)
+        
+        do {
+            try encoded.write(to: customImageURL)
+        } catch {
+            print("Error saving custom image to file: \(error)")
+        }
     }
 }

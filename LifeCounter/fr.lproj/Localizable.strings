@@ -16,6 +16,7 @@
 "plane" = "Plan";
 "phenomenon" = "Phénomène";
 "close" = "Fermer";
+"reset" = "Réinitialiser";
 
 // Mark: Play
 
@@ -147,6 +148,8 @@
 "options_monarch_style" = "Style de jeton :";
 "options_profiles_title" = "Profils de joueur";
 "options_profiles_intro" = "Sauvegardez les noms des joueurs et ajoutez une image de fond personnalisé. Affectez-les en jeu.";
+"options_profiles_search" = "Rechercher";
+"options_profiles_cardName" = "Nom de la carte ...";
 
 "options_contact_discord" = "Des suggestion sur l'app ? Un bug que vous aimeriez que je règle ?";
 "options_contact_discordJoin" = "Rejoignez nous sur Discord !";
@@ -206,3 +209,7 @@
 "options_treachery_unco" = "Utiliser les identités unco";
 "options_treachery_rare" = "Utiliser les identités rare";
 "options_treachery_mythic" = "Utiliser les identités mythique";
+"options_treachery_player" = "Joueur";
+"options_treachery_players" = "Joueurs";
+"options_treachery_role" = "Rôle";
+"options_treachery_roleRepartition" = "Répartition des rôles :";

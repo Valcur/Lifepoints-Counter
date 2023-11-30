@@ -101,8 +101,6 @@ struct LifePointsView: View {
                                 showMonarchToken: $showMonarchToken,
                                 playersChoosenRandomly: $playersChoosenRandomly)
                             
-                            Spacer()
-                            
                             Button(action: {
                                 withAnimation(.easeInOut(duration: 0.3)) {
                                     gameVM.showLifePointsView.toggle()

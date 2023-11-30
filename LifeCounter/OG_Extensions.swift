@@ -313,9 +313,15 @@ extension UIImage {
         }
     }
     
-    func compressImage(height: CGFloat = 800) -> UIImage {
+    func compressImage(height: CGFloat = 750) -> UIImage {
+        print(self.size.height)
+        if self.size.height <= height * 2 {
+            print("Image too small, no compressing")
+            return self
+        }
         let resizedImage = self.aspectFittedToHeight(height)
         resizedImage.jpegData(compressionQuality: 0.2)
+        print("Compressing")
     
         return resizedImage
     }

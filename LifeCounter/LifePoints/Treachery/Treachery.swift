@@ -41,29 +41,8 @@ struct TreacheryPlayer {
     }
     
     static func getRandomizedRoleArray(nbrOfPlayer: Int, data: TreacheryData) -> [TreacheryPlayer] {
-        var array = [TreacheryRole]()
-        if nbrOfPlayer >= 2 {
-            array.append(.leader)
-            array.append(.traitor)
-        }
-        if nbrOfPlayer >= 3 {
-            array.append(.assassin)
-        }
-        if nbrOfPlayer >= 4 {
-            array.append(.assassin)
-        }
-        if nbrOfPlayer >= 5 {
-            array.append(.guardian)
-        }
-        if nbrOfPlayer >= 6 {
-            array.append(.assassin)
-        }
-        if nbrOfPlayer >= 7 {
-            array.append(.guardian)
-        }
-        if nbrOfPlayer >= 8 {
-            array.append(.traitor)
-        }
+        var array = SaveManager.getTreacheryRolesRepartition()
+        array = Array(array[..<nbrOfPlayer])
         array = array.shuffled()
         
         var roles = [TreacheryPlayer]()
@@ -243,11 +222,22 @@ class TreacheryData: ObservableObject {
     }
 }
 
-enum TreacheryRole {
+enum TreacheryRole: Codable {
     case leader
     case guardian
     case assassin
     case traitor
+    
+    static func getDefault() -> [TreacheryRole] {
+        return [
+            .leader,
+            .traitor,
+            .assassin,
+            .assassin,
+            .guardian,
+            .assassin
+        ]
+    }
     
     func name() -> String {
         switch self {
@@ -259,6 +249,19 @@ enum TreacheryRole {
             return "Assassin"
         case .traitor:
             return "Traitor"
+        }
+    }
+    
+    func color() -> String {
+        switch self {
+        case .leader:
+            return "ColorLeader"
+        case .guardian:
+            return "ColorGuardian"
+        case .assassin:
+            return "ColorAssassin"
+        case .traitor:
+            return "ColorTraitor"
         }
     }
 }
