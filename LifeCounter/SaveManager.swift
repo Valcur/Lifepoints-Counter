@@ -141,7 +141,7 @@ extension SaveManager {
     static func getOptions_LifeToggles() -> (Bool, Bool, Bool) {
         let showPlusMinus = UserDefaults.standard.object(forKey: "ShowPlusMinus") as? Bool ?? true
         let biggerLifeTotal = UserDefaults.standard.object(forKey: "BiggerLifeTotal") as? Bool ?? true
-        let fullscreenCommanderAndCounters = UserDefaults.standard.object(forKey: "FullscreenCommanderAndCounters") as? Bool ?? UIDevice.isIPhone
+        let fullscreenCommanderAndCounters = UserDefaults.standard.object(forKey: "FullscreenCommanderAndCounters") as? Bool ?? true
         return (showPlusMinus, biggerLifeTotal, fullscreenCommanderAndCounters)
     }
     

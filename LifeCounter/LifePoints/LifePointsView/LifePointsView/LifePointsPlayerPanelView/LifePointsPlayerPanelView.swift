@@ -36,12 +36,28 @@ struct LifePointsPlayerPanelView: View {
     }
     @Binding var isAllowedToChangeProfile: Bool
     @Binding var showMonarchToken: Bool
+    @State var topPressed = false
+    @State var bottomPressed = false
+    @State var topPressedTimer: Timer?
+    @State var bottomPressedTimer: Timer?
     
     var body: some View {
         ZStack(alignment: .bottom) {
             LifePointsPanelBackground(player: $player, isMiniView: isMiniView, isPlayerOnOppositeSide: isPlayerOnOppositeSide)
             
-            LifePointsPanelView(playerName: player.name, lifepoints: $player.lifePoints, totalChange: $totalChange, isMiniView: isMiniView, inverseChangeSide: isPlayerOnOppositeSide || isPlayerOnTheSide, isPlayerOnSide: isPlayerOnTheSide)
+            if !isMiniView {
+                VStack(spacing: 0) {
+                    Rectangle()
+                        .foregroundColor(.white)
+                        .opacity(topPressed ? 0.5 : 0.0001)
+
+                    Rectangle()
+                        .foregroundColor(.white)
+                        .opacity(bottomPressed ? 0.5 : 0.0001)
+                }
+            }
+            
+            LifePointsPanelView(playerName: player.name, lifepoints: $player.lifePoints, totalChange: $totalChange, isMiniView: isMiniView, inverseChangeSide: isPlayerOnOppositeSide, isPlayerOnSide: isPlayerOnTheSide)
                 .cornerRadius(15)
             
             if !isMiniView {
@@ -73,14 +89,26 @@ struct LifePointsPlayerPanelView: View {
                     }
                     VStack(spacing: 0) {
                         Rectangle()
+                            .foregroundColor(.black)
                             .opacity(0.0001)
-                            .onTapGesture {
+                            .onLongPressGesture(minimumDuration: 0) {
+                                topPressed = true
+                                topPressedTimer?.invalidate()
+                                topPressedTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
+                                    topPressed = false
+                                }
                                 addLifepoint()
                                 startTotalChangeTimer()
                             }
                         Rectangle()
+                            .foregroundColor(.black)
                             .opacity(0.0001)
-                            .onTapGesture {
+                            .onLongPressGesture(minimumDuration: 0) {
+                                bottomPressed = true
+                                bottomPressedTimer?.invalidate()
+                                bottomPressedTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
+                                    bottomPressed = false
+                                }
                                 removeLifepoint()
                                 startTotalChangeTimer()
                             }
@@ -88,21 +116,24 @@ struct LifePointsPlayerPanelView: View {
                 }
                 
                 if planechaseVM.treacheryOptions.isTreacheryEnabled {
-                    GeometryReader { geo in
-                        HStack {
-                            if isPlayerOnOppositeSide {
-                                Spacer()
-                            }
-                            Color.black
-                                .frame(width: CardSizes.classic_widthForHeight(geo.size.height ) - (geo.size.height / 3))
-                                .opacity(0.00001)
-                                .onTapGesture {
-                                    showTreacheryPanel = true
-                                    lifepointHasBeenUsedToggler.toggle()
-                                }
-                            if !isPlayerOnOppositeSide {
-                                Spacer()
-                            }
+                    HStack {
+                        if isPlayerOnOppositeSide {
+                            Spacer()
+                        }
+                        VStack {
+                            Button(action: {
+                                showTreacheryPanel = true
+                                lifepointHasBeenUsedToggler.toggle()
+                            }, label: {
+                                Image("TreacheryIcon")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
+                                    .genericButtonLabel()
+                            })
+                            Spacer()
+                        }
+                        if !(isPlayerOnOppositeSide) {
+                            Spacer()
                         }
                     }
                 }
@@ -203,17 +234,18 @@ struct LifePointsPlayerPanelView: View {
             Color.white.opacity(hasBeenChoosenRandomly ? 1 : 0).allowsHitTesting(false)
         }.cornerRadius(isMiniView ? 0 : 0)
             .padding(0)
-            //.padding(.top, isMiniView ? 0 : 1)
-            //.padding(.horizontal, isMiniView || isPlayerOnTheSide ? 0 : 1)
-            .gesture(DragGesture()
+            .simultaneousGesture(DragGesture()
                 .onChanged { value in
+                    topPressed = false
+                    bottomPressed = false
                     if !isInAPanel {
                         let newValue = value.translation.height
-                        if newValue > prevValue + 6 {
+                        //if newValue > prevValue + 6 {
+                        if newValue > prevValue + 10 {
                             prevValue = newValue
                             removeLifepoint()
                         }
-                        else if newValue < prevValue - 6 {
+                        else if newValue < prevValue - 10 {
                             prevValue = newValue
                             addLifepoint()
                         }
@@ -341,8 +373,7 @@ struct LifePointsPlayerPanelView: View {
                     }
                     .frame(maxWidth: 200).frame(height: UIDevice.isIPhone ? 90 : 100)
                     .rotationEffect(.degrees(isPlayerOnTheSide ? 90 : (playerId < halfNumberOfPlayers + lifePointsViewModel.numberOfPlayer % 2 ? 180 : 0)))
-                    //.frame(maxWidth: 200).frame(height: isPlayerOnTheSide ? 200 : (UIDevice.isIPhone ? 90 : 100))
-                    .scaleEffect(UIDevice.isIPhone ? 0.65 : 1, anchor: isPlayerOnTheSide ? .trailing : .bottom)
+                    .scaleEffect(UIDevice.isIPhone ? 0.65 : 0.85, anchor: isPlayerOnTheSide ? .trailing : .bottom)
                     .frame(maxWidth: 200).frame(height: isPlayerOnTheSide ? (UIDevice.isIPhone ? 130 : 200) : (UIDevice.isIPhone ? 90 : 100))
                     .padding(.trailing, isPlayerOnTheSide ? (UIDevice.isIPad ? 30 : 15) : 0)
                     
