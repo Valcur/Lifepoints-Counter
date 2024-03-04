@@ -10,6 +10,7 @@ import SwiftUI
 struct LifePointsPlayerPanelView: View {
     @EnvironmentObject var planechaseVM: PlanechaseViewModel
     @EnvironmentObject var lifePointsViewModel: LifePointsViewModel
+    @EnvironmentObject var gameVM: GameViewModel
     let playerId: Int
     var players: [PlayerProfile] {
         lifePointsViewModel.players
@@ -197,7 +198,7 @@ struct LifePointsPlayerPanelView: View {
                             if planechaseVM.fullscreenCommanderAndCounters {
                                 withAnimation(.easeInOut(duration: 0.3)) {
                                     lifePointsViewModel.fullscreenView = FullscreenView(
-                                        view: AnyView(CommanderDamagesPanel(showSheet: $showingCountersSheet, playerCounters: $player.counters, lifePoints: $player.lifePoints, playerId: playerId, isFullscreen: true)),
+                                        view: AnyView(CommanderDamagesPanel(showSheet: $showingCountersSheet, playerCounters: $player.counters, lifePoints: $player.lifePoints, playerId: playerId, isFullscreen: true, playerProfiles: players)),
                                         orientation: isPlayerOnOppositeSide ? .opposite : (isPlayerOnTheSide ? .side : .classic))
                                 }
                             } else {
@@ -209,7 +210,7 @@ struct LifePointsPlayerPanelView: View {
                         }
                 }
             
-                Group {
+                if !isMiniView {
                     if showAlternativeCounters {
                         AlternativeCountersView(counters: $player.counters.alternativeCounters, playerId: playerId, showAlternativeCounters: $showAlternativeCounters)
                     }
@@ -220,7 +221,7 @@ struct LifePointsPlayerPanelView: View {
                         TreacheryPanelView(treacheryData: $player.treachery, showPanel: $showTreacheryPanel, lifepointHasBeenUsedToggler: $lifepointHasBeenUsedToggler, isOnTheOppositeSide: isPlayerOnOppositeSide)
                     }
                     if showingCountersSheet {
-                        CommanderDamagesPanel(showSheet: $showingCountersSheet, playerCounters: $player.counters, lifePoints: $player.lifePoints, playerId: playerId, isFullscreen: false)
+                        CommanderDamagesPanel(showSheet: $showingCountersSheet, playerCounters: $player.counters, lifePoints: $player.lifePoints, playerId: playerId, isFullscreen: false, playerProfiles: players)
                     }
                 }
             }
@@ -260,6 +261,14 @@ struct LifePointsPlayerPanelView: View {
             .onChange(of: isInAPanel) { value in
                 if lifePointsViewModel.currentMonarchId == playerId {
                     showMonarchToken = !value
+                }
+            }
+            .onChange(of: gameVM.showLifePointsView) { value in
+                if value == false {
+                    showingCountersSheet = false
+                    showAlternativeCounters = false
+                    showTreacheryPanel = false
+                    lifePointsViewModel.fullscreenView = nil
                 }
             }
     }
